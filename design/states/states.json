@@ -138,6 +138,60 @@
   "description": "1920 × 1200, the largest size."
  },
  {
+  "file": "default-dark.png",
+  "file2x": "default-dark@2x.png",
+  "name": "Default, dark",
+  "description": "As it opens: Amount 30%, no points, the curve flat at 100% (it follows Amount everywhere)."
+ },
+ {
+  "file": "in-use-dark.png",
+  "file2x": "in-use-dark@2x.png",
+  "name": "In use, dark",
+  "description": "Amount 55%, three points: less in the lows, more around 3 kHz and 9.5 kHz."
+ },
+ {
+  "file": "amount-drag-dark.png",
+  "file2x": "amount-drag-dark@2x.png",
+  "name": "Amount, drag, dark",
+  "description": "The pointer dot grows while you drag. The ring thins as the value rises."
+ },
+ {
+  "file": "point-drag-dark.png",
+  "file2x": "point-drag-dark@2x.png",
+  "name": "Point, drag, dark",
+  "description": "Filled, with a halo, a drop line to the frequency scale and the readout."
+ },
+ {
+  "file": "delta-on-dark.png",
+  "file2x": "delta-on-dark@2x.png",
+  "name": "Delta on, dark",
+  "description": "Only what's removed plays. The removed part turns heavy and klein; the result drops to a hairline."
+ },
+ {
+  "file": "live-dark.png",
+  "file2x": "live-dark@2x.png",
+  "name": "Live, dark",
+  "description": "No latency. Your curve turns dashed; the smoothed curve that's applied is drawn solid."
+ },
+ {
+  "file": "bypassed-dark.png",
+  "file2x": "bypassed-dark@2x.png",
+  "name": "Bypassed, dark",
+  "description": "Nothing thins: one heavy line, no hatching, the curve and the value arcs fade."
+ },
+ {
+  "file": "tooltip-dark.png",
+  "file2x": "tooltip-dark@2x.png",
+  "name": "Tooltip, dark",
+  "description": "After 600 ms over a control. Ink box, paper text."
+ },
+ {
+  "file": "theme-hover.png",
+  "file2x": "theme-hover@2x.png",
+  "name": "Theme switch, hover",
+  "description": "Light and Dark, bottom right. A window preference saved with the plugin's state, not a parameter."
+ },
+ {
   "file": "redlines.png",
   "file2x": "redlines@2x.png",
   "name": "Redlines",

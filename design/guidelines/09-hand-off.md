@@ -6,7 +6,8 @@ Everything the plugin is built from. The numbers come from one file (`build/ui/c
 
 - **The spec, written out:** {{asset ui-handoff/spec-md}}
 - **The spec as JSON**, for code: {{asset ui-handoff/spec-json}}
-- **Tokens (DTCG):** {{asset ui-handoff/tokens}}
+- **Tokens (DTCG):** {{asset ui-handoff/tokens}} {{asset ui-handoff/tokens-light}} {{asset ui-handoff/tokens-dark}}
+- **Release assets** are on the Release page.
 - **The prototype:** open it in a browser and use the window. {{asset ui-handoff/prototype}}
 - **Contrast:** {{asset ui-handoff/contrast}}
 
@@ -23,6 +24,8 @@ Everything the plugin is built from. The numbers come from one file (`build/ui/c
 {{asset ui-assets/wordmark-header}}
 
 {{asset ui-assets/credit}}
+
+For the dark theme: {{asset ui-assets/wordmark-header-dark}} {{asset ui-assets/credit-dark}}
 
 Ship {{asset data/anybody-ofl}} and {{asset data/departure-mono-ofl}} with the plugin.
 

@@ -1,0 +1,176 @@
+{
+ "$description": "De-Saturator's colours, light theme. Every one is the parent's.",
+ "ds-color": {
+  "$type": "color",
+  "$description": "Prefixed ds- so nothing inherits the parent's group types.",
+  "ground": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.9255,
+     0.9216,
+     0.902
+    ],
+    "hex": "#ecebe6"
+   },
+   "$description": "The window."
+  },
+  "text": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.0471,
+     0.0471,
+     0.0431
+    ],
+    "hex": "#0c0c0b"
+   },
+   "$description": "Labels, the name, button outlines, the analyser's frame."
+  },
+  "text-muted": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.3725,
+     0.3686,
+     0.349
+    ],
+    "hex": "#5f5e59"
+   },
+   "$description": "Values, the latency, frequency labels, the credit."
+  },
+  "grid": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.8392,
+     0.8314,
+     0.7961
+    ],
+    "hex": "#d6d4cb"
+   },
+   "$description": "The analyser's grid, knob tracks, the Shape track."
+  },
+  "body": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.0471,
+     0.0471,
+     0.0431
+    ],
+    "hex": "#0c0c0b",
+    "alpha": 0.16
+   },
+   "$description": "Analyser: the comb under the result line, at 16% opacity. What stays, kept quiet."
+  },
+  "result": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.0471,
+     0.0471,
+     0.0431
+    ],
+    "hex": "#0c0c0b"
+   },
+   "$description": "Analyser: the result line, heavy. What you hear."
+  },
+  "original": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.0471,
+     0.0471,
+     0.0431
+    ],
+    "hex": "#0c0c0b"
+   },
+   "$description": "Analyser: the original's line, a hairline."
+  },
+  "removed": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.0471,
+     0.0471,
+     0.0431
+    ],
+    "hex": "#0c0c0b"
+   },
+   "$description": "Analyser: hairlines between the two lines. What's removed."
+  },
+  "hand": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.1804,
+     0.251,
+     1
+    ],
+    "hex": "#2e40ff"
+   },
+   "$description": "What you set: the thinning curve, its points, value arcs, Delta when on."
+  },
+  "selected": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.0471,
+     0.0471,
+     0.0431
+    ],
+    "hex": "#0c0c0b"
+   },
+   "$description": "The chosen segment of a switch; Auto gain and Bypass when on."
+  },
+  "on-selected": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.9255,
+     0.9216,
+     0.902
+    ],
+    "hex": "#ecebe6"
+   },
+   "$description": "Text and icons on ink."
+  },
+  "on-hand": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.9255,
+     0.9216,
+     0.902
+    ],
+    "hex": "#ecebe6"
+   },
+   "$description": "Text on klein."
+  },
+  "readout": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.0471,
+     0.0471,
+     0.0431
+    ],
+    "hex": "#0c0c0b"
+   },
+   "$description": "Readout chips and tooltips."
+  },
+  "on-readout": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.9255,
+     0.9216,
+     0.902
+    ],
+    "hex": "#ecebe6"
+   },
+   "$description": "Text in readout chips and tooltips."
+  }
+ }
+}

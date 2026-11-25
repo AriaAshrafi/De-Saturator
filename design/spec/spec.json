@@ -1,6 +1,6 @@
 {
  "name": "De-Saturator",
- "version": "1.0.0",
+ "version": "1.1.0",
  "direction": "Hairline",
  "idea": "Thinner, drawn literally. What stays is heavy, what's removed is a hairline: in the analyser, in the Amount ring, in the name.",
  "units": "Window pixels at 100%. Every number scales with the window; the 1 px hairlines never go under one physical pixel.",
@@ -21,82 +21,162 @@
   "paperRaised": "#E2E0D8",
   "paperLine": "#D6D4CB",
   "ink": "#0C0C0B",
+  "inkLine": "#2A2A27",
+  "graphite": "#8A8983",
   "graphiteDeep": "#5F5E59",
-  "klein": "#2E40FF"
+  "klein": "#2E40FF",
+  "kleinLight": "#7C88FF"
+ },
+ "themes": {
+  "default": "light",
+  "note": "Every role has a light and a dark colour. Descriptions in this spec name the light theme's colours; swap by role for dark."
  },
  "roles": {
   "ground": {
    "color": "paper",
    "hex": "#ECEBE6",
+   "dark": {
+    "color": "ink",
+    "hex": "#0C0C0B"
+   },
    "use": "The window."
   },
   "text": {
    "color": "ink",
    "hex": "#0C0C0B",
+   "dark": {
+    "color": "paper",
+    "hex": "#ECEBE6"
+   },
    "use": "Labels, the name, button outlines, the analyser's frame."
   },
   "textMuted": {
    "color": "graphiteDeep",
    "hex": "#5F5E59",
+   "dark": {
+    "color": "graphite",
+    "hex": "#8A8983"
+   },
    "use": "Values, the latency, frequency labels, the credit."
   },
   "grid": {
    "color": "paperLine",
    "hex": "#D6D4CB",
+   "dark": {
+    "color": "inkLine",
+    "hex": "#2A2A27"
+   },
    "use": "The analyser's grid, knob tracks, the Shape track."
   },
   "body": {
    "color": "ink",
    "hex": "#0C0C0B",
+   "dark": {
+    "color": "paper",
+    "hex": "#ECEBE6"
+   },
    "alpha": 0.16,
+   "darkAlpha": 0.2,
    "use": "Analyser: the comb under the result line, at 16% opacity. What stays, kept quiet."
   },
   "result": {
    "color": "ink",
    "hex": "#0C0C0B",
+   "dark": {
+    "color": "paper",
+    "hex": "#ECEBE6"
+   },
    "use": "Analyser: the result line, heavy. What you hear."
   },
   "original": {
    "color": "ink",
    "hex": "#0C0C0B",
+   "dark": {
+    "color": "paper",
+    "hex": "#ECEBE6"
+   },
    "use": "Analyser: the original's line, a hairline."
   },
   "removed": {
    "color": "ink",
    "hex": "#0C0C0B",
+   "dark": {
+    "color": "paper",
+    "hex": "#ECEBE6"
+   },
    "use": "Analyser: hairlines between the two lines. What's removed."
   },
   "hand": {
    "color": "klein",
    "hex": "#2E40FF",
+   "dark": {
+    "color": "kleinLight",
+    "hex": "#7C88FF"
+   },
    "use": "What you set: the thinning curve, its points, value arcs, Delta when on."
   },
   "selected": {
    "color": "ink",
    "hex": "#0C0C0B",
+   "dark": {
+    "color": "paper",
+    "hex": "#ECEBE6"
+   },
    "use": "The chosen segment of a switch; Auto gain and Bypass when on."
   },
   "onSelected": {
    "color": "paper",
    "hex": "#ECEBE6",
+   "dark": {
+    "color": "ink",
+    "hex": "#0C0C0B"
+   },
    "use": "Text and icons on ink."
   },
   "onHand": {
    "color": "paper",
    "hex": "#ECEBE6",
+   "dark": {
+    "color": "ink",
+    "hex": "#0C0C0B"
+   },
    "use": "Text on klein."
   },
   "readout": {
    "color": "ink",
    "hex": "#0C0C0B",
+   "dark": {
+    "color": "paper",
+    "hex": "#ECEBE6"
+   },
    "use": "Readout chips and tooltips."
   },
   "onReadout": {
    "color": "paper",
    "hex": "#ECEBE6",
+   "dark": {
+    "color": "ink",
+    "hex": "#0C0C0B"
+   },
    "use": "Text in readout chips and tooltips."
   }
  },
+ "settings": [
+  {
+   "id": "theme",
+   "name": "Theme",
+   "kind": "choice",
+   "options": [
+    "light",
+    "dark"
+   ],
+   "labels": [
+    "Light",
+    "Dark"
+   ],
+   "def": "light"
+  }
+ ],
  "strokes": {
   "frame": {
    "px": 1.5,
@@ -269,10 +349,29 @@
  "components": {
   "wordmark": {
    "file": "ui/assets/wordmark-header.svg",
+   "fileDark": "ui/assets/wordmark-header-dark.svg",
    "x": 24,
    "baseline": 38,
    "size": 27,
-   "note": "An outlined drawing, not text: the weight changes letter by letter. Draw the SVG with its origin at x 24 and its baseline (y 0 in the file) at y 38. It stays ink in every state."
+   "note": "An outlined drawing, not text: the weight changes letter by letter. Draw the SVG with its origin at x 24 and its baseline (y 0 in the file) at y 38. Ink in the light theme, paper in the dark one (wordmark-header-dark.svg), in every state."
+  },
+  "theme": {
+   "x": 848,
+   "y": 562,
+   "h": 24,
+   "segments": [
+    {
+     "value": "light",
+     "label": "Light",
+     "width": 44
+    },
+    {
+     "value": "dark",
+     "label": "Dark",
+     "width": 44
+    }
+   ],
+   "note": "A small switch like Clean / Character, 24 high, label type. A window preference, not a parameter: keep it in the plugin's state, and start new instances with the theme last chosen."
   },
   "legend": {
    "baseline": 64,
@@ -717,11 +816,12 @@
    "version": {
     "x": 86,
     "baseline": 578,
-    "text": "1.0.0",
+    "text": "the plugin's version string, e.g. \"1.0.0\"",
     "type": "value",
     "color": "textMuted"
    },
-   "file": "ui/assets/credit.svg"
+   "file": "ui/assets/credit.svg",
+   "fileDark": "ui/assets/credit-dark.svg"
   },
   "tooltip": {
    "maxWidth": 220,
@@ -892,14 +992,7 @@
     "buttons": "pointing hand"
    }
   },
-  "keys": {
-   "Up / Down": "selected point's amount ±5%, or Amount ±1 with no point selected",
-   "Left / Right": "selected point ±1 semitone",
-   "Delete / Backspace": "remove the selected point",
-   "Escape": "deselect",
-   "D": "Delta",
-   "B": "Bypass"
-  },
+  "keyboard": "None. The window takes no keys and never takes keyboard focus, so the host keeps all its shortcuts (in JUCE: setWantsKeyboardFocus(false) and setMouseClickGrabsKeyboardFocus(false) on the editor and every control).",
   "tooltips": {
    "delayMs": 600,
    "strings": {
@@ -915,6 +1008,8 @@
     "quality:live": "Live: no latency. The curve is applied smoothed.",
     "quality:hq": "HQ: full resolution. Adds latency.",
     "bypass": "Hear the track untouched.",
+    "theme:light": "A paper window.",
+    "theme:dark": "An ink window, for a dark room.",
     "display": "Double-click to add a point, up to six.",
     "point": "Drag to move. Scroll to change its width. Double-click to remove."
    }
@@ -998,6 +1093,12 @@
    "role": "slider (2D)",
    "value": "the readout text",
    "help": "Drag to move. Scroll to change its width. Double-click to remove."
+  },
+  {
+   "control": "Theme",
+   "role": "radio group",
+   "value": "Light or Dark",
+   "help": "An ink window, for a dark room."
   }
  ],
  "contrast": [
@@ -1042,6 +1143,48 @@
    "needs": null,
    "pass": null,
    "use": "grid and tracks: decorative, never carries meaning alone"
+  },
+  {
+   "pair": "dark: paper on ink",
+   "ratio": 16.39,
+   "needs": 4.5,
+   "pass": true,
+   "use": "labels, values, the result line"
+  },
+  {
+   "pair": "dark: graphite on ink",
+   "ratio": 5.58,
+   "needs": 4.5,
+   "pass": true,
+   "use": "values, latency, frequency labels"
+  },
+  {
+   "pair": "dark: klein light on ink",
+   "ratio": 6.36,
+   "needs": 3,
+   "pass": true,
+   "use": "the curve, points, value arcs (graphics)"
+  },
+  {
+   "pair": "dark: ink on klein light",
+   "ratio": 6.36,
+   "needs": 4.5,
+   "pass": true,
+   "use": "Delta's label when on"
+  },
+  {
+   "pair": "dark: ink on paper",
+   "ratio": 16.39,
+   "needs": 4.5,
+   "pass": true,
+   "use": "chips, tooltips, selected switches"
+  },
+  {
+   "pair": "dark: ink line on ink",
+   "ratio": 1.36,
+   "needs": null,
+   "pass": null,
+   "use": "grid and tracks: decorative"
   }
  ],
  "motion": "Nothing eases. Values, hovers and switches change on the next frame; the analyser runs at 30 to 60 fps. The only timers are the tooltip delay (600 ms) and the six-points note (2 s)."

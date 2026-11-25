@@ -1,0 +1,140 @@
+[
+ {
+  "collection": "store",
+  "file": "store/hero-light.png",
+  "slug": "hero-light",
+  "name": "Hero, light",
+  "description": "For the product page: the name, the line, and the window in use. 1600 × 900.",
+  "tags": [
+   "store",
+   "light"
+  ]
+ },
+ {
+  "collection": "store",
+  "file": "store/hero-light@2x.png",
+  "slug": "hero-light-2x",
+  "name": "Hero, light (2x)",
+  "description": "For the product page: the name, the line, and the window in use. 3200 × 1800.",
+  "tags": [
+   "store",
+   "light",
+   "2x"
+  ]
+ },
+ {
+  "collection": "store",
+  "file": "store/hero-dark.png",
+  "slug": "hero-dark",
+  "name": "Hero, dark",
+  "description": "For the product page: the name, the line, and the window in use. 1600 × 900.",
+  "tags": [
+   "store",
+   "dark"
+  ]
+ },
+ {
+  "collection": "store",
+  "file": "store/hero-dark@2x.png",
+  "slug": "hero-dark-2x",
+  "name": "Hero, dark (2x)",
+  "description": "For the product page: the name, the line, and the window in use. 3200 × 1800.",
+  "tags": [
+   "store",
+   "dark",
+   "2x"
+  ]
+ },
+ {
+  "collection": "store",
+  "file": "store/square-light.png",
+  "slug": "square-light",
+  "name": "Square, light",
+  "description": "For social posts. 1080 × 1080.",
+  "tags": [
+   "store",
+   "light"
+  ]
+ },
+ {
+  "collection": "store",
+  "file": "store/square-light@2x.png",
+  "slug": "square-light-2x",
+  "name": "Square, light (2x)",
+  "description": "For social posts. 2160 × 2160.",
+  "tags": [
+   "store",
+   "light",
+   "2x"
+  ]
+ },
+ {
+  "collection": "store",
+  "file": "store/square-dark.png",
+  "slug": "square-dark",
+  "name": "Square, dark",
+  "description": "For social posts. 1080 × 1080.",
+  "tags": [
+   "store",
+   "dark"
+  ]
+ },
+ {
+  "collection": "store",
+  "file": "store/square-dark@2x.png",
+  "slug": "square-dark-2x",
+  "name": "Square, dark (2x)",
+  "description": "For social posts. 2160 × 2160.",
+  "tags": [
+   "store",
+   "dark",
+   "2x"
+  ]
+ },
+ {
+  "collection": "store",
+  "file": "store/github-social-light.png",
+  "slug": "github-social-light",
+  "name": "GitHub social preview, light",
+  "description": "The repository's social preview, 1280 × 640. 1280 × 640.",
+  "tags": [
+   "store",
+   "light"
+  ]
+ },
+ {
+  "collection": "store",
+  "file": "store/github-social-light@2x.png",
+  "slug": "github-social-light-2x",
+  "name": "GitHub social preview, light (2x)",
+  "description": "The repository's social preview, 1280 × 640. 2560 × 1280.",
+  "tags": [
+   "store",
+   "light",
+   "2x"
+  ]
+ },
+ {
+  "collection": "store",
+  "file": "store/github-social-dark.png",
+  "slug": "github-social-dark",
+  "name": "GitHub social preview, dark",
+  "description": "The repository's social preview, 1280 × 640. 1280 × 640.",
+  "tags": [
+   "store",
+   "dark"
+  ]
+ },
+ {
+  "collection": "store",
+  "file": "store/github-social-dark@2x.png",
+  "slug": "github-social-dark-2x",
+  "name": "GitHub social preview, dark (2x)",
+  "description": "The repository's social preview, 1280 × 640. 2560 × 1280.",
+  "tags": [
+   "store",
+   "dark",
+   "2x"
+  ]
+ }
+]

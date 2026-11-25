@@ -12,7 +12,7 @@
 (function (root) {
 "use strict";
 
-const VERSION = "1.0.0";
+const VERSION = "1.1.0";                    // the design's version; the window shows the plugin's own
 const W = 960, H = 600;
 const FMIN = 20, FMAX = 20000, OCT = Math.log2(FMAX / FMIN);
 const DBMIN = -90, DBMAX = 6, TILT = 4.5;
@@ -26,7 +26,7 @@ const n2 = v => Math.round(v * 100) / 100;
 /* ---------- colour: all the parent's, nothing mixed on the spot ---------- */
 const COLOR = {
   paper: "#ECEBE6", paperRaised: "#E2E0D8", paperLine: "#D6D4CB",
-  ink: "#0C0C0B", graphiteDeep: "#5F5E59", klein: "#2E40FF",
+  ink: "#0C0C0B", inkLine: "#2A2A27", graphite: "#8A8983", graphiteDeep: "#5F5E59", klein: "#2E40FF", kleinLight: "#7C88FF",
 };
 const ROLE = {
   ground: ["paper", "The window."],
@@ -46,6 +46,22 @@ const ROLE = {
 };
 const T = Object.fromEntries(Object.entries(ROLE).map(([k, [c]]) => [k, COLOR[c]]));
 const ALPHA = { body: 0.16 };                // the only colour drawn at an opacity
+// Two themes. Light is paper, the default. Dark is the same window in ink: the parent's rule is
+// klein-light on ink, and text on it is ink.
+const THEMES = {
+  light: { roles: Object.fromEntries(Object.entries(ROLE).map(([k, [c]]) => [k, c])), bodyAlpha: 0.16 },
+  dark: {
+    roles: { ground: "ink", text: "paper", textMuted: "graphite", grid: "inkLine", body: "paper", result: "paper", original: "paper", removed: "paper",
+      hand: "kleinLight", selected: "paper", onSelected: "ink", onHand: "ink", readout: "paper", onReadout: "ink" },
+    bodyAlpha: 0.2,
+  },
+};
+function useTheme(name) {
+  const th = THEMES[name] || THEMES.light;
+  for (const [k, c] of Object.entries(th.roles)) T[k] = COLOR[c];
+  ALPHA.body = th.bodyAlpha;
+  return th;
+}
 
 /* ---------- strokes, px at 100% ---------- */
 const STROKE = {
@@ -101,6 +117,7 @@ const L = {
   autoGain: { x: 852, y: 504, w: 80, h: 24 },
   shape: { x1: 120, x2: 560, y: 514, title: 492, thumb: { w: 16, h: 30 }, endGap: 14 },
   credit: { x: 24, y: 566, w: 54, h: 15, version: { x: 86, baseline: 578 } },
+  theme: { x: 848, y: 562, h: 24, segs: [["light", "Light", 44], ["dark", "Dark", 44]] },
   comb: { lines: 120 },
   point: { r: 6.5, rHover: 8.5, rSelected: 7, halo: 12, hit: 13 },
   tooltip: { maxWidth: 220, padX: 10, padY: 8, gap: 8, delayMs: 600 },
@@ -127,9 +144,12 @@ const PARAMS = [
   { id: "bypass", name: "Bypass", kind: "toggle", def: false },
 ];
 const PM = Object.fromEntries(PARAMS.map(p => [p.id, p]));
+// a window preference, not a processor parameter: kept with the plugin's state, not automatable
+const SETTINGS = [{ id: "theme", name: "Theme", kind: "choice", options: ["light", "dark"], labels: ["Light", "Dark"], def: "light" }];
 const CURVE = { maxPoints: 6, f: [FMIN, FMAX], amount: [0, 2], width: [0.3, 4], widthDefault: 1, widthStep: 0.1, baseline: 1 };
 const DRAG = { fullRangePx: 240, fineRangePx: 1200 };
-const defaults = () => Object.assign(Object.fromEntries(PARAMS.map(p => [p.id, p.def])), { points: [], latencyMs: 43 });
+// latencyMs and versionText come from the processor and the build; these are sample values for the pictures
+const defaults = () => Object.assign(Object.fromEntries(PARAMS.concat(SETTINGS).map(p => [p.id, p.def])), { points: [], latencyMs: 85, versionText: "1.0.0" });
 
 const pct = v => Math.round(v) + "%";
 function fmt(id, v) {
@@ -152,6 +172,8 @@ const TIPS = {
   "quality:live": "Live: no latency. The curve is applied smoothed.",
   "quality:hq": "HQ: full resolution. Adds latency.",
   bypass: "Hear the track untouched.",
+  "theme:light": "A paper window.",
+  "theme:dark": "An ink window, for a dark room.",
   display: "Double-click to add a point, up to six.",
   point: "Drag to move. Scroll to change its width. Double-click to remove.",
 };
@@ -319,7 +341,7 @@ function segmented(ctx, id) {
     const key = id + ":" + v, on = st[id] === v;
     if (on) s += `<rect x="${x + 3}" y="${g.y + 3}" width="${w - 6}" height="${g.h - 6}" rx="${(g.h - 6) / 2}" fill="${T.selected}"/>`;
     else if (ui.hover === key) s += `<rect x="${x + 3.5}" y="${g.y + 3.5}" width="${w - 7}" height="${g.h - 7}" rx="${(g.h - 7) / 2}" fill="none" stroke="${T.text}" stroke-width="1"/>`;
-    s += text(x + w / 2, g.y + 20.5, label, "button", on ? T.onSelected : T.text, "middle");
+    s += text(x + w / 2, g.y + g.h / 2 + 4.5, label, g.h > 28 ? "button" : "label", on ? T.onSelected : T.text, "middle");
     rectHit(ctx, id, x, g.y, w, g.h, { v, type: "choice", key });
     x += w;
   }
@@ -392,12 +414,12 @@ function shape(ctx) {
   rectHit(ctx, "shape", g.x1 - 12, y - 18, g.x2 - g.x1 + 24, 36, { type: "slider", key: "shape" });
   return s;
 }
-function credit() {
+function credit(ctx) {
   const c = L.credit;
   const mark = assets.credit
     ? `<svg x="${c.x}" y="${c.y}" width="${c.w}" height="${c.h}" viewBox="${assets.credit.vb}" preserveAspectRatio="xMinYMid meet"><path d="${assets.credit.d}" fill="${T.textMuted}"/></svg>`
     : text(c.x, c.version.baseline, "Aria Ashrafi", "value", T.textMuted);
-  return mark + text(c.version.x, c.version.baseline, VERSION, "value", T.textMuted);
+  return mark + text(c.version.x, c.version.baseline, ctx.st.versionText || "1.0.0", "value", T.textMuted);
 }
 function background() {
   const A = L.analyser;
@@ -481,6 +503,7 @@ function tooltip(ctx) {
 
 /* ---------- the window ---------- */
 function context(st, ui) {
+  useTheme(st.theme);
   const c = curves(st);
   return { st, ui: Object.assign({ hover: null, drag: null, sel: null, note: null, tip: null }, ui || {}), hits: [], drawn: c.drawn, applied: c.applied };
 }
@@ -488,7 +511,7 @@ function controls(ctx) {
   let s = header(ctx) + amount(ctx);
   for (const [id, label, cx] of L.small.knobs) s += smallKnob(ctx, id, label, cx);
   s += pill(ctx, "autoGain", L.autoGain, "Auto gain", T.selected, T.onSelected, "label");
-  s += shape(ctx) + credit();
+  s += shape(ctx) + credit(ctx) + segmented(ctx, "theme");
   // the analyser's own hit area comes after the controls
   rectHit(ctx, "display", P.x, P.y, P.w, P.h, { type: "display", key: "display" });
   return s;
@@ -535,8 +558,8 @@ function hitTest(ctx, p) {
 }
 
 const DS = {
-  VERSION, W, H, FMIN, FMAX, OCT, DBMIN, DBMAX, TILT, NB, BINF, COLOR, ROLE, T, ALPHA, STROKE, S, TYPE, FONTSTACK, MONO_ADV, L,
-  PARAMS, PM, CURVE, DRAG, TIPS, NOTES, defaults, fmt, fmtF, pct, clamp, lerp,
+  VERSION, W, H, FMIN, FMAX, OCT, DBMIN, DBMAX, TILT, NB, BINF, COLOR, ROLE, T, ALPHA, THEMES, useTheme, STROKE, S, TYPE, FONTSTACK, MONO_ADV, L,
+  PARAMS, PM, SETTINGS, CURVE, DRAG, TIPS, NOTES, defaults, fmt, fmtF, pct, clamp, lerp,
   fx, xf, dy, cyv, yv, Signal, snapshot, SILENCE, curveAt, curves, reduce,
   COMB_X, COMB_BASE, comb, combStyle, contour, legend, background, ui, context, render, hitTest, assets, esc,
 };

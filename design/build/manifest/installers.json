@@ -1,0 +1,350 @@
+[
+ {
+  "collection": "installers",
+  "file": "installers/icon-big.png",
+  "slug": "icon-big",
+  "name": "Plugin icon, 1024 (ICON_BIG)",
+  "description": "Klein, in Apple's rounded template with its transparent margin. Give it to JUCE as ICON_BIG.",
+  "tags": [
+   "icon",
+   "juce"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/macos/src/icon-full.svg",
+  "slug": "macos-icon-source",
+  "name": "macOS icon, source",
+  "description": "1024 grid: an 824 tile, 185 corner, per Apple's template.",
+  "tags": [
+   "macos",
+   "icon"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/macos/pkg/background-light.png",
+  "slug": "pkg-background-light-1x",
+  "name": "macOS .pkg background, light, 1x",
+  "description": "Aligned bottom left, not scaled. Only the bottom 70 px carry art.",
+  "tags": [
+   "macos",
+   "pkg"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/macos/pkg/background-light@2x.png",
+  "slug": "pkg-background-light-2x",
+  "name": "macOS .pkg background, light, 2x",
+  "description": "Aligned bottom left, not scaled. Only the bottom 70 px carry art.",
+  "tags": [
+   "macos",
+   "pkg"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/macos/pkg/background-dark.png",
+  "slug": "pkg-background-dark-1x",
+  "name": "macOS .pkg background, dark, 1x",
+  "description": "Aligned bottom left, not scaled. Only the bottom 70 px carry art.",
+  "tags": [
+   "macos",
+   "pkg"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/macos/pkg/background-dark@2x.png",
+  "slug": "pkg-background-dark-2x",
+  "name": "macOS .pkg background, dark, 2x",
+  "description": "Aligned bottom left, not scaled. Only the bottom 70 px carry art.",
+  "tags": [
+   "macos",
+   "pkg"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/macos/dmg/background.png",
+  "slug": "dmg-background-1x",
+  "name": "macOS disk image background, 1x",
+  "description": "A 660 × 400 window. Put the installer at (200, 190) and the read-me at (460, 190); labels in ink.",
+  "tags": [
+   "macos",
+   "dmg"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/macos/dmg/background@2x.png",
+  "slug": "dmg-background-2x",
+  "name": "macOS disk image background, 2x",
+  "description": "A 660 × 400 window. Put the installer at (200, 190) and the read-me at (460, 190); labels in ink.",
+  "tags": [
+   "macos",
+   "dmg"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/vst3/desktop.ini",
+  "slug": "vst3-desktop-ini",
+  "name": "desktop.ini",
+  "description": "Beside PlugIn.ico in the Windows .vst3 bundle folder, so Explorer shows the icon. Mark the folder read-only or system.",
+  "tags": [
+   "vst3",
+   "windows"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/windows/de-saturator.ico",
+  "slug": "windows-ico",
+  "name": "de-saturator.ico",
+  "description": "Setup and uninstall icon: 16 to 256 px, the small mark at 32 px and under.",
+  "tags": [
+   "windows",
+   "icon"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/vst3/PlugIn.ico",
+  "slug": "vst3-plugin-ico",
+  "name": "PlugIn.ico",
+  "description": "The icon inside the Windows .vst3 bundle folder.",
+  "tags": [
+   "vst3",
+   "windows"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/macos/de-saturator.icns",
+  "slug": "macos-icns",
+  "name": "de-saturator.icns",
+  "description": "Installer and bundle icon: 16 to 1024 px.",
+  "tags": [
+   "macos",
+   "icon"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/macos/dmg/VolumeIcon.icns",
+  "slug": "macos-volume-icns",
+  "name": "VolumeIcon.icns",
+  "description": "The mounted disk image's icon.",
+  "tags": [
+   "macos",
+   "dmg"
+  ]
+ },
+ {
+  "collection": "favicons",
+  "file": "favicons/favicon.ico",
+  "slug": "favicon-ico",
+  "name": "favicon.ico",
+  "description": "16, 32 and 48 px, for the product page.",
+  "tags": [
+   "favicon"
+  ]
+ },
+ {
+  "collection": "favicons",
+  "file": "favicons/apple-touch-icon.png",
+  "slug": "apple-touch-icon",
+  "name": "apple-touch-icon.png",
+  "description": "180 px.",
+  "tags": [
+   "favicon"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/vst3/Resources/Snapshots/PROCESSOR-UID_snapshot.png",
+  "slug": "vst3-snapshot",
+  "name": "VST3 snapshot",
+  "description": "The default window, light, for DAW plugin browsers. Rename PROCESSOR-UID to the processor's class ID.",
+  "tags": [
+   "vst3"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/vst3/Resources/Snapshots/PROCESSOR-UID_snapshot_2.0x.png",
+  "slug": "vst3-snapshot-2-0x",
+  "name": "VST3 snapshot 2.0x",
+  "description": "The default window, light, for DAW plugin browsers. Rename PROCESSOR-UID to the processor's class ID.",
+  "tags": [
+   "vst3"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/windows/wizard/preview.png",
+  "slug": "inno-wizard-preview",
+  "name": "Inno Setup wizard image, preview",
+  "description": "The 200% size as a PNG, to look at. The installer takes the BMPs.",
+  "tags": [
+   "windows",
+   "inno"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/windows/wizard/WizardImage-164x314.bmp",
+  "slug": "inno-wizard-164x314",
+  "name": "Inno Setup wizard image, 164 × 314",
+  "description": "24-bit BMP. Pass all seven to WizardImageFile, smallest first.",
+  "tags": [
+   "windows",
+   "inno"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/windows/wizard/WizardImage-192x386.bmp",
+  "slug": "inno-wizard-192x386",
+  "name": "Inno Setup wizard image, 192 × 386",
+  "description": "24-bit BMP. Pass all seven to WizardImageFile, smallest first.",
+  "tags": [
+   "windows",
+   "inno"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/windows/wizard/WizardImage-246x459.bmp",
+  "slug": "inno-wizard-246x459",
+  "name": "Inno Setup wizard image, 246 × 459",
+  "description": "24-bit BMP. Pass all seven to WizardImageFile, smallest first.",
+  "tags": [
+   "windows",
+   "inno"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/windows/wizard/WizardImage-273x556.bmp",
+  "slug": "inno-wizard-273x556",
+  "name": "Inno Setup wizard image, 273 × 556",
+  "description": "24-bit BMP. Pass all seven to WizardImageFile, smallest first.",
+  "tags": [
+   "windows",
+   "inno"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/windows/wizard/WizardImage-328x604.bmp",
+  "slug": "inno-wizard-328x604",
+  "name": "Inno Setup wizard image, 328 × 604",
+  "description": "24-bit BMP. Pass all seven to WizardImageFile, smallest first.",
+  "tags": [
+   "windows",
+   "inno"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/windows/wizard/WizardImage-355x700.bmp",
+  "slug": "inno-wizard-355x700",
+  "name": "Inno Setup wizard image, 355 × 700",
+  "description": "24-bit BMP. Pass all seven to WizardImageFile, smallest first.",
+  "tags": [
+   "windows",
+   "inno"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/windows/wizard/WizardImage-410x797.bmp",
+  "slug": "inno-wizard-410x797",
+  "name": "Inno Setup wizard image, 410 × 797",
+  "description": "24-bit BMP. Pass all seven to WizardImageFile, smallest first.",
+  "tags": [
+   "windows",
+   "inno"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/windows/wizard/WizardSmallImage-55x58.bmp",
+  "slug": "inno-wizard-small-55x58",
+  "name": "Inno Setup small image, 55 × 58",
+  "description": "24-bit BMP. Pass all seven to WizardSmallImageFile, smallest first.",
+  "tags": [
+   "windows",
+   "inno"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/windows/wizard/WizardSmallImage-64x68.bmp",
+  "slug": "inno-wizard-small-64x68",
+  "name": "Inno Setup small image, 64 × 68",
+  "description": "24-bit BMP. Pass all seven to WizardSmallImageFile, smallest first.",
+  "tags": [
+   "windows",
+   "inno"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/windows/wizard/WizardSmallImage-83x80.bmp",
+  "slug": "inno-wizard-small-83x80",
+  "name": "Inno Setup small image, 83 × 80",
+  "description": "24-bit BMP. Pass all seven to WizardSmallImageFile, smallest first.",
+  "tags": [
+   "windows",
+   "inno"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/windows/wizard/WizardSmallImage-92x97.bmp",
+  "slug": "inno-wizard-small-92x97",
+  "name": "Inno Setup small image, 92 × 97",
+  "description": "24-bit BMP. Pass all seven to WizardSmallImageFile, smallest first.",
+  "tags": [
+   "windows",
+   "inno"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/windows/wizard/WizardSmallImage-110x106.bmp",
+  "slug": "inno-wizard-small-110x106",
+  "name": "Inno Setup small image, 110 × 106",
+  "description": "24-bit BMP. Pass all seven to WizardSmallImageFile, smallest first.",
+  "tags": [
+   "windows",
+   "inno"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/windows/wizard/WizardSmallImage-119x123.bmp",
+  "slug": "inno-wizard-small-119x123",
+  "name": "Inno Setup small image, 119 × 123",
+  "description": "24-bit BMP. Pass all seven to WizardSmallImageFile, smallest first.",
+  "tags": [
+   "windows",
+   "inno"
+  ]
+ },
+ {
+  "collection": "installers",
+  "file": "installers/windows/wizard/WizardSmallImage-138x140.bmp",
+  "slug": "inno-wizard-small-138x140",
+  "name": "Inno Setup small image, 138 × 140",
+  "description": "24-bit BMP. Pass all seven to WizardSmallImageFile, smallest first.",
+  "tags": [
+   "windows",
+   "inno"
+  ]
+ }
+]

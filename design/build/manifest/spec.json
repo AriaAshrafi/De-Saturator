@@ -23,10 +23,32 @@
   "collection": "ui-handoff",
   "file": "tokens/de-saturator.tokens.json",
   "slug": "tokens",
-  "name": "Tokens (DTCG)",
-  "description": "Colours, strokes, sizes, type and timings.",
+  "name": "Tokens (DTCG): sizes, strokes, type",
+  "description": "Strokes, sizes, type and timings.",
   "tags": [
    "tokens"
+  ]
+ },
+ {
+  "collection": "ui-handoff",
+  "file": "tokens/de-saturator.light.tokens.json",
+  "slug": "tokens-light",
+  "name": "Tokens (DTCG): light colours",
+  "description": "Every colour role, light theme.",
+  "tags": [
+   "tokens",
+   "light"
+  ]
+ },
+ {
+  "collection": "ui-handoff",
+  "file": "tokens/de-saturator.dark.tokens.json",
+  "slug": "tokens-dark",
+  "name": "Tokens (DTCG): dark colours",
+  "description": "Every colour role, dark theme.",
+  "tags": [
+   "tokens",
+   "dark"
   ]
  },
  {

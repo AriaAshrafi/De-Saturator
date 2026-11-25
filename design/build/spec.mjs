@@ -26,6 +26,12 @@ const PAIRS = [
   ["paper on klein", COLOR.paper, COLOR.klein, 4.5, "Delta's label when on"],
   ["paper on ink", COLOR.paper, COLOR.ink, 4.5, "chips, tooltips, selected switches"],
   ["paper line on paper", COLOR.paperLine, COLOR.paper, 0, "grid and tracks: decorative, never carries meaning alone"],
+  ["dark: paper on ink", COLOR.paper, COLOR.ink, 4.5, "labels, values, the result line"],
+  ["dark: graphite on ink", COLOR.graphite, COLOR.ink, 4.5, "values, latency, frequency labels"],
+  ["dark: klein light on ink", COLOR.kleinLight, COLOR.ink, 3, "the curve, points, value arcs (graphics)"],
+  ["dark: ink on klein light", COLOR.ink, COLOR.kleinLight, 4.5, "Delta's label when on"],
+  ["dark: ink on paper", COLOR.ink, COLOR.paper, 4.5, "chips, tooltips, selected switches"],
+  ["dark: ink line on ink", COLOR.inkLine, COLOR.ink, 0, "grid and tracks: decorative"],
 ];
 const contrast = PAIRS.map(([n, a, b, need, use]) => { const c = ratio(a, b); return { pair: n, ratio: r2(c), needs: need || null, pass: need ? c >= need : null, use }; });
 const verdict = (c) => c.pass == null ? "decorative" : c.pass ? "pass" : "FAIL";
@@ -34,10 +40,14 @@ const verdict = (c) => c.pass == null ? "decorative" : c.pass ? "pass" : "FAIL";
 const comps = (h) => [1, 3, 5].map((i) => Math.round(parseInt(h.slice(i, i + 2), 16) / 255 * 10000) / 10000);
 const color = (h, d, alpha) => ({ $value: Object.assign({ colorSpace: "srgb", components: comps(h), hex: h.toLowerCase() }, alpha != null ? { alpha } : {}), ...(d ? { $description: d } : {}) });
 const px = (v, d) => ({ $value: { value: v, unit: "px" }, ...(d ? { $description: d } : {}) });
-const tokens = {
-  $description: "De-Saturator: what it adds to aria-ashrafi. Window px at 100%; the window scales 75% to 200% at a fixed ratio. Every colour is the parent's.",
+const kebab = (k) => k.replace(/[A-Z]/g, (m) => "-" + m.toLowerCase());
+const colourTokens = (theme) => ({
+  $description: `De-Saturator's colours, ${theme} theme. Every one is the parent's.`,
   "ds-color": Object.assign({ $type: "color", $description: "Prefixed ds- so nothing inherits the parent's group types." },
-    Object.fromEntries(Object.entries(ROLE).map(([k, [c, d]]) => [k.replace(/[A-Z]/g, (m) => "-" + m.toLowerCase()), color(COLOR[c], d, ALPHA[k])]))),
+    Object.fromEntries(Object.entries(ROLE).map(([k, [, d]]) => [kebab(k), color(COLOR[DS.THEMES[theme].roles[k]], d, k === "body" ? DS.THEMES[theme].bodyAlpha : undefined)]))),
+});
+const tokens = {
+  $description: "De-Saturator: what it adds to aria-ashrafi, apart from colour. Window px at 100%; the window scales 75% to 200% at a fixed ratio.",
   "ds-stroke": Object.assign({ $type: "dimension" }, Object.fromEntries(Object.entries(STROKE).map(([k, [v, d]]) => [k.replace(/[A-Z]/g, (m) => "-" + m.toLowerCase()), px(v, d)]))),
   "ds-size": {
     $type: "dimension",
@@ -64,7 +74,8 @@ const tokens = {
 const seg = (g) => g.segs.reduce((a, s) => a + s[2], 0);
 const PLOT = L.plot;
 const components = {
-  wordmark: { file: "ui/assets/wordmark-header.svg", x: L.wordmark.x, baseline: L.wordmark.baseline, size: L.wordmark.size, note: "An outlined drawing, not text: the weight changes letter by letter. Draw the SVG with its origin at x 24 and its baseline (y 0 in the file) at y 38. It stays ink in every state." },
+  wordmark: { file: "ui/assets/wordmark-header.svg", fileDark: "ui/assets/wordmark-header-dark.svg", x: L.wordmark.x, baseline: L.wordmark.baseline, size: L.wordmark.size, note: "An outlined drawing, not text: the weight changes letter by letter. Draw the SVG with its origin at x 24 and its baseline (y 0 in the file) at y 38. Ink in the light theme, paper in the dark one (wordmark-header-dark.svg), in every state." },
+  theme: { x: L.theme.x, y: L.theme.y, h: L.theme.h, segments: L.theme.segs.map(([v, l, w]) => ({ value: v, label: l, width: w })), note: "A small switch like Clean / Character, 24 high, label type. A window preference, not a parameter: keep it in the plugin's state, and start new instances with the theme last chosen." },
   legend: { baseline: 64, items: [{ x: 24, swatch: "18 px line, ink 2", label: "Result" }, { x: 100, swatch: "18 px line, ink 1", label: "Original" }, { x: 190, swatch: "four 10 px verticals 5 px apart, ink 1 (Delta: klein 2)", label: "Removed" }], labelDx: 24, type: "label", color: "textMuted", note: "Swatches follow the analyser's current style." },
   switch: { ids: ["character", "quality"], character: { x: L.character.x, y: L.character.y, h: L.character.h, segments: L.character.segs.map(([v, l, w]) => ({ value: v, label: l, width: w })) }, quality: { x: L.quality.x, y: L.quality.y, h: L.quality.h, segments: L.quality.segs.map(([v, l, w]) => ({ value: v, label: l, width: w })) }, track: "Pill outline, ink 1.5, radius half the height.", selected: "An inner pill inset 3 px, ink, with paper text.", hover: "On an unselected segment: a 1 px ink inner outline inset 3.5 px.", text: "button type, centred, baseline y + 20.5." },
   latency: { x: L.latency.x, baseline: L.latency.baseline, type: "value", color: "textMuted", text: "\"{ms} ms\" from the processor in HQ, \"0 ms\" in Live. Room for six characters (\"120 ms\")." },
@@ -115,7 +126,7 @@ const components = {
   knob: { ids: L.small.knobs.map(([id, label, cx]) => ({ id, label, cx })), cy: L.small.cy, r: L.small.r, body: "Paper fill, ink outline 1.5 (2.5 under the pointer or while dragging).", track: "Arc radius 29, -135° to 135°, paper line 3.5.", valueArc: "Klein 3.5 from -135° (Output: from 0 dB) to the angle. Graphite deep when bypassed.", pointer: "Ink 3, square caps, from radius 7 to 18 at the angle.", label: { baseline: L.small.label, type: "label" }, value: { baseline: L.small.value, type: "value", color: "textMuted", hover: "On an ink chip 17 high, paper text." } },
   autoGain: { ...L.autoGain, on: "Ink fill, paper text.", off: "Ink outline 1.5 (2.5 under the pointer), ink text.", text: "label type, centred." },
   shape: { ...L.shape, track: "Paper line 3 from x 120 to 560, with a 12 px centre tick (1.5).", thumb: "Ink pill 16 × 30 centred on x = 120 + 440 * shape / 100, with a 14 px paper mark (2).", hover: "An ink outline 1.5 around the thumb, 4 px out.", ends: "\"Harmonics\" right-aligned at x 106, baseline 512, its share (100 - shape)% under it at 527; \"Body\" at x 574, its share shape% under it.", title: "\"Shape\" centred at x 340, baseline 492." },
-  credit: { ...L.credit, file: "ui/assets/credit.svg", version: { ...L.credit.version, text: DS.VERSION, type: "value", color: "textMuted" } },
+  credit: { ...L.credit, file: "ui/assets/credit.svg", fileDark: "ui/assets/credit-dark.svg", version: { ...L.credit.version, text: "the plugin's version string, e.g. \"1.0.0\"", type: "value", color: "textMuted" } },
   tooltip: { ...L.tooltip, fill: "readout", text: "onReadout", type: "tooltip", placement: "8 px under the control (above when it would leave the window), centred, kept 8 px inside. On the analyser: 18 px under the pointer.", hides: "On press, on leaving the control, and while dragging." },
 };
 const params = PARAMS.map((p) => ({ ...p, format: p.kind === "knob" || p.kind === "slider" ? (p.id === "output" ? "one decimal, a sign, \"dB\": \"−1.5 dB\", \"0.0 dB\", \"+3.0 dB\"" : "whole percent: \"30%\"") : undefined }));
@@ -124,7 +135,7 @@ const interaction = {
   doubleClick: { knob: "reset to default", shape: "reset to default", emptyAnalyser: "add a point at the pointer (width 1 oct); with six already, show \"Six points is the most\" for 2 s", point: "remove it" },
   wheel: { knob: "one step per notch (1%, Output 0.5 dB)", point: "width ±0.1 oct per notch, 0.3 to 4", note: "Only once the window has been clicked, so a host's scroll isn't stolen." },
   pointer: { point: "Press selects and drags it: frequency follows x, amount follows y. Clicking empty analyser deselects.", hitRadius: L.point.hit, cursors: { knob: "up-down resize", shape: "left-right resize", point: "grab / grabbing", analyser: "crosshair (default when full)", buttons: "pointing hand" } },
-  keys: { "Up / Down": "selected point's amount ±5%, or Amount ±1 with no point selected", "Left / Right": "selected point ±1 semitone", "Delete / Backspace": "remove the selected point", Escape: "deselect", D: "Delta", B: "Bypass" },
+  keyboard: "None. The window takes no keys and never takes keyboard focus, so the host keeps all its shortcuts (in JUCE: setWantsKeyboardFocus(false) and setMouseClickGrabsKeyboardFocus(false) on the editor and every control).",
   tooltips: { delayMs: L.tooltip.delayMs, strings: TIPS },
 };
 const processor = [
@@ -137,6 +148,7 @@ const accessibility = [
   ...PARAMS.map((p) => ({ control: p.name, role: p.kind === "toggle" ? "toggle button" : p.kind === "choice" ? "radio group" : "slider", value: p.kind === "knob" || p.kind === "slider" ? "the readout text" : p.kind === "choice" ? p.labels.join(" or ") : "on / off", help: TIPS[p.id] ?? TIPS[`${p.id}:${p.options?.[0]}`] })),
   { control: "Thinning curve", role: "group", value: "\"{n} points\"", help: TIPS.display },
   { control: "Curve point", role: "slider (2D)", value: "the readout text", help: TIPS.point },
+  { control: "Theme", role: "radio group", value: "Light or Dark", help: TIPS["theme:dark"] },
 ];
 
 const spec = {
@@ -144,7 +156,10 @@ const spec = {
   idea: "Thinner, drawn literally. What stays is heavy, what's removed is a hairline: in the analyser, in the Amount ring, in the name.",
   units: "Window pixels at 100%. Every number scales with the window; the 1 px hairlines never go under one physical pixel.",
   window: { width: DS.W, height: DS.H, aspect: DS.W / DS.H, scale: { min: 0.75, max: 2, default: 1 }, background: "ground", corners: 0 },
-  colors: COLOR, roles: Object.fromEntries(Object.entries(ROLE).map(([k, [c, d]]) => [k, { color: c, hex: COLOR[c], ...(ALPHA[k] != null ? { alpha: ALPHA[k] } : {}), use: d }])),
+  colors: COLOR,
+  themes: { default: "light", note: "Every role has a light and a dark colour. Descriptions in this spec name the light theme's colours; swap by role for dark." },
+  roles: Object.fromEntries(Object.entries(ROLE).map(([k, [c, d]]) => { const dc = DS.THEMES.dark.roles[k]; return [k, { color: c, hex: COLOR[c], dark: { color: dc, hex: COLOR[dc] }, ...(k === "body" ? { alpha: DS.THEMES.light.bodyAlpha, darkAlpha: DS.THEMES.dark.bodyAlpha } : {}), use: d }]; })),
+  settings: DS.SETTINGS,
   strokes: Object.fromEntries(Object.entries(STROKE).map(([k, [v, d]]) => [k, { px: v, use: d }])),
   type: TYPE, fonts: [
     { file: "fonts/Anybody-Medium-500.ttf", family: "Anybody", weight: 500, licence: "OFL-1.1" },
@@ -161,6 +176,7 @@ mkdirSync(join(ROOT, "spec"), { recursive: true });
 mkdirSync(join(ROOT, "tokens"), { recursive: true });
 writeFileSync(join(ROOT, "spec/spec.json"), JSON.stringify(spec, null, 1) + "\n");
 writeFileSync(join(ROOT, "tokens/de-saturator.tokens.json"), JSON.stringify(tokens, null, 1) + "\n");
+for (const th of ["light", "dark"]) writeFileSync(join(ROOT, `tokens/de-saturator.${th}.tokens.json`), JSON.stringify(colourTokens(th), null, 1) + "\n");
 writeFileSync(join(ROOT, "spec/contrast.txt"), contrast.map((c) => `${verdict(c)}  ${c.ratio.toFixed(2)}:1  ${c.needs ? `(needs ${c.needs})  ` : ""}${c.pair}: ${c.use}`).join("\n") + "\n");
 
 /* ---------- SPEC.md ---------- */
@@ -173,11 +189,13 @@ md.push("## Window", "");
 md.push(`- ${DS.W} × ${DS.H} at 100%, aspect ${DS.W}:${DS.H} (1.6), resizable from 75% (720 × 450) to 200% (1920 × 1200) at that ratio. Draw at 100% coordinates under one scale transform.`);
 md.push("- Square corners everywhere except pills (switches, Delta, Auto gain, the Shape thumb) and circles. Nothing in between.");
 md.push("- Flat: no gradients, no shadows, no glows. One colour is drawn at an opacity: the analyser's body comb, ink at 16%.");
-md.push("- Hairlines (1 px) never go under one physical pixel at 75%.", "");
+md.push("- Hairlines (1 px) never go under one physical pixel at 75%.");
+md.push("- Two themes, light (paper, the default) and dark (ink), switched by Light / Dark at the bottom right. Every colour below is a role with a light and a dark value; the descriptions name the light ones.");
+md.push(`- No keyboard. ${interaction.keyboard}`, "");
 md.push("Draw order: " + spec.drawOrder.join(" → ") + ".", "");
 md.push("![Redlines](../states/redlines.png)", "");
-md.push("## Colour", "", row("Role", "Colour", "Hex", "Use"), row("---", "---", "---", "---"));
-for (const [k, v] of Object.entries(spec.roles)) md.push(row(k, v.color + (v.alpha != null ? ` at ${v.alpha * 100}%` : ""), "`" + v.hex + "`", v.use));
+md.push("## Colour", "", row("Role", "Light", "Dark", "Use"), row("---", "---", "---", "---"));
+for (const [k, v] of Object.entries(spec.roles)) md.push(row(k, `${v.color}${v.alpha != null ? ` at ${Math.round(v.alpha * 100)}%` : ""} \`${v.hex}\``, `${v.dark.color}${v.darkAlpha != null ? ` at ${Math.round(v.darkAlpha * 100)}%` : ""} \`${v.dark.hex}\``, v.use));
 md.push("", "Contrast (WCAG):", "", "```", ...contrast.map((c) => `${verdict(c)}  ${c.ratio.toFixed(2)}:1  ${c.pair}`), "```", "");
 md.push("## Type", "", row("Role", "Font file", "Size", "Use"), row("---", "---", "---", "---"));
 for (const [k, t] of Object.entries(TYPE)) md.push(row(k, "`fonts/" + t.file + "`", t.size + " px" + (t.lineHeight ? ` / ${t.lineHeight}` : ""), t.use));
@@ -224,13 +242,14 @@ md.push("## Restore, Mix, Output", "");
 md.push(`Centres at x ${L.small.knobs.map((k) => k[2]).join(", ")}, y ${L.small.cy}. ${components.knob.body} ${components.knob.track} ${components.knob.valueArc} ${components.knob.pointer} Label baseline ${L.small.label}; value baseline ${L.small.value}, graphite deep. ${components.knob.value.hover}`, "");
 md.push(`**Auto gain** under Output: a pill at x ${L.autoGain.x}, y ${L.autoGain.y}, ${L.autoGain.w} × ${L.autoGain.h}. ${components.autoGain.on} ${components.autoGain.off}`, "");
 md.push("## Shape", "", `${components.shape.track} ${components.shape.thumb} ${components.shape.hover} ${components.shape.ends} ${components.shape.title}`, "");
-md.push("## Credit", "", `\`ui/assets/credit.svg\` drawn ${L.credit.w} × ${L.credit.h} at (${L.credit.x}, ${L.credit.y}), graphite deep; \"${DS.VERSION}\" in the value type at x ${L.credit.version.x}, baseline ${L.credit.version.baseline}.`, "");
+md.push("## Footer", "", `**Credit**: \`ui/assets/credit.svg\` (dark: \`credit-dark.svg\`) drawn ${L.credit.w} × ${L.credit.h} at (${L.credit.x}, ${L.credit.y}); the plugin's own version string (\"1.0.0\" in the pictures) in the value type, graphite deep, at x ${L.credit.version.x}, baseline ${L.credit.version.baseline}.`, "");
+md.push(`**Theme**: Light / Dark at x ${L.theme.x}, y ${L.theme.y}, ${seg(L.theme)} × ${L.theme.h} (${L.theme.segs.map((s) => s[2]).join(" + ")}). ${components.theme.note}`, "");
 md.push("## Interaction", "");
 md.push(`- **Drag**: knobs vertically, ${DRAG.fullRangePx} screen px for the whole range, ${DRAG.fineRangePx} with Shift. Shape horizontally, the thumb follows the pointer.`);
 for (const [k, v] of Object.entries(interaction.doubleClick)) md.push(`- **Double-click ${k.replace(/([A-Z])/g, " $1").toLowerCase()}**: ${v}.`);
 md.push(`- **Wheel**: on a knob ${interaction.wheel.knob}; on a point ${interaction.wheel.point}. ${interaction.wheel.note}`);
 md.push(`- **Points**: ${interaction.pointer.point} Hit radius ${L.point.hit} px.`);
-md.push(`- **Keys** (window focused): ${Object.entries(interaction.keys).map(([k, v]) => `${k}: ${v}`).join("; ")}.`);
+md.push(`- **Keyboard**: ${interaction.keyboard}`);
 md.push(`- **Tooltips** after ${L.tooltip.delayMs} ms: ${components.tooltip.placement} ${components.tooltip.hides} Ink box, paper text, Anybody Medium 12/16, padding ${L.tooltip.padX} × ${L.tooltip.padY}, at most ${L.tooltip.maxWidth} wide.`, "");
 md.push(row("Over", "Tooltip"), row("---", "---"));
 for (const [k, v] of Object.entries(TIPS)) md.push(row(k, v));
@@ -247,14 +266,16 @@ if (existsSync(statesFile)) {
   for (const s of JSON.parse(readFileSync(statesFile, "utf8"))) md.push(row(s.name, s.description, `[1x](../states/${s.file}), [2x](../states/${s.file2x})`));
   md.push("");
 } else md.push("Run `node build/states.mjs` to render them.", "");
-md.push("## Files", "", "- `fonts/`: the four font files and their licences.", "- `ui/assets/`: the name for the header and the Aria Ashrafi credit, as SVG.", "- `logo/`: the name, the mark, lockups and icon tiles, SVG and PNG.", "- `tokens/de-saturator.tokens.json`: the same values as DTCG tokens.", "- `states/`: every state as PNG, and `redlines.png`.", "- `prototype/prototype.html`: the window, working.", "");
+md.push("## Files", "", "- `fonts/`: the four font files and their licences.", "- `ui/assets/`: the name for the header and the Aria Ashrafi credit, as SVG, for each theme.", "- `logo/`: the name, the mark, lockups and icon tiles, SVG and PNG.", "- `tokens/`: the same values as DTCG tokens: `de-saturator.tokens.json` (sizes, strokes, type, timings), `de-saturator.light.tokens.json` and `de-saturator.dark.tokens.json` (colours).", "- `states/`: every state as PNG, and `redlines.png`.", "- `installers/`: release art and icons (see `installers/README.md`).", "- `store/`: store and social pictures.", "- `prototype/prototype.html`: the window, working.", "");
 writeFileSync(join(ROOT, "spec/SPEC.md"), md.join("\n"));
 
 mkdirSync(join(HERE, "manifest"), { recursive: true });
 writeFileSync(join(HERE, "manifest", "spec.json"), JSON.stringify([
   { collection: "ui-handoff", file: "spec/spec.json", slug: "spec-json", name: "Window spec (JSON)", description: "Everything the window is made of, for code: layout, colours, strokes, type, parameters, states, strings.", tags: ["spec"] },
   { collection: "ui-handoff", file: "spec/SPEC.md", slug: "spec-md", name: "Window spec", description: "The same spec, written out.", tags: ["spec"] },
-  { collection: "ui-handoff", file: "tokens/de-saturator.tokens.json", slug: "tokens", name: "Tokens (DTCG)", description: "Colours, strokes, sizes, type and timings.", tags: ["tokens"] },
+  { collection: "ui-handoff", file: "tokens/de-saturator.tokens.json", slug: "tokens", name: "Tokens (DTCG): sizes, strokes, type", description: "Strokes, sizes, type and timings.", tags: ["tokens"] },
+  { collection: "ui-handoff", file: "tokens/de-saturator.light.tokens.json", slug: "tokens-light", name: "Tokens (DTCG): light colours", description: "Every colour role, light theme.", tags: ["tokens", "light"] },
+  { collection: "ui-handoff", file: "tokens/de-saturator.dark.tokens.json", slug: "tokens-dark", name: "Tokens (DTCG): dark colours", description: "Every colour role, dark theme.", tags: ["tokens", "dark"] },
   { collection: "ui-handoff", file: "spec/contrast.txt", slug: "contrast", name: "Contrast check", description: "WCAG ratios for every pairing the window uses.", tags: ["accessibility"] },
 ], null, 1));
 console.log("spec/spec.json, spec/SPEC.md, spec/contrast.txt, tokens/de-saturator.tokens.json");

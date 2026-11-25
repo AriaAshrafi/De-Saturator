@@ -1,4 +1,4 @@
-# De-Saturator: design 1.0.0
+# De-Saturator: design 1.1.0
 
 The design for De-Saturator, a free plugin that thins a sound, and its brand, a sub-brand of Aria Ashrafi. Direction **B, Hairline**: thinner, drawn literally. What stays is heavy and what's removed is a hairline, in the analyser, in the Amount ring and in the name.
 
@@ -19,8 +19,8 @@ The design for De-Saturator, a free plugin that thins a sound, and its brand, a 
 | `fonts/Anybody-Bold-700.ttf` | The Amount title |
 | `fonts/Anybody-Medium-500.ttf` | Tooltips |
 | `fonts/DepartureMono-Regular.otf` | Every value and readout |
-| `ui/assets/wordmark-header.svg` | The name in the header (a drawing, not text) |
-| `ui/assets/credit.svg` | The Aria Ashrafi credit |
+| `ui/assets/wordmark-header.svg`, `-dark.svg` | The name in the header (a drawing, not text), light and dark |
+| `ui/assets/credit.svg`, `credit-dark.svg` | The Aria Ashrafi credit, light and dark |
 
 Both fonts are under the SIL Open Font License 1.1: ship `fonts/Anybody-OFL.txt` and `fonts/DepartureMono-OFL.txt` with the plugin.
 
@@ -29,12 +29,18 @@ Both fonts are under the SIL Open Font License 1.1: ship `fonts/Anybody-OFL.txt`
 - Window 960 × 600, scales 75% to 200% at 16:10. All coordinates in the spec are at 100%.
 - Analyser: 20 Hz to 20 kHz log, −90 to +6 dB, 4.5 dB/oct tilt around 1 kHz. The result is measured **after Mix, before Output and Auto gain**, so the gap only ever shows thinning.
 - Thinning curve: bells on a 100% baseline, up to six, 0 to 200%. In Live, draw the curve you drew (dashed) and the applied curve from the processor (solid).
-- Colour: paper, ink (in every weight, for the sound), graphite deep (values), and klein for everything you set.
+- Colour: paper, ink (in every weight, for the sound), graphite deep (values), and klein for everything you set. A dark theme swaps each role (Light / Dark at the bottom right; a preference kept with the plugin's state, not a parameter).
+- No keyboard: the window takes no keys and never takes keyboard focus.
+
+## Release
+
+`installers/` holds ICON_BIG, the Windows .ico, the VST3 bundle's PlugIn.ico, desktop.ini and snapshots, the Inno Setup wizard images and the macOS .icns, .pkg and disk image backgrounds. `installers/README.md` says where each one goes. `favicons/` and `store/` are for the product page.
 
 ## Also here
 
 - `logo/`: the name, the mark, lockups and icon tiles, SVG and PNG.
-- `tokens/de-saturator.tokens.json`: the same values as DTCG tokens.
+- `tokens/`: the same values as DTCG tokens: sizes, strokes and type, and the colours per theme.
+- `CHANGELOG.md`: what changed in each version.
 - `board-v1/`: the direction board that B was picked from.
 - `build/`: the sources. `build/ui/core.js` is the single source for the window: layout, colours, drawing. The prototype, the state pictures and the spec are all made from it, so they agree. Rebuild everything with `bash build/make.sh` (Git Bash; it needs Python with fontTools, Node, and Playwright with Chrome).
 

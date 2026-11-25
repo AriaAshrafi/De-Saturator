@@ -484,6 +484,195 @@
  },
  {
   "collection": "ui-states",
+  "file": "states/default-dark.png",
+  "slug": "default-dark",
+  "name": "Default, dark",
+  "description": "As it opens: Amount 30%, no points, the curve flat at 100% (it follows Amount everywhere).",
+  "tags": [
+   "state"
+  ]
+ },
+ {
+  "collection": "ui-states-2x",
+  "file": "states/default-dark@2x.png",
+  "slug": "default-dark-2x",
+  "name": "Default, dark (2x)",
+  "description": "As it opens: Amount 30%, no points, the curve flat at 100% (it follows Amount everywhere).",
+  "tags": [
+   "state",
+   "2x"
+  ]
+ },
+ {
+  "collection": "ui-states",
+  "file": "states/in-use-dark.png",
+  "slug": "in-use-dark",
+  "name": "In use, dark",
+  "description": "Amount 55%, three points: less in the lows, more around 3 kHz and 9.5 kHz.",
+  "tags": [
+   "state"
+  ]
+ },
+ {
+  "collection": "ui-states-2x",
+  "file": "states/in-use-dark@2x.png",
+  "slug": "in-use-dark-2x",
+  "name": "In use, dark (2x)",
+  "description": "Amount 55%, three points: less in the lows, more around 3 kHz and 9.5 kHz.",
+  "tags": [
+   "state",
+   "2x"
+  ]
+ },
+ {
+  "collection": "ui-states",
+  "file": "states/amount-drag-dark.png",
+  "slug": "amount-drag-dark",
+  "name": "Amount, drag, dark",
+  "description": "The pointer dot grows while you drag. The ring thins as the value rises.",
+  "tags": [
+   "state"
+  ]
+ },
+ {
+  "collection": "ui-states-2x",
+  "file": "states/amount-drag-dark@2x.png",
+  "slug": "amount-drag-dark-2x",
+  "name": "Amount, drag, dark (2x)",
+  "description": "The pointer dot grows while you drag. The ring thins as the value rises.",
+  "tags": [
+   "state",
+   "2x"
+  ]
+ },
+ {
+  "collection": "ui-states",
+  "file": "states/point-drag-dark.png",
+  "slug": "point-drag-dark",
+  "name": "Point, drag, dark",
+  "description": "Filled, with a halo, a drop line to the frequency scale and the readout.",
+  "tags": [
+   "state"
+  ]
+ },
+ {
+  "collection": "ui-states-2x",
+  "file": "states/point-drag-dark@2x.png",
+  "slug": "point-drag-dark-2x",
+  "name": "Point, drag, dark (2x)",
+  "description": "Filled, with a halo, a drop line to the frequency scale and the readout.",
+  "tags": [
+   "state",
+   "2x"
+  ]
+ },
+ {
+  "collection": "ui-states",
+  "file": "states/delta-on-dark.png",
+  "slug": "delta-on-dark",
+  "name": "Delta on, dark",
+  "description": "Only what's removed plays. The removed part turns heavy and klein; the result drops to a hairline.",
+  "tags": [
+   "state"
+  ]
+ },
+ {
+  "collection": "ui-states-2x",
+  "file": "states/delta-on-dark@2x.png",
+  "slug": "delta-on-dark-2x",
+  "name": "Delta on, dark (2x)",
+  "description": "Only what's removed plays. The removed part turns heavy and klein; the result drops to a hairline.",
+  "tags": [
+   "state",
+   "2x"
+  ]
+ },
+ {
+  "collection": "ui-states",
+  "file": "states/live-dark.png",
+  "slug": "live-dark",
+  "name": "Live, dark",
+  "description": "No latency. Your curve turns dashed; the smoothed curve that's applied is drawn solid.",
+  "tags": [
+   "state"
+  ]
+ },
+ {
+  "collection": "ui-states-2x",
+  "file": "states/live-dark@2x.png",
+  "slug": "live-dark-2x",
+  "name": "Live, dark (2x)",
+  "description": "No latency. Your curve turns dashed; the smoothed curve that's applied is drawn solid.",
+  "tags": [
+   "state",
+   "2x"
+  ]
+ },
+ {
+  "collection": "ui-states",
+  "file": "states/bypassed-dark.png",
+  "slug": "bypassed-dark",
+  "name": "Bypassed, dark",
+  "description": "Nothing thins: one heavy line, no hatching, the curve and the value arcs fade.",
+  "tags": [
+   "state"
+  ]
+ },
+ {
+  "collection": "ui-states-2x",
+  "file": "states/bypassed-dark@2x.png",
+  "slug": "bypassed-dark-2x",
+  "name": "Bypassed, dark (2x)",
+  "description": "Nothing thins: one heavy line, no hatching, the curve and the value arcs fade.",
+  "tags": [
+   "state",
+   "2x"
+  ]
+ },
+ {
+  "collection": "ui-states",
+  "file": "states/tooltip-dark.png",
+  "slug": "tooltip-dark",
+  "name": "Tooltip, dark",
+  "description": "After 600 ms over a control. Ink box, paper text.",
+  "tags": [
+   "state"
+  ]
+ },
+ {
+  "collection": "ui-states-2x",
+  "file": "states/tooltip-dark@2x.png",
+  "slug": "tooltip-dark-2x",
+  "name": "Tooltip, dark (2x)",
+  "description": "After 600 ms over a control. Ink box, paper text.",
+  "tags": [
+   "state",
+   "2x"
+  ]
+ },
+ {
+  "collection": "ui-states",
+  "file": "states/theme-hover.png",
+  "slug": "theme-hover",
+  "name": "Theme switch, hover",
+  "description": "Light and Dark, bottom right. A window preference saved with the plugin's state, not a parameter.",
+  "tags": [
+   "state"
+  ]
+ },
+ {
+  "collection": "ui-states-2x",
+  "file": "states/theme-hover@2x.png",
+  "slug": "theme-hover-2x",
+  "name": "Theme switch, hover (2x)",
+  "description": "Light and Dark, bottom right. A window preference saved with the plugin's state, not a parameter.",
+  "tags": [
+   "state",
+   "2x"
+  ]
+ },
+ {
+  "collection": "ui-states",
   "file": "states/redlines.png",
   "slug": "redlines",
   "name": "Redlines",

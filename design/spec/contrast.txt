@@ -4,3 +4,9 @@ pass  5.34:1  (needs 3)  klein on paper: the curve, points, value arcs (graphics
 pass  5.34:1  (needs 4.5)  paper on klein: Delta's label when on
 pass  16.39:1  (needs 4.5)  paper on ink: chips, tooltips, selected switches
 decorative  1.24:1  paper line on paper: grid and tracks: decorative, never carries meaning alone
+pass  16.39:1  (needs 4.5)  dark: paper on ink: labels, values, the result line
+pass  5.58:1  (needs 4.5)  dark: graphite on ink: values, latency, frequency labels
+pass  6.36:1  (needs 3)  dark: klein light on ink: the curve, points, value arcs (graphics)
+pass  6.36:1  (needs 4.5)  dark: ink on klein light: Delta's label when on
+pass  16.39:1  (needs 4.5)  dark: ink on paper: chips, tooltips, selected switches
+decorative  1.36:1  dark: ink line on ink: grid and tracks: decorative

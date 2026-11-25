@@ -25,8 +25,8 @@ class Win {
     this.st = work(); this.ui = { hover: null, drag: null, sel: 1, note: null, tip: null, tipAt: null };
     svg.setAttribute("viewBox", `0 0 ${DS.W} ${DS.H}`);
     svg.innerHTML = `<defs><clipPath id="plot-clip"><rect x="${P.x}" y="${P.y}" width="${P.w}" height="${P.h}"/></clipPath></defs>` +
-      `<g>${DS.background()}</g><g clip-path="url(#plot-clip)"><g class="k"></g><g class="r"></g><path class="o" fill="none" stroke-linejoin="round"/><path class="s" fill="none" stroke-linejoin="round"/></g><g class="ui"></g>`;
-    this.gk = svg.querySelector(".k"); this.gr = svg.querySelector(".r"); this.po = svg.querySelector(".o"); this.ps = svg.querySelector(".s"); this.gUI = svg.querySelector(".ui");
+      `<g class="bg"></g><g clip-path="url(#plot-clip)"><g class="k"></g><g class="r"></g><path class="o" fill="none" stroke-linejoin="round"/><path class="s" fill="none" stroke-linejoin="round"/></g><g class="ui"></g>`;
+    this.gBg = svg.querySelector(".bg"); this.gk = svg.querySelector(".k"); this.gr = svg.querySelector(".r"); this.po = svg.querySelector(".o"); this.ps = svg.querySelector(".s"); this.gUI = svg.querySelector(".ui");
     this.lk = []; this.lr = [];
     for (const x of DS.COMB_X) {
       for (const [g, arr] of [[this.gk, this.lk], [this.gr, this.lr]]) {
@@ -41,6 +41,11 @@ class Win {
   load(st, ui) { this.st = st; this.ui = Object.assign({ hover: null, drag: null, sel: null, note: null, tip: null, tipAt: null }, ui); this.changed(); }
   changed() {
     this.ctx = DS.context(this.st, this.ui);
+    if (this.theme !== this.st.theme) {
+      this.theme = this.st.theme;
+      this.gBg.innerHTML = DS.background();
+      this.svg.parentElement.style.background = DS.T.ground;
+    }
     this.gUI.innerHTML = DS.ui(this.ctx);
     const sty = DS.combStyle(this.st);
     const set = (el, s, op) => { if (!s) { el.setAttribute("visibility", "hidden"); return; } el.removeAttribute("visibility"); el.setAttribute("stroke", s[0]); el.setAttribute("stroke-width", s[1]); if (op) el.setAttribute("stroke-opacity", op); };
@@ -116,21 +121,7 @@ class Win {
       else return;
       e.preventDefault(); this.changed();
     }, { passive: false });
-    svg.addEventListener("keydown", e => {
-      const s = this.st, i = this.ui.sel, q = i != null ? s.points[i] : null;
-      if ((e.key === "Delete" || e.key === "Backspace") && q) { s.points.splice(i, 1); this.ui.sel = null; }
-      else if (q && e.key === "ArrowLeft") q.f = clamp(q.f / Math.pow(2, 1 / 12), DS.FMIN, DS.FMAX);
-      else if (q && e.key === "ArrowRight") q.f = clamp(q.f * Math.pow(2, 1 / 12), DS.FMIN, DS.FMAX);
-      else if (q && e.key === "ArrowUp") q.a = clamp(q.a + 0.05, 0, 2);
-      else if (q && e.key === "ArrowDown") q.a = clamp(q.a - 0.05, 0, 2);
-      else if (!q && e.key === "ArrowUp") s.amount = clamp(s.amount + 1, 0, 100);
-      else if (!q && e.key === "ArrowDown") s.amount = clamp(s.amount - 1, 0, 100);
-      else if (e.key === "Escape") this.ui.sel = null;
-      else if (e.key === "d" || e.key === "D") s.delta = !s.delta;
-      else if (e.key === "b" || e.key === "B") s.bypass = !s.bypass;
-      else return;
-      e.preventDefault(); this.changed();
-    });
+    // No keyboard handling at all: the window never takes keys from the host.
   }
 }
 
@@ -140,7 +131,7 @@ function boot() {
   const presets = document.getElementById("presets");
   for (const [name, make] of PRESETS) {
     const b = document.createElement("button"); b.type = "button"; b.textContent = name;
-    b.addEventListener("click", () => { const [st, ui] = make(); w.load(st, ui); svg.focus({ preventScroll: true }); });
+    b.addEventListener("click", () => { const [st, ui] = make(); st.theme = w.st.theme; w.load(st, ui); });
     presets.appendChild(b);
   }
   const frame = document.getElementById("frame");

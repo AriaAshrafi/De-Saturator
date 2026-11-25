@@ -26,7 +26,7 @@ A blend from Harmonics (overtones) to Body (weight). Each end shows its share.
 
 ## Switches and buttons
 
-Clean / Character and Live / HQ are pill switches: the chosen side is ink. Delta turns klein when it's on, because what you hear is then what you set. Auto gain and Bypass turn ink.
+Clean / Character and Live / HQ are pill switches: the chosen side is ink. Delta turns klein when it's on, because what you hear is then what you set. Auto gain and Bypass turn ink. Light / Dark, the small switch at the bottom right, picks the theme; it's a preference kept with the plugin, not a parameter.
 
 {{asset ui-states/switch-hover}}
 
@@ -41,5 +41,5 @@ After 600 ms over anything: an ink box with paper text, in plain words.
 ## Using it
 
 - Drag knobs up or down; Shift for fine. Double-click resets. The wheel steps a knob once you've clicked in the window.
-- Keys, with the window focused: arrows move the selected point (or Amount, with none selected), Delete removes it, D is Delta, B is Bypass.
+- No keyboard: the plugin takes no keys and never takes keyboard focus, so the host keeps all its shortcuts.
 - Nothing eases: values and switches change on the next frame.

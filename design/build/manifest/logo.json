@@ -694,20 +694,44 @@
   "collection": "ui-assets",
   "file": "ui/assets/wordmark-header.svg",
   "slug": "wordmark-header",
-  "name": "Name for the window header",
+  "name": "Name for the window header, light theme",
   "description": "At 27 px, ink. Its baseline sits at y 38, its origin at x 24.",
   "tags": [
-   "window"
+   "window",
+   "light"
+  ]
+ },
+ {
+  "collection": "ui-assets",
+  "file": "ui/assets/wordmark-header-dark.svg",
+  "slug": "wordmark-header-dark",
+  "name": "Name for the window header, dark theme",
+  "description": "The same drawing in paper.",
+  "tags": [
+   "window",
+   "dark"
   ]
  },
  {
   "collection": "ui-assets",
   "file": "ui/assets/credit.svg",
   "slug": "credit",
-  "name": "Aria Ashrafi credit for the window",
+  "name": "Aria Ashrafi credit for the window, light theme",
   "description": "Graphite deep. Drawn 54 × 15 at x 24, y 566.",
   "tags": [
-   "window"
+   "window",
+   "light"
+  ]
+ },
+ {
+  "collection": "ui-assets",
+  "file": "ui/assets/credit-dark.svg",
+  "slug": "credit-dark",
+  "name": "Aria Ashrafi credit for the window, dark theme",
+  "description": "Graphite. Same place.",
+  "tags": [
+   "window",
+   "dark"
   ]
  }
 ]

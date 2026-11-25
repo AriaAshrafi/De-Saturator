@@ -35,6 +35,9 @@ const COLLECTIONS = [
   { slug: "ui-assets", name: "Window assets", kind: "logo" },
   { slug: "ui-states", name: "States", kind: "image" },
   { slug: "ui-states-2x", name: "States 2x", kind: "image" },
+  { slug: "installers", name: "Release", kind: "file" },
+  { slug: "favicons", name: "Favicons", kind: "file" },
+  { slug: "store", name: "Store and social", kind: "image" },
   { slug: "data", name: "Data", kind: "file" },
 ];
 
@@ -164,8 +167,13 @@ if (!CHECK || got.status === 200) {
   }
   done.push(`assets: ${added} added, ${versions} new versions, ${same} unchanged`);
 
-  // The window is light only in v1, so its colours hold in every mode.
-  const files = [{ name: "de-saturator.tokens.json", modes: [], content: JSON.parse(readFileSync(join(ROOT, "tokens", "de-saturator.tokens.json"), "utf8")) }];
+  // Sizes, strokes and type hold in every mode; the colours have a light and a dark file.
+  const tok = (f) => JSON.parse(readFileSync(join(ROOT, "tokens", f), "utf8"));
+  const files = [
+    { name: "de-saturator.tokens.json", modes: [], content: tok("de-saturator.tokens.json") },
+    { name: "de-saturator.light.tokens.json", modes: ["light"], content: tok("de-saturator.light.tokens.json") },
+    { name: "de-saturator.dark.tokens.json", modes: ["dark"], content: tok("de-saturator.dark.tokens.json") },
+  ];
   const check = must(await api("POST", `${P}/token-versions/check`, { files }), "Checking tokens");
   for (const p of check.problems ?? []) console.log(`  ${p.level}: ${p.file} → ${p.path}: ${p.message}`);
   const changed = !check.diff || ["added", "removed", "changed"].some((k) => (check.diff[k] ?? []).length);

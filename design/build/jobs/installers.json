@@ -1,0 +1,230 @@
+[
+{
+"svg": "installers/macos/src/icon-small.svg",
+"png": "build/_r/icns-16.png",
+"width": 16,
+"background": null
+},
+{
+"svg": "installers/macos/src/icon-small.svg",
+"png": "build/_r/icns-32.png",
+"width": 32,
+"background": null
+},
+{
+"svg": "installers/macos/src/icon-full.svg",
+"png": "build/_r/icns-64.png",
+"width": 64,
+"background": null
+},
+{
+"svg": "installers/macos/src/icon-full.svg",
+"png": "build/_r/icns-128.png",
+"width": 128,
+"background": null
+},
+{
+"svg": "installers/macos/src/icon-full.svg",
+"png": "build/_r/icns-256.png",
+"width": 256,
+"background": null
+},
+{
+"svg": "installers/macos/src/icon-full.svg",
+"png": "build/_r/icns-512.png",
+"width": 512,
+"background": null
+},
+{
+"svg": "installers/macos/src/icon-full.svg",
+"png": "build/_r/icns-1024.png",
+"width": 1024,
+"background": null
+},
+{
+"svg": "installers/macos/src/icon-full.svg",
+"png": "installers/icon-big.png",
+"width": 1024,
+"background": null
+},
+{
+"svg": "logo/de-saturator-tile-small-klein.svg",
+"png": "build/_r/ico-16.png",
+"width": 16,
+"background": "#2E40FF"
+},
+{
+"svg": "logo/de-saturator-tile-small-klein.svg",
+"png": "build/_r/ico-20.png",
+"width": 20,
+"background": "#2E40FF"
+},
+{
+"svg": "logo/de-saturator-tile-small-klein.svg",
+"png": "build/_r/ico-24.png",
+"width": 24,
+"background": "#2E40FF"
+},
+{
+"svg": "logo/de-saturator-tile-small-klein.svg",
+"png": "build/_r/ico-32.png",
+"width": 32,
+"background": "#2E40FF"
+},
+{
+"svg": "logo/de-saturator-tile-klein.svg",
+"png": "build/_r/ico-40.png",
+"width": 40,
+"background": "#2E40FF"
+},
+{
+"svg": "logo/de-saturator-tile-klein.svg",
+"png": "build/_r/ico-48.png",
+"width": 48,
+"background": "#2E40FF"
+},
+{
+"svg": "logo/de-saturator-tile-klein.svg",
+"png": "build/_r/ico-64.png",
+"width": 64,
+"background": "#2E40FF"
+},
+{
+"svg": "logo/de-saturator-tile-klein.svg",
+"png": "build/_r/ico-128.png",
+"width": 128,
+"background": "#2E40FF"
+},
+{
+"svg": "logo/de-saturator-tile-klein.svg",
+"png": "build/_r/ico-256.png",
+"width": 256,
+"background": "#2E40FF"
+},
+{
+"svg": "installers/windows/src/wizard-164x314.svg",
+"png": "build/_r/wizard-164x314.png",
+"width": 164,
+"background": null
+},
+{
+"svg": "installers/windows/src/wizard-192x386.svg",
+"png": "build/_r/wizard-192x386.png",
+"width": 192,
+"background": null
+},
+{
+"svg": "installers/windows/src/wizard-246x459.svg",
+"png": "build/_r/wizard-246x459.png",
+"width": 246,
+"background": null
+},
+{
+"svg": "installers/windows/src/wizard-273x556.svg",
+"png": "build/_r/wizard-273x556.png",
+"width": 273,
+"background": null
+},
+{
+"svg": "installers/windows/src/wizard-328x604.svg",
+"png": "build/_r/wizard-328x604.png",
+"width": 328,
+"background": null
+},
+{
+"svg": "installers/windows/src/wizard-355x700.svg",
+"png": "build/_r/wizard-355x700.png",
+"width": 355,
+"background": null
+},
+{
+"svg": "installers/windows/src/wizard-410x797.svg",
+"png": "build/_r/wizard-410x797.png",
+"width": 410,
+"background": null
+},
+{
+"svg": "installers/windows/src/wizard-small-55x58.svg",
+"png": "build/_r/wizard-small-55x58.png",
+"width": 55,
+"background": null
+},
+{
+"svg": "installers/windows/src/wizard-small-64x68.svg",
+"png": "build/_r/wizard-small-64x68.png",
+"width": 64,
+"background": null
+},
+{
+"svg": "installers/windows/src/wizard-small-83x80.svg",
+"png": "build/_r/wizard-small-83x80.png",
+"width": 83,
+"background": null
+},
+{
+"svg": "installers/windows/src/wizard-small-92x97.svg",
+"png": "build/_r/wizard-small-92x97.png",
+"width": 92,
+"background": null
+},
+{
+"svg": "installers/windows/src/wizard-small-110x106.svg",
+"png": "build/_r/wizard-small-110x106.png",
+"width": 110,
+"background": null
+},
+{
+"svg": "installers/windows/src/wizard-small-119x123.svg",
+"png": "build/_r/wizard-small-119x123.png",
+"width": 119,
+"background": null
+},
+{
+"svg": "installers/windows/src/wizard-small-138x140.svg",
+"png": "build/_r/wizard-small-138x140.png",
+"width": 138,
+"background": null
+},
+{
+"svg": "installers/macos/src/pkg-background-light.svg",
+"png": "installers/macos/pkg/background-light.png",
+"width": 620,
+"background": null
+},
+{
+"svg": "installers/macos/src/pkg-background-light.svg",
+"png": "installers/macos/pkg/background-light@2x.png",
+"width": 1240,
+"background": null
+},
+{
+"svg": "installers/macos/src/pkg-background-dark.svg",
+"png": "installers/macos/pkg/background-dark.png",
+"width": 620,
+"background": null
+},
+{
+"svg": "installers/macos/src/pkg-background-dark.svg",
+"png": "installers/macos/pkg/background-dark@2x.png",
+"width": 1240,
+"background": null
+},
+{
+"svg": "installers/macos/src/dmg-background.svg",
+"png": "installers/macos/dmg/background.png",
+"width": 660,
+"background": null
+},
+{
+"svg": "installers/macos/src/dmg-background.svg",
+"png": "installers/macos/dmg/background@2x.png",
+"width": 1320,
+"background": null
+},
+{
+"svg": "logo/de-saturator-tile-klein.svg",
+"png": "favicons/apple-touch-icon.png",
+"width": 180,
+"background": "#2E40FF"
+}
+]

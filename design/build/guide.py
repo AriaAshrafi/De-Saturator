@@ -93,12 +93,12 @@ Half the D's height on every side of the name, and the mark's thick end around t
 - Don't add effects: no gradients, glows or soft shadows.
 """)
 
-roles = "\n".join(f"| {k} | {v['color']}{' at ' + str(int(v['alpha'] * 100)) + '%' if 'alpha' in v else ''} | `{v['hex']}` | {v['use']} |" for k, v in SPEC["roles"].items())
+roles = "\n".join(f"| {k} | {v['color']}{' at ' + str(round(v['alpha'] * 100)) + '%' if 'alpha' in v else ''} `{v['hex']}` | {v['dark']['color']}{' at ' + str(round(v['darkAlpha'] * 100)) + '%' if 'darkAlpha' in v else ''} `{v['dark']['hex']}` | {v['use']} |" for k, v in SPEC["roles"].items())
 contrast = "\n".join(f"| {c['pair']} | {c['ratio']}:1 | {'decorative' if c['pass'] is None else ('passes ' if c['pass'] else 'fails ') + str(c['needs']) + ':1'} | {c['use']} |" for c in SPEC["contrast"])
 page("Colour", "Brand", f"""
-Four of the parent's colours, and one rule: **weight means content, klein means you**. Ink in every weight draws the sound; klein draws what you set (the curve, its points, the value arcs, Delta when it's on). Nothing else is coloured.
+The parent's colours, and one rule: **weight means content, klein means you**. Ink in every weight draws the sound; klein draws what you set (the curve, its points, the value arcs, Delta when it's on). Nothing else is coloured. The dark theme swaps each role: paper draws the sound on ink, and klein turns klein light, the parent's klein for ink grounds.
 
-| Role | Colour | Hex | Use |
+| Role | Light | Dark | Use |
 |---|---|---|---|
 {roles}
 
@@ -230,7 +230,7 @@ A blend from Harmonics (overtones) to Body (weight). Each end shows its share.
 
 ## Switches and buttons
 
-Clean / Character and Live / HQ are pill switches: the chosen side is ink. Delta turns klein when it's on, because what you hear is then what you set. Auto gain and Bypass turn ink.
+Clean / Character and Live / HQ are pill switches: the chosen side is ink. Delta turns klein when it's on, because what you hear is then what you set. Auto gain and Bypass turn ink. Light / Dark, the small switch at the bottom right, picks the theme; it's a preference kept with the plugin, not a parameter.
 
 {A("ui-states", "switch-hover")}
 
@@ -245,7 +245,7 @@ After 600 ms over anything: an ink box with paper text, in plain words.
 ## Using it
 
 - Drag knobs up or down; Shift for fine. Double-click resets. The wheel steps a knob once you've clicked in the window.
-- Keys, with the window focused: arrows move the selected point (or Amount, with none selected), Delete removes it, D is Delta, B is Bypass.
+- No keyboard: the plugin takes no keys and never takes keyboard focus, so the host keeps all its shortcuts.
 - Nothing eases: values and switches change on the next frame.
 """)
 
@@ -254,7 +254,8 @@ Everything the plugin is built from. The numbers come from one file (`build/ui/c
 
 - **The spec, written out:** {A("ui-handoff", "spec-md")}
 - **The spec as JSON**, for code: {A("ui-handoff", "spec-json")}
-- **Tokens (DTCG):** {A("ui-handoff", "tokens")}
+- **Tokens (DTCG):** {A("ui-handoff", "tokens")} {A("ui-handoff", "tokens-light")} {A("ui-handoff", "tokens-dark")}
+- **Release assets** are on the Release page.
 - **The prototype:** open it in a browser and use the window. {A("ui-handoff", "prototype")}
 - **Contrast:** {A("ui-handoff", "contrast")}
 
@@ -272,6 +273,8 @@ Everything the plugin is built from. The numbers come from one file (`build/ui/c
 
 {A("ui-assets", "credit")}
 
+For the dark theme: {A("ui-assets", "wordmark-header-dark")} {A("ui-assets", "credit-dark")}
+
 Ship {A("data", "anybody-ofl")} and {A("data", "departure-mono-ofl")} with the plugin.
 
 ## What the window needs from the processor
@@ -279,6 +282,86 @@ Ship {A("data", "anybody-ofl")} and {A("data", "departure-mono-ofl")} with the p
 """ + "\n".join(f"- {p}" for p in SPEC["processor"]) + """
 
 Every state is in the States collection at 1x and in States 2x at twice the size.
+""")
+
+page("Dark", "Window", f"""
+The same window in ink, for a dark room. Light / Dark at the bottom right switches it; new instances open in the theme last chosen. Every role keeps its job: paper draws the sound in every weight, klein light draws what you set, and text on klein light is ink.
+
+{A("ui-states", "in-use-dark")}
+
+{A("ui-states", "default-dark")}
+
+{A("ui-states", "delta-on-dark")}
+
+{A("ui-states", "live-dark")}
+
+{A("ui-states", "point-drag-dark")}
+
+{A("ui-states", "amount-drag-dark")}
+
+{A("ui-states", "bypassed-dark")}
+
+{A("ui-states", "tooltip-dark")}
+
+The switch itself:
+
+{A("ui-states", "theme-hover")}
+""")
+
+page("Release", "Window", f"""
+What ships around the plugin. Where each file goes is in `installers/README.md` in the design folder.
+
+## The icon
+
+The klein tile in Apple's rounded template. JUCE takes it as `ICON_BIG`.
+
+{A("installers", "icon-big")}
+
+Windows: {A("installers", "windows-ico")} Inside the VST3 bundle: {A("installers", "vst3-plugin-ico")} {A("installers", "vst3-desktop-ini")} macOS: {A("installers", "macos-icns")}
+
+## DAW browsers
+
+The VST3 snapshot: the default window, light, at 1x and 2x.
+
+{A("installers", "vst3-snapshot")}
+
+## Windows setup
+
+Inno Setup's wizard image: the mark, the analyser in small, the name and the credit. Seven sizes from 100% to 250%, as BMPs.
+
+{A("installers", "inno-wizard-preview")}
+
+{A("installers", "inno-wizard-small-138x140")}
+
+## macOS
+
+The `.pkg` background keeps its art in the bottom 70 px: a strip of the analyser, light and dark.
+
+{A("installers", "pkg-background-light-2x")}
+
+{A("installers", "pkg-background-dark-2x")}
+
+The disk image window:
+
+{A("installers", "dmg-background-2x")}
+
+## The product page
+
+{A("favicons", "favicon-ico")} {A("favicons", "apple-touch-icon")}
+""")
+
+page("Store", "Brand", f"""
+The window in use beside the name and the line that sells it: **One knob that makes it thinner.** Each picture comes in light and dark, at 1x and 2x.
+
+{A("store", "hero-light")}
+
+{A("store", "hero-dark")}
+
+{A("store", "square-light")}
+
+{A("store", "github-social-light")}
+
+{A("store", "github-social-dark")}
 """)
 
 out = ROOT / "guidelines"

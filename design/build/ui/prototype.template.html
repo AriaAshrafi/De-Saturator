@@ -19,8 +19,6 @@ p { margin: 0; }
 .muted { color: var(--muted); }
 .frame { width: 960px; max-width: 100%; box-shadow: 6px 6px 0 var(--ink); border: 1.5px solid var(--ink); background: var(--paper); }
 .frame svg { display: block; width: 100%; height: auto; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
-.frame svg:focus { outline: none; }
-.frame svg:focus-visible { outline: 2px solid var(--klein); outline-offset: 2px; }
 .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .bar b { font-size: 13px; font-weight: 700; margin-right: 4px; min-width: 52px; }
 button { font: inherit; font-size: 13px; font-weight: 600; color: var(--ink); background: none; border: 1.5px solid var(--ink); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
@@ -35,11 +33,11 @@ kbd { font-family: var(--machine); font-size: 13px; color: var(--ink); border: 1
     <h1>De-Saturator</h1>
     <p class="muted">The window as designed, wired to the spec. The analyser runs on a stand-in signal and the thinning is a sketch of the look; nothing plays.</p>
   </header>
-  <div class="frame" id="frame"><svg id="window" tabindex="0" role="application" aria-label="De-Saturator window"></svg></div>
+  <div class="frame" id="frame"><svg id="window" aria-label="De-Saturator window"></svg></div>
   <div class="bar" id="presets"><b>States</b></div>
   <div class="bar"><b>Size</b><button type="button" data-scale="0.75" aria-pressed="false">75%</button><button type="button" data-scale="1" aria-pressed="true">100%</button><button type="button" data-scale="1.5" aria-pressed="false">150%</button><button type="button" data-scale="2" aria-pressed="false">200%</button></div>
   <div class="bar"><b>Signal</b><button type="button" id="run" aria-pressed="true">Pause the analyser</button><button type="button" id="silent" aria-pressed="false">No signal</button></div>
-  <p class="keys">Drag a knob up or down; <kbd>Shift</kbd> drags finely, double-click resets, the wheel steps it once you've clicked in the window. On the analyser: double-click to add a point (up to six), drag it, scroll on it to change its width, double-click it to remove it. With a point selected, the arrow keys move it and <kbd>Delete</kbd> removes it. <kbd>D</kbd> toggles Delta, <kbd>B</kbd> Bypass. Rest the pointer on anything for its tooltip.</p>
+  <p class="keys">Drag a knob up or down; <kbd>Shift</kbd> drags finely, double-click resets, the wheel steps it once you've clicked in the window. On the analyser: double-click to add a point (up to six), drag it, scroll on it to change its width, double-click it to remove it. Rest the pointer on anything for its tooltip. Light and Dark, bottom right, switch the window's theme. The plugin takes no keys, so the host keeps its shortcuts.</p>
 </div>
 <script>
 %%CORE%%

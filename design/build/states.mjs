@@ -48,6 +48,12 @@ export const STATES = [
   { slug: "scale-75", name: "At 75%", desc: "720 × 450, the smallest size.", st: work(), scale: 0.75 },
   { slug: "scale-200", name: "At 200%", desc: "1920 × 1200, the largest size.", st: work(), scale: 2 },
 ];
+// the same window in the dark theme
+for (const slug of ["default", "in-use", "amount-drag", "point-drag", "delta-on", "live", "bypassed", "tooltip"]) {
+  const s = STATES.find((x) => x.slug === slug);
+  STATES.push({ ...s, slug: `${slug}-dark`, name: `${s.name}, dark`, st: { ...s.st, theme: "dark" } });
+}
+STATES.push({ slug: "theme-hover", name: "Theme switch, hover", desc: "Light and Dark, bottom right. A window preference saved with the plugin's state, not a parameter.", st: work(), ui: { hover: "theme:dark", tip: "theme:dark" } });
 
 // the redline sheet: every element's box over the default window
 function redlines() {
