@@ -76,7 +76,10 @@ if(DESAT_BUILD_PLUGIN)
         ${CMAKE_CURRENT_SOURCE_DIR}/src/plugin/PluginProcessor.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/plugin/Analyser.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/PluginEditor.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/DeSaturatorView.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/DeSaturatorView.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/AccessibleRegion.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Draw.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/Theme.cpp)
     target_include_directories(desat_shared INTERFACE src)
     target_compile_definitions(desat_shared INTERFACE
         JUCE_WEB_BROWSER=0
@@ -121,6 +124,16 @@ if(DESAT_BUILD_PLUGIN)
             juce::juce_recommended_config_flags
             juce::juce_recommended_lto_flags
             juce::juce_recommended_warning_flags)
+
+    # The design kit's VST3 resources (bundle icon, host snapshots), after JUCE writes moduleinfo.json.
+    # The artefact path holds generator expressions, which add_custom_command evaluates (as JUCE's own steps do).
+    get_target_property(DESAT_VST3_BUNDLE DeSaturator_VST3 JUCE_PLUGIN_ARTEFACT_FILE)
+    add_custom_command(TARGET DeSaturator_VST3 POST_BUILD
+        COMMAND ${CMAKE_COMMAND}
+            "-DBUNDLE=${DESAT_VST3_BUNDLE}"
+            "-DBRAND=${CMAKE_CURRENT_SOURCE_DIR}/design/installers/vst3"
+            -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Vst3Resources.cmake"
+        VERBATIM)
 endif()
 
 # ---------------------------------------------------------------------------

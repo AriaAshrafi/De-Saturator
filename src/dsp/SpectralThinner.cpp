@@ -1,5 +1,7 @@
 #include "SpectralThinner.h"
 
+#include "FastMath.h"
+
 #include <algorithm>
 #include <array>
 #include <cmath>
@@ -325,13 +327,15 @@ void SpectralThinner::frame (int index, const ThinSettings& s)
 
     for (auto& ch : r.ch)
     {
-        int p = r.pos;
-        for (int i = 0; i < N; ++i)
-        {
-            r.time[(size_t) i] = ch.in[(size_t) p] * r.window[(size_t) i];
-            if (++p == N)
-                p = 0;
-        }
+        // The ring starts at pos: unwrap it in two straight runs.
+        const int first = N - r.pos;
+        const double* in = ch.in.data();
+        const double* w = r.window.data();
+        double* t = r.time.data();
+        for (int i = 0; i < first; ++i)
+            t[i] = in[r.pos + i] * w[i];
+        for (int i = first; i < N; ++i)
+            t[i] = in[i - first] * w[i];
         r.fft.forward (r.time.data(), ch.Xr.data(), ch.Xi.data());
     }
 
@@ -356,7 +360,7 @@ void SpectralThinner::frame (int index, const ThinSettings& s)
         const double p = r.P[(size_t) k];
         double t = 0.0;
         if (p > floorPower)
-            t = std::clamp ((10.0 * std::log10 (p / (r.Ps[(size_t) k] + floorPower)) - 6.0) / 12.0, 0.0, 1.0);
+            t = std::clamp ((fastPowerToDb (p / (r.Ps[(size_t) k] + floorPower)) - 6.0) / 12.0, 0.0, 1.0);
         r.trans[(size_t) k] = t;
     }
 
@@ -375,7 +379,7 @@ void SpectralThinner::frame (int index, const ThinSettings& s)
         ps += r.aPower * (r.P[(size_t) k] - ps);
         if (ps < tiny)
             ps = 0.0;
-        r.L[(size_t) k] = 10.0 * std::log10 (ps + tiny);
+        r.L[(size_t) k] = fastPowerToDb (ps + tiny);
     }
 
     if (index == 0)
@@ -406,7 +410,8 @@ void SpectralThinner::frame (int index, const ThinSettings& s)
         const int b = std::min (r.kHi, (int) std::floor (kc + hw));
         for (int k = a; k <= b; ++k)
         {
-            const double w = e.weight * 0.5 * (1.0 + std::cos (pi * (k - kc) / hw));
+            const double u = (k - kc) / hw;
+            const double w = e.weight * (1.0 - u * u) * (1.0 - u * u); // a smooth bump, 1 at the partial, 0 at the edges
             r.harm[(size_t) k] = std::max (r.harm[(size_t) k], w);
         }
     }
@@ -442,7 +447,7 @@ void SpectralThinner::frame (int index, const ThinSettings& s)
         // The curve's floor is exact: where it is 0, nothing is removed.
         red = std::min (red, mode.maxDb * s.amount * r.curveVal[(size_t) k]);
 
-        const double c = red > 1.0e-6 ? (1.0 - std::pow (10.0, -red / 20.0)) * r.W[(size_t) k] : 0.0;
+        const double c = red > 1.0e-6 ? (1.0 - std::exp (-0.11512925464970229 * red)) * r.W[(size_t) k] : 0.0; // 10^(-dB/20)
         r.coef[(size_t) k] = c;
         any = any || c > 0.0;
     }
@@ -473,13 +478,14 @@ void SpectralThinner::frame (int index, const ThinSettings& s)
 
         r.fft.inverse (ch.Xr.data(), ch.Xi.data(), r.time.data());
 
-        int p = r.pos;
-        for (int i = 0; i < N; ++i)
-        {
-            ch.ola[(size_t) p] += r.time[(size_t) i] * r.window[(size_t) i] * overlapGain;
-            if (++p == N)
-                p = 0;
-        }
+        const int first = N - r.pos;
+        const double* t = r.time.data();
+        const double* w = r.window.data();
+        double* ola = ch.ola.data();
+        for (int i = 0; i < first; ++i)
+            ola[r.pos + i] += t[i] * w[i] * overlapGain;
+        for (int i = first; i < N; ++i)
+            ola[i - first] += t[i] * w[i] * overlapGain;
     }
 }
 

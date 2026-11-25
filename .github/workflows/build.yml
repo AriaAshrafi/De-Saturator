@@ -1,0 +1,109 @@
+name: Build
+
+# Builds main, pull requests, version tags and manual runs, and skips docs-only changes.
+# (Design assets are compiled into the plugin, so design/ changes do build.)
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+    paths-ignore: ['docs/**', '**.md']
+  pull_request:
+    paths-ignore: ['docs/**', '**.md']
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Windows
+            os: windows-latest
+            configure: cmake -B build
+          # Intel runner, as for Cognisynth: the binary is still universal (arm64 + x86_64);
+          # tests run on the x86_64 slice.
+          - name: macOS (Universal)
+            os: macos-15-intel
+            configure: cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Version
+        shell: bash
+        run: echo "VERSION=$(grep -m1 -oE 'project\(DeSaturator VERSION [0-9.]+' CMakeLists.txt | awk '{print $3}')" >> "$GITHUB_ENV"
+
+      - name: Configure
+        run: ${{ matrix.configure }}
+
+      - name: Build
+        run: cmake --build build --config Release --parallel 4
+
+      - name: Test
+        run: ctest --test-dir build -C Release --output-on-failure
+
+      # pluginval loads the plugin the way hosts do and stress-tests it (strictness 5 of 10).
+      - name: Validate VST3 (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          Invoke-WebRequest https://github.com/Tracktion/pluginval/releases/latest/download/pluginval_Windows.zip -OutFile pluginval.zip
+          Expand-Archive pluginval.zip -DestinationPath pluginval
+          ./pluginval/pluginval.exe --strictness-level 5 --validate-in-process --timeout-ms 600000 --validate build/DeSaturator_artefacts/Release/VST3/De-Saturator.vst3
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Validate VST3 and AU (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          curl -sL -o pluginval.zip https://github.com/Tracktion/pluginval/releases/latest/download/pluginval_macOS.zip
+          unzip -q pluginval.zip
+          codesign --force --deep --sign - build/DeSaturator_artefacts/Release/VST3/De-Saturator.vst3
+          codesign --force --deep --sign - build/DeSaturator_artefacts/Release/AU/De-Saturator.component
+          pluginval.app/Contents/MacOS/pluginval --strictness-level 5 --validate-in-process --timeout-ms 600000 --validate build/DeSaturator_artefacts/Release/VST3/De-Saturator.vst3
+          mkdir -p ~/Library/Audio/Plug-Ins/Components
+          cp -R build/DeSaturator_artefacts/Release/AU/De-Saturator.component ~/Library/Audio/Plug-Ins/Components/
+          killall -9 AudioComponentRegistrar || true
+          auval -v aufx Dst1 Aash
+
+      - name: Installer (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) { choco install innosetup -y --no-progress }
+          & $iscc /DAppVersion=$env:VERSION installers\windows\De-Saturator.iss
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Installer (macOS)
+        if: runner.os == 'macOS'
+        run: installers/macos/build_pkg.sh "$VERSION" build/DeSaturator_artefacts/Release build/installer
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v6
+        with:
+          name: De-Saturator-${{ env.VERSION }}-${{ runner.os }}
+          path: build/installer/*
+          if-no-files-found: error
+
+  release:
+    name: GitHub release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v6
+        with:
+          path: installers
+          merge-multiple: true
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${GITHUB_REF_NAME}" installers/* --repo "${GITHUB_REPOSITORY}" --title "De-Saturator ${GITHUB_REF_NAME#v}" --prerelease --generate-notes
