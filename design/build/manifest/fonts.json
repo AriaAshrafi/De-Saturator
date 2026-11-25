@@ -1,0 +1,76 @@
+[
+ {
+  "collection": "fonts",
+  "file": "fonts/Anybody-Medium-500.ttf",
+  "slug": "anybody-medium",
+  "name": "Anybody Medium 500 (static)",
+  "description": "Tooltips. Embed this cut.",
+  "tags": [
+   "anybody",
+   "static"
+  ]
+ },
+ {
+  "collection": "fonts",
+  "file": "fonts/Anybody-SemiBold-600.ttf",
+  "slug": "anybody-semibold",
+  "name": "Anybody SemiBold 600 (static)",
+  "description": "Labels, switches, Delta, Auto gain. Embed this cut.",
+  "tags": [
+   "anybody",
+   "static"
+  ]
+ },
+ {
+  "collection": "fonts",
+  "file": "fonts/Anybody-Bold-700.ttf",
+  "slug": "anybody-bold",
+  "name": "Anybody Bold 700 (static)",
+  "description": "The Amount title. Embed this cut.",
+  "tags": [
+   "anybody",
+   "static"
+  ]
+ },
+ {
+  "collection": "fonts",
+  "file": "fonts/DepartureMono-Regular.otf",
+  "slug": "departure-mono",
+  "name": "Departure Mono",
+  "description": "Values and readouts, at 11 or 22 px at 100%. Embed this.",
+  "tags": [
+   "departure-mono"
+  ]
+ },
+ {
+  "collection": "fonts",
+  "file": "fonts/Anybody-Variable.ttf",
+  "slug": "anybody-variable",
+  "name": "Anybody, variable",
+  "description": "The whole family (wdth 50-150, wght 100-900), for print and the web. The plugin uses the static cuts.",
+  "tags": [
+   "anybody",
+   "variable"
+  ]
+ },
+ {
+  "collection": "data",
+  "file": "fonts/Anybody-OFL.txt",
+  "slug": "anybody-ofl",
+  "name": "Anybody licence (OFL 1.1)",
+  "description": "Ship it with the plugin.",
+  "tags": [
+   "licence"
+  ]
+ },
+ {
+  "collection": "data",
+  "file": "fonts/DepartureMono-OFL.txt",
+  "slug": "departure-mono-ofl",
+  "name": "Departure Mono licence (OFL 1.1)",
+  "description": "Ship it with the plugin.",
+  "tags": [
+   "licence"
+  ]
+ }
+]

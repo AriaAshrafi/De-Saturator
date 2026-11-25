@@ -1,0 +1,48 @@
+<meta charset="utf-8">
+<title>De-Saturator Prototype</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: the window first, at its real size (it shrinks to fit a narrow screen); the states and sizes under it. A light page on purpose: the window is paper. */
+@font-face { font-family: "Anybody"; src: url(data:font/woff2;base64,%%ANYBODY%%) format("woff2"); font-weight: 100 900; font-stretch: 50% 150%; font-display: swap; }
+@font-face { font-family: "Departure Mono"; src: url(data:font/woff2;base64,%%DEPARTURE%%) format("woff2"); font-display: swap; }
+:root {
+  --page: #E2E0D8; --paper: #ECEBE6; --ink: #0C0C0B; --muted: #5F5E59; --line: #D6D4CB; --klein: #2E40FF;
+  --voice: "Anybody", system-ui, sans-serif; --machine: "Departure Mono", ui-monospace, monospace;
+  color-scheme: light;
+}
+html, body { background: var(--page); color: var(--ink); }
+body { font-family: var(--voice); font-size: 15px; line-height: 1.5; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.page { max-width: 1940px; margin: 0 auto; padding-block: 32px 64px; display: grid; gap: 20px; }
+.head { display: grid; gap: 6px; max-width: 760px; }
+h1 { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.01em; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.frame { width: 960px; max-width: 100%; box-shadow: 6px 6px 0 var(--ink); border: 1.5px solid var(--ink); background: var(--paper); }
+.frame svg { display: block; width: 100%; height: auto; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.frame svg:focus { outline: none; }
+.frame svg:focus-visible { outline: 2px solid var(--klein); outline-offset: 2px; }
+.bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.bar b { font-size: 13px; font-weight: 700; margin-right: 4px; min-width: 52px; }
+button { font: inherit; font-size: 13px; font-weight: 600; color: var(--ink); background: none; border: 1.5px solid var(--ink); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+button:hover { border-width: 2.5px; padding: 3px 11px; }
+button:focus-visible { outline: 2px solid var(--klein); outline-offset: 2px; }
+button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.keys { font-size: 14px; color: var(--muted); max-width: 90ch; }
+kbd { font-family: var(--machine); font-size: 13px; color: var(--ink); border: 1px solid var(--line); background: var(--paper); padding: 0 4px; }
+</style>
+<div class="page">
+  <header class="head">
+    <h1>De-Saturator</h1>
+    <p class="muted">The window as designed, wired to the spec. The analyser runs on a stand-in signal and the thinning is a sketch of the look; nothing plays.</p>
+  </header>
+  <div class="frame" id="frame"><svg id="window" tabindex="0" role="application" aria-label="De-Saturator window"></svg></div>
+  <div class="bar" id="presets"><b>States</b></div>
+  <div class="bar"><b>Size</b><button type="button" data-scale="0.75" aria-pressed="false">75%</button><button type="button" data-scale="1" aria-pressed="true">100%</button><button type="button" data-scale="1.5" aria-pressed="false">150%</button><button type="button" data-scale="2" aria-pressed="false">200%</button></div>
+  <div class="bar"><b>Signal</b><button type="button" id="run" aria-pressed="true">Pause the analyser</button><button type="button" id="silent" aria-pressed="false">No signal</button></div>
+  <p class="keys">Drag a knob up or down; <kbd>Shift</kbd> drags finely, double-click resets, the wheel steps it once you've clicked in the window. On the analyser: double-click to add a point (up to six), drag it, scroll on it to change its width, double-click it to remove it. With a point selected, the arrow keys move it and <kbd>Delete</kbd> removes it. <kbd>D</kbd> toggles Delta, <kbd>B</kbd> Bypass. Rest the pointer on anything for its tooltip.</p>
+</div>
+<script>
+%%CORE%%
+%%ASSETS%%
+%%APP%%
+</script>

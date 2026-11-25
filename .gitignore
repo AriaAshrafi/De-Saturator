@@ -1,0 +1,25 @@
+# Build output (anchored to the repo root; design/build/ is source, not output)
+/build/
+/build-*/
+/out/
+/cmake-build-*/
+CMakeUserPresets.json
+
+# Rendered audio and window snapshots from the tools
+/renders/
+/snapshots/
+
+# IDEs
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.xcworkspace
+xcuserdata/
+
+# OS and caches
+.DS_Store
+Thumbs.db
+__pycache__/
+node_modules/

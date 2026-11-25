@@ -1,0 +1,193 @@
+<meta charset="utf-8">
+<title>De-Saturator Directions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: one column; each direction is its working window, four still states, then its parts. One dark look on purpose, so the grey, paper and ink windows all sit on the same ground. */
+@font-face { font-family: "Anybody"; src: url(data:font/woff2;base64,%%ANYBODY%%) format("woff2"); font-weight: 100 900; font-stretch: 50% 150%; font-display: swap; }
+@font-face { font-family: "Bodoni Moda"; src: url(data:font/woff2;base64,%%BODONI_IT%%) format("woff2"); font-weight: 400 900; font-style: italic; font-display: swap; }
+@font-face { font-family: "Departure Mono"; src: url(data:font/woff2;base64,%%DEPARTURE%%) format("woff2"); font-display: swap; }
+:root {
+  --ink: #0C0C0B; --ink-raised: #1A1A18; --ink-line: #2A2A27; --paper: #ECEBE6; --graphite: #8A8983; --signal: #FF4B1F; --klein-light: #7C88FF;
+  --voice: "Anybody", system-ui, sans-serif; --score: "Bodoni Moda", Georgia, serif; --machine: "Departure Mono", ui-monospace, monospace;
+  color-scheme: dark;
+}
+html, body { background: var(--ink); color: var(--paper); }
+body { font-family: var(--voice); font-size: 16px; line-height: 1.5; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.page { max-width: 1180px; margin: 0 auto; padding-block: 48px 96px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.mast { display: grid; gap: 16px; max-width: 780px; }
+.mast h1 { font-size: clamp(44px, 8vw, 92px); font-weight: 800; letter-spacing: -0.02em; line-height: 0.95; }
+.mast h1 .w { font-stretch: 150%; }
+.mast .lede { font-size: 19px; max-width: 62ch; }
+.aside { font-family: var(--score); font-style: italic; color: var(--graphite); font-size: 17px; }
+.pick { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-block: 12px; margin-block: 32px 8px; background: var(--ink); border-bottom: 1px solid var(--ink-line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ink); }
+.pick a, .pick button { color: var(--paper); background: none; font: inherit; text-decoration: none; border: 1px solid var(--ink-line); border-radius: 999px; padding: 6px 14px; font-weight: 600; font-stretch: 110%; cursor: pointer; }
+.pick a:hover, .pick a:focus-visible, .pick button:hover, .pick button:focus-visible { border-color: var(--paper); outline: none; }
+.pick a b { font-family: var(--machine); font-weight: 400; color: var(--graphite); margin-right: 6px; }
+.pick button { margin-left: auto; font-weight: 500; color: var(--graphite); }
+.dir { padding-block: 56px 24px; border-bottom: 1px solid var(--ink-line); display: grid; gap: 24px; }
+.dir-head { display: grid; grid-template-columns: auto 1fr; gap: 4px 20px; align-items: baseline; }
+.letter { font-family: var(--machine); color: var(--graphite); font-size: 15px; grid-row: span 2; }
+.dir-head h2 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; font-stretch: 120%; line-height: 1; }
+.dir-head p { grid-column: 2; max-width: 66ch; font-size: 18px; min-width: 0; }
+.win { overflow: hidden; border: 1px solid var(--ink-line); max-width: 1100px; }
+.win svg { display: block; width: 100%; height: auto; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.win svg:focus { outline: none; }
+.win svg:focus-visible { outline: 2px solid var(--klein-light); outline-offset: -2px; }
+.hint { font-size: 14px; color: var(--graphite); max-width: 90ch; }
+.hint kbd { font-family: var(--machine); font-size: 13px; color: var(--paper); border: 1px solid var(--ink-line); padding: 0 5px; }
+.stills { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; max-width: 1100px; }
+.stills figure { margin: 0; display: grid; gap: 6px; min-width: 0; }
+.stills svg { display: block; width: 100%; height: auto; border: 1px solid var(--ink-line); pointer-events: none; }
+.stills figcaption { font-size: 13px; font-weight: 600; font-stretch: 110%; color: var(--graphite); }
+@media (max-width: 720px) { .stills { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.parts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+.parts > div { min-width: 0; display: grid; gap: 12px; align-content: start; }
+.parts h3 { font-size: 13px; font-weight: 700; font-stretch: 110%; color: var(--graphite); }
+.marks { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+.marks svg { display: block; max-width: 100%; }
+.lockup svg { display: block; width: 100%; max-width: 460px; height: auto; }
+.swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+.sw { display: grid; gap: 4px; font-size: 12px; width: 78px; }
+.sw i { display: block; height: 40px; border: 1px solid var(--ink-line); }
+.sw code { font-family: var(--machine); font-size: 11px; color: var(--graphite); }
+.type p { font-size: 15px; }
+dl { margin: 0; display: grid; gap: 10px; }
+dt { font-weight: 700; font-stretch: 110%; font-size: 14px; }
+dd { margin: 0; color: var(--paper); font-size: 15px; max-width: 60ch; }
+.risk { border-left: 2px solid var(--signal); padding-left: 12px; font-size: 15px; }
+.shared { padding-block: 56px 0; display: grid; gap: 16px; max-width: 780px; }
+.shared h2 { font-size: 28px; font-weight: 800; font-stretch: 120%; }
+.shared ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">%%CREDIT%%</svg>
+
+<div class="page">
+  <header class="mast">
+    <h1>De-S<span class="w">a</span>tur<span class="w">a</span>tor</h1>
+    <p class="lede">Three directions for the plugin and its brand, each one a working window. Turn Amount, draw on the analyser, and try Delta, Live, Character and Bypass to see what each look does with them.</p>
+    <p class="aside">The analyser is fed by a stand-in signal. Nothing plays.</p>
+  </header>
+
+  <nav class="pick" aria-label="Directions">
+    <a href="#grey-card"><b>A</b>Grey card</a>
+    <a href="#hairline"><b>B</b>Hairline</a>
+    <a href="#halftone"><b>C</b>Halftone</a>
+    <a href="#shared">What they share</a>
+    <button id="run" type="button" aria-pressed="true">Pause the analysers</button>
+  </nav>
+
+  <section class="dir" id="grey-card">
+    <div class="dir-head">
+      <span class="letter">A</span>
+      <h2>Grey card</h2>
+      <p>A photographer holds up a grey card to take the colour cast out of a picture. Here the whole window is that card, and the only colour on it is what the plugin takes out: the orange between the original and the result, and the arc on the Amount knob. Bypass it and the window turns fully grey.</p>
+    </div>
+    <div class="win"><svg id="win-a" tabindex="0" role="application" aria-label="De-Saturator window, direction A"></svg></div>
+    <p class="hint">Drag a knob up or down (<kbd>Shift</kbd> for fine; double-click resets). On the analyser: double-click to add a point, drag it, scroll on it to change its width, double-click it to remove it. With the window focused, <kbd>D</kbd> toggles Delta and <kbd>B</kbd> Bypass.</p>
+    <div class="stills">
+      <figure><svg id="still-a-delta" role="img" aria-label="Direction A, Delta on"></svg><figcaption>Delta on</figcaption></figure>
+      <figure><svg id="still-a-live" role="img" aria-label="Direction A, Live"></svg><figcaption>Live</figcaption></figure>
+      <figure><svg id="still-a-character" role="img" aria-label="Direction A, Character"></svg><figcaption>Character</figcaption></figure>
+      <figure><svg id="still-a-bypass" role="img" aria-label="Direction A, bypassed"></svg><figcaption>Bypassed</figcaption></figure>
+    </div>
+    <div class="parts">
+      <div><h3>Mark</h3><div class="marks" id="marks-a"></div><div class="lockup" id="lockup-a"></div><p class="type"><span style="font-size:15px">A disc half on the card: the half on the card has lost its colour and left only its outline. It also reads as a D.</span></p></div>
+      <div><h3>Colour and type</h3>
+        <div class="swatches"><span class="sw"><i style="background:#8A8983"></i>Graphite<code>#8A8983</code></span><span class="sw"><i style="background:#0C0C0B"></i>Ink<code>#0C0C0B</code></span><span class="sw"><i style="background:#ECEBE6"></i>Paper<code>#ECEBE6</code></span><span class="sw"><i style="background:#FF4B1F"></i>Signal<code>#FF4B1F</code></span></div>
+        <div class="type"><p style="font-weight:800;font-size:26px">De-S<span style="font-stretch:150%">a</span>tur<span style="font-stretch:150%">a</span>tor</p><p>All the parent's: graphite is the card, ink the screen and knobs, signal is what gets removed. Anybody ExtraBold for the name, Anybody for labels, Departure Mono for values.</p></div>
+      </div>
+      <div><h3>How the states look</h3>
+        <dl>
+          <dt>What's removed</dt><dd>Orange, filled between the original (the faint line) and the result. Orange means removal and nothing else.</dd>
+          <dt>Delta</dt><dd>The orange stays and everything else dims, so what you see in orange is what you hear.</dd>
+          <dt>Live</dt><dd>Your curve turns dashed and the smoothed curve Live applies is drawn solid over it.</dd>
+          <dt>Bypassed</dt><dd>No orange anywhere, not even in the logo.</dd>
+        </dl>
+        <p class="risk">Watch: orange and graphite are close in lightness, so every orange shape sits on ink or is edged in ink: the screen, the knob's track, the Delta button.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="dir" id="hairline">
+    <div class="dir-head">
+      <span class="letter">B</span>
+      <h2>Hairline</h2>
+      <p>Thinner, drawn literally. The analyser is a comb of lines: what stays is drawn heavy, and what's removed carries on as a hairline up to where the original reached. The Amount knob thins the same way, from a solid disc at 0 to a hairline ring at 100, and the name loses weight letter by letter.</p>
+    </div>
+    <div class="win"><svg id="win-b" tabindex="0" role="application" aria-label="De-Saturator window, direction B"></svg></div>
+    <p class="hint">Turn Amount and watch the knob's ring thin. The same controls as above.</p>
+    <div class="stills">
+      <figure><svg id="still-b-delta" role="img" aria-label="Direction B, Delta on"></svg><figcaption>Delta on</figcaption></figure>
+      <figure><svg id="still-b-live" role="img" aria-label="Direction B, Live"></svg><figcaption>Live</figcaption></figure>
+      <figure><svg id="still-b-character" role="img" aria-label="Direction B, Character"></svg><figcaption>Character</figcaption></figure>
+      <figure><svg id="still-b-bypass" role="img" aria-label="Direction B, bypassed"></svg><figcaption>Bypassed</figcaption></figure>
+    </div>
+    <div class="parts">
+      <div><h3>Mark</h3><div class="marks" id="marks-b"></div><div class="lockup" id="lockup-b"></div><p class="type"><span style="font-size:15px">One sine wave, the parent's own part, losing weight from left to right.</span></p></div>
+      <div><h3>Colour and type</h3>
+        <div class="swatches"><span class="sw"><i style="background:#ECEBE6"></i>Paper<code>#ECEBE6</code></span><span class="sw"><i style="background:#0C0C0B"></i>Ink<code>#0C0C0B</code></span><span class="sw"><i style="background:#5F5E59"></i>Graphite deep<code>#5F5E59</code></span><span class="sw"><i style="background:#2E40FF"></i>Klein<code>#2E40FF</code></span></div>
+        <div class="type"><p style="font-size:26px"><span style="font-weight:900">De-</span><span style="font-weight:600">Sat</span><span style="font-weight:300">urator</span></p><p>Anybody from Black down to ExtraLight across the name, never thinner, so it still reads. Klein is the hand: the curve, its points and Delta.</p></div>
+      </div>
+      <div><h3>How the states look</h3>
+        <dl>
+          <dt>What's removed</dt><dd>The hairline tip of each line. The heavy part is what you keep.</dd>
+          <dt>Delta</dt><dd>The weights swap: the removed part turns heavy and klein, the rest drops to a hairline.</dd>
+          <dt>Live</dt><dd>As in A: your curve dashed, the applied one solid.</dd>
+          <dt>Bypassed</dt><dd>Every line heavy, end to end. Nothing thins.</dd>
+        </dl>
+        <p class="risk">Watch: hairlines fade at 75% on a low-resolution screen. The thin part keeps a one-pixel floor, and the comb stays at 120 lines.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="dir" id="halftone">
+    <div class="dir-head">
+      <span class="letter">C</span>
+      <h2>Halftone</h2>
+      <p>Saturation the way a printer means it: how much ink is on the page. The analyser is a halftone screen in columns. Paper dots are what stays, pink dots are the ink being lifted off, and the Amount knob's own dot screen gets finer as you turn it up.</p>
+    </div>
+    <div class="win"><svg id="win-c" tabindex="0" role="application" aria-label="De-Saturator window, direction C"></svg></div>
+    <p class="hint">The dot screen updates at 30 frames a second, like a hardware meter. The same controls as above.</p>
+    <div class="stills">
+      <figure><svg id="still-c-delta" role="img" aria-label="Direction C, Delta on"></svg><figcaption>Delta on</figcaption></figure>
+      <figure><svg id="still-c-live" role="img" aria-label="Direction C, Live"></svg><figcaption>Live</figcaption></figure>
+      <figure><svg id="still-c-character" role="img" aria-label="Direction C, Character"></svg><figcaption>Character</figcaption></figure>
+      <figure><svg id="still-c-bypass" role="img" aria-label="Direction C, bypassed"></svg><figcaption>Bypassed</figcaption></figure>
+    </div>
+    <div class="parts">
+      <div><h3>Mark</h3><div class="marks" id="marks-c"></div><div class="lockup" id="lockup-c"></div><p class="type"><span style="font-size:15px">A disc of halftone dots that shrink to nothing, the lifted half in pink.</span></p></div>
+      <div><h3>Colour and type</h3>
+        <div class="swatches"><span class="sw"><i style="background:#0C0C0B"></i>Ink<code>#0C0C0B</code></span><span class="sw"><i style="background:#1A1A18"></i>Ink raised<code>#1A1A18</code></span><span class="sw"><i style="background:#ECEBE6"></i>Paper<code>#ECEBE6</code></span><span class="sw"><i style="background:#FF9BD0"></i>Bubblegum<code>#FF9BD0</code></span></div>
+        <div class="type"><p style="font-weight:900;font-size:26px">De-Saturator</p><p>Anybody Black, with the word after the hyphen screened into dots that shrink letter by letter. Bubblegum is the lifted ink.</p></div>
+      </div>
+      <div><h3>How the states look</h3>
+        <dl>
+          <dt>What's removed</dt><dd>Pink dots above the paper ones, in each column, up to where the original reached.</dd>
+          <dt>Delta</dt><dd>Only the pink dots stay full size; the rest shrink to pinpoints.</dd>
+          <dt>Live</dt><dd>As in A: your curve dashed, the applied one solid.</dd>
+          <dt>Bypassed</dt><dd>No pink anywhere.</dd>
+        </dl>
+        <p class="risk">Watch: a moving dot field can shimmer. Here the dots snap to a fixed grid and update at 30 fps, which keeps it calm, but it is still the busiest of the three.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="shared" id="shared">
+    <h2>What they share</h2>
+    <ul>
+      <li>One layout: the analyser and its curve on the left, Amount on the right with Restore, Mix and Output under it, Shape beneath the analyser, and the modes and listening switches in the header.</li>
+      <li>The window is 960 × 600 and scales from 75% to 200% at that ratio. Everything is shapes and strokes, so nothing needs a bitmap.</li>
+      <li>The thinning curve is a set of bells on a line at 100% of Amount, up to six. The top is 200%, the bottom leaves that range untouched.</li>
+      <li>The result is drawn before Output and Auto gain, so the gap only ever shows what was removed, never a change in level.</li>
+      <li>In Live, the curve you draw and the smoothed curve that's applied are both shown. In HQ they are the same line. The latency label holds up to three digits.</li>
+      <li>Type is the parent brand's: Anybody for the name and labels, Departure Mono for values. Both are under the SIL Open Font License, so they can ship inside a free plugin.</li>
+    </ul>
+    <p class="aside">Pick one and the full kit follows: logo files, tokens, every state as a picture, the build spec for JUCE and a clickable prototype.</p>
+  </section>
+</div>
+<script>
+%%SCRIPT%%
+</script>

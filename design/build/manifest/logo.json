@@ -1,0 +1,713 @@
+[
+ {
+  "collection": "logo",
+  "file": "logo/de-saturator-wordmark-ink.svg",
+  "slug": "wordmark-ink",
+  "name": "Name, ink",
+  "description": "Black at the D to ExtraLight at the end. In ink.",
+  "tags": [
+   "wordmark"
+  ]
+ },
+ {
+  "collection": "logo-png",
+  "file": "logo/png/de-saturator-wordmark-ink.png",
+  "slug": "wordmark-ink-png",
+  "name": "Name, ink (PNG)",
+  "description": "Transparent ground.",
+  "tags": [
+   "wordmark",
+   "png"
+  ]
+ },
+ {
+  "collection": "logo",
+  "file": "logo/de-saturator-wordmark-paper.svg",
+  "slug": "wordmark-paper",
+  "name": "Name, paper",
+  "description": "Black at the D to ExtraLight at the end. In paper.",
+  "tags": [
+   "wordmark"
+  ]
+ },
+ {
+  "collection": "logo-png",
+  "file": "logo/png/de-saturator-wordmark-paper.png",
+  "slug": "wordmark-paper-png",
+  "name": "Name, paper (PNG)",
+  "description": "Transparent ground.",
+  "tags": [
+   "wordmark",
+   "png"
+  ]
+ },
+ {
+  "collection": "logo",
+  "file": "logo/de-saturator-wordmark-current.svg",
+  "slug": "wordmark-current",
+  "name": "Name, current",
+  "description": "Black at the D to ExtraLight at the end. In current.",
+  "tags": [
+   "wordmark"
+  ]
+ },
+ {
+  "collection": "logo",
+  "file": "logo/de-saturator-wordmark-small-ink.svg",
+  "slug": "wordmark-small-ink",
+  "name": "Name small, ink",
+  "description": "For 24 px tall and under: the weight stops at 420 so the thin end holds. In ink.",
+  "tags": [
+   "wordmark",
+   "small"
+  ]
+ },
+ {
+  "collection": "logo-png",
+  "file": "logo/png/de-saturator-wordmark-small-ink.png",
+  "slug": "wordmark-small-ink-png",
+  "name": "Name small, ink (PNG)",
+  "description": "Transparent ground.",
+  "tags": [
+   "wordmark",
+   "png"
+  ]
+ },
+ {
+  "collection": "logo",
+  "file": "logo/de-saturator-wordmark-small-paper.svg",
+  "slug": "wordmark-small-paper",
+  "name": "Name small, paper",
+  "description": "For 24 px tall and under: the weight stops at 420 so the thin end holds. In paper.",
+  "tags": [
+   "wordmark",
+   "small"
+  ]
+ },
+ {
+  "collection": "logo-png",
+  "file": "logo/png/de-saturator-wordmark-small-paper.png",
+  "slug": "wordmark-small-paper-png",
+  "name": "Name small, paper (PNG)",
+  "description": "Transparent ground.",
+  "tags": [
+   "wordmark",
+   "png"
+  ]
+ },
+ {
+  "collection": "logo",
+  "file": "logo/de-saturator-wordmark-small-current.svg",
+  "slug": "wordmark-small-current",
+  "name": "Name small, current",
+  "description": "For 24 px tall and under: the weight stops at 420 so the thin end holds. In current.",
+  "tags": [
+   "wordmark",
+   "small"
+  ]
+ },
+ {
+  "collection": "symbol",
+  "file": "logo/de-saturator-mark-ink.svg",
+  "slug": "mark-ink",
+  "name": "Mark, ink",
+  "description": "The parent's sine, losing weight left to right. In ink.",
+  "tags": [
+   "mark"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-mark-ink.png",
+  "slug": "mark-ink-png",
+  "name": "Mark, ink (PNG)",
+  "description": "Transparent ground.",
+  "tags": [
+   "mark",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol",
+  "file": "logo/de-saturator-mark-paper.svg",
+  "slug": "mark-paper",
+  "name": "Mark, paper",
+  "description": "The parent's sine, losing weight left to right. In paper.",
+  "tags": [
+   "mark"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-mark-paper.png",
+  "slug": "mark-paper-png",
+  "name": "Mark, paper (PNG)",
+  "description": "Transparent ground.",
+  "tags": [
+   "mark",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol",
+  "file": "logo/de-saturator-mark-current.svg",
+  "slug": "mark-current",
+  "name": "Mark, current",
+  "description": "The parent's sine, losing weight left to right. In current.",
+  "tags": [
+   "mark"
+  ]
+ },
+ {
+  "collection": "symbol",
+  "file": "logo/de-saturator-mark-klein.svg",
+  "slug": "mark-klein",
+  "name": "Mark, klein",
+  "description": "The parent's sine, losing weight left to right. In klein.",
+  "tags": [
+   "mark"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-mark-klein.png",
+  "slug": "mark-klein-png",
+  "name": "Mark, klein (PNG)",
+  "description": "Transparent ground.",
+  "tags": [
+   "mark",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol",
+  "file": "logo/de-saturator-mark-small-ink.svg",
+  "slug": "mark-small-ink",
+  "name": "Mark small, ink",
+  "description": "For 32 px and under: the thin end stays a third as heavy as the thick one. In ink.",
+  "tags": [
+   "mark",
+   "small"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-mark-small-ink.png",
+  "slug": "mark-small-ink-png",
+  "name": "Mark small, ink (PNG)",
+  "description": "Transparent ground.",
+  "tags": [
+   "mark",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol",
+  "file": "logo/de-saturator-mark-small-paper.svg",
+  "slug": "mark-small-paper",
+  "name": "Mark small, paper",
+  "description": "For 32 px and under: the thin end stays a third as heavy as the thick one. In paper.",
+  "tags": [
+   "mark",
+   "small"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-mark-small-paper.png",
+  "slug": "mark-small-paper-png",
+  "name": "Mark small, paper (PNG)",
+  "description": "Transparent ground.",
+  "tags": [
+   "mark",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol",
+  "file": "logo/de-saturator-mark-small-current.svg",
+  "slug": "mark-small-current",
+  "name": "Mark small, current",
+  "description": "For 32 px and under: the thin end stays a third as heavy as the thick one. In current.",
+  "tags": [
+   "mark",
+   "small"
+  ]
+ },
+ {
+  "collection": "symbol",
+  "file": "logo/de-saturator-mark-small-klein.svg",
+  "slug": "mark-small-klein",
+  "name": "Mark small, klein",
+  "description": "For 32 px and under: the thin end stays a third as heavy as the thick one. In klein.",
+  "tags": [
+   "mark",
+   "small"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-mark-small-klein.png",
+  "slug": "mark-small-klein-png",
+  "name": "Mark small, klein (PNG)",
+  "description": "Transparent ground.",
+  "tags": [
+   "mark",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol",
+  "file": "logo/de-saturator-tile-paper.svg",
+  "slug": "tile-paper",
+  "name": "Icon tile, paper",
+  "description": "The mark on a paper square.",
+  "tags": [
+   "tile",
+   "icon"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-paper-48.png",
+  "slug": "tile-paper-48",
+  "name": "Icon tile, paper, 48 px",
+  "description": "48 × 48.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-paper-64.png",
+  "slug": "tile-paper-64",
+  "name": "Icon tile, paper, 64 px",
+  "description": "64 × 64.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-paper-128.png",
+  "slug": "tile-paper-128",
+  "name": "Icon tile, paper, 128 px",
+  "description": "128 × 128.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-paper-256.png",
+  "slug": "tile-paper-256",
+  "name": "Icon tile, paper, 256 px",
+  "description": "256 × 256.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-paper-512.png",
+  "slug": "tile-paper-512",
+  "name": "Icon tile, paper, 512 px",
+  "description": "512 × 512.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-paper-1024.png",
+  "slug": "tile-paper-1024",
+  "name": "Icon tile, paper, 1024 px",
+  "description": "1024 × 1024.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol",
+  "file": "logo/de-saturator-tile-ink.svg",
+  "slug": "tile-ink",
+  "name": "Icon tile, ink",
+  "description": "The mark on a ink square.",
+  "tags": [
+   "tile",
+   "icon"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-ink-48.png",
+  "slug": "tile-ink-48",
+  "name": "Icon tile, ink, 48 px",
+  "description": "48 × 48.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-ink-64.png",
+  "slug": "tile-ink-64",
+  "name": "Icon tile, ink, 64 px",
+  "description": "64 × 64.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-ink-128.png",
+  "slug": "tile-ink-128",
+  "name": "Icon tile, ink, 128 px",
+  "description": "128 × 128.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-ink-256.png",
+  "slug": "tile-ink-256",
+  "name": "Icon tile, ink, 256 px",
+  "description": "256 × 256.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-ink-512.png",
+  "slug": "tile-ink-512",
+  "name": "Icon tile, ink, 512 px",
+  "description": "512 × 512.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-ink-1024.png",
+  "slug": "tile-ink-1024",
+  "name": "Icon tile, ink, 1024 px",
+  "description": "1024 × 1024.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol",
+  "file": "logo/de-saturator-tile-klein.svg",
+  "slug": "tile-klein",
+  "name": "Icon tile, klein",
+  "description": "The mark on a klein square.",
+  "tags": [
+   "tile",
+   "icon"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-klein-48.png",
+  "slug": "tile-klein-48",
+  "name": "Icon tile, klein, 48 px",
+  "description": "48 × 48.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-klein-64.png",
+  "slug": "tile-klein-64",
+  "name": "Icon tile, klein, 64 px",
+  "description": "64 × 64.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-klein-128.png",
+  "slug": "tile-klein-128",
+  "name": "Icon tile, klein, 128 px",
+  "description": "128 × 128.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-klein-256.png",
+  "slug": "tile-klein-256",
+  "name": "Icon tile, klein, 256 px",
+  "description": "256 × 256.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-klein-512.png",
+  "slug": "tile-klein-512",
+  "name": "Icon tile, klein, 512 px",
+  "description": "512 × 512.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-klein-1024.png",
+  "slug": "tile-klein-1024",
+  "name": "Icon tile, klein, 1024 px",
+  "description": "1024 × 1024.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol",
+  "file": "logo/de-saturator-tile-small-paper.svg",
+  "slug": "tile-small-paper",
+  "name": "Icon tile small, paper",
+  "description": "For 16 and 32 px. The mark on a paper square.",
+  "tags": [
+   "tile",
+   "icon"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-paper-16.png",
+  "slug": "tile-paper-16",
+  "name": "Icon tile, paper, 16 px",
+  "description": "16 × 16.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-paper-32.png",
+  "slug": "tile-paper-32",
+  "name": "Icon tile, paper, 32 px",
+  "description": "32 × 32.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol",
+  "file": "logo/de-saturator-tile-small-ink.svg",
+  "slug": "tile-small-ink",
+  "name": "Icon tile small, ink",
+  "description": "For 16 and 32 px. The mark on a ink square.",
+  "tags": [
+   "tile",
+   "icon"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-ink-16.png",
+  "slug": "tile-ink-16",
+  "name": "Icon tile, ink, 16 px",
+  "description": "16 × 16.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-ink-32.png",
+  "slug": "tile-ink-32",
+  "name": "Icon tile, ink, 32 px",
+  "description": "32 × 32.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol",
+  "file": "logo/de-saturator-tile-small-klein.svg",
+  "slug": "tile-small-klein",
+  "name": "Icon tile small, klein",
+  "description": "For 16 and 32 px. The mark on a klein square.",
+  "tags": [
+   "tile",
+   "icon"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-klein-16.png",
+  "slug": "tile-klein-16",
+  "name": "Icon tile, klein, 16 px",
+  "description": "16 × 16.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "symbol-png",
+  "file": "logo/png/de-saturator-tile-klein-32.png",
+  "slug": "tile-klein-32",
+  "name": "Icon tile, klein, 32 px",
+  "description": "32 × 32.",
+  "tags": [
+   "tile",
+   "png"
+  ]
+ },
+ {
+  "collection": "logo",
+  "file": "logo/de-saturator-lockup-ink.svg",
+  "slug": "lockup-ink",
+  "name": "Lockup, ink",
+  "description": "The mark beside the name, as tall as the D. In ink.",
+  "tags": [
+   "lockup"
+  ]
+ },
+ {
+  "collection": "logo-png",
+  "file": "logo/png/de-saturator-lockup-ink.png",
+  "slug": "lockup-ink-png",
+  "name": "Lockup, ink (PNG)",
+  "description": "Transparent ground.",
+  "tags": [
+   "lockup",
+   "png"
+  ]
+ },
+ {
+  "collection": "logo",
+  "file": "logo/de-saturator-lockup-paper.svg",
+  "slug": "lockup-paper",
+  "name": "Lockup, paper",
+  "description": "The mark beside the name, as tall as the D. In paper.",
+  "tags": [
+   "lockup"
+  ]
+ },
+ {
+  "collection": "logo-png",
+  "file": "logo/png/de-saturator-lockup-paper.png",
+  "slug": "lockup-paper-png",
+  "name": "Lockup, paper (PNG)",
+  "description": "Transparent ground.",
+  "tags": [
+   "lockup",
+   "png"
+  ]
+ },
+ {
+  "collection": "logo",
+  "file": "logo/de-saturator-lockup-current.svg",
+  "slug": "lockup-current",
+  "name": "Lockup, current",
+  "description": "The mark beside the name, as tall as the D. In current.",
+  "tags": [
+   "lockup"
+  ]
+ },
+ {
+  "collection": "logo",
+  "file": "logo/de-saturator-endorsed-ink.svg",
+  "slug": "endorsed-ink",
+  "name": "Name with the Aria Ashrafi credit, ink",
+  "description": "The parent's credit lockup under the name's end. For the store, the site and the installer.",
+  "tags": [
+   "endorsed"
+  ]
+ },
+ {
+  "collection": "logo-png",
+  "file": "logo/png/de-saturator-endorsed-ink.png",
+  "slug": "endorsed-ink-png",
+  "name": "Name with credit, ink (PNG)",
+  "description": "Transparent ground.",
+  "tags": [
+   "endorsed",
+   "png"
+  ]
+ },
+ {
+  "collection": "logo",
+  "file": "logo/de-saturator-endorsed-paper.svg",
+  "slug": "endorsed-paper",
+  "name": "Name with the Aria Ashrafi credit, paper",
+  "description": "The parent's credit lockup under the name's end. For the store, the site and the installer.",
+  "tags": [
+   "endorsed"
+  ]
+ },
+ {
+  "collection": "logo-png",
+  "file": "logo/png/de-saturator-endorsed-paper.png",
+  "slug": "endorsed-paper-png",
+  "name": "Name with credit, paper (PNG)",
+  "description": "Transparent ground.",
+  "tags": [
+   "endorsed",
+   "png"
+  ]
+ },
+ {
+  "collection": "logo",
+  "file": "logo/de-saturator-clear-space.svg",
+  "slug": "clear-space",
+  "name": "Clear space",
+  "description": "Keep half the D's height clear on every side of the name.",
+  "tags": [
+   "rules"
+  ]
+ },
+ {
+  "collection": "ui-assets",
+  "file": "ui/assets/wordmark-header.svg",
+  "slug": "wordmark-header",
+  "name": "Name for the window header",
+  "description": "At 27 px, ink. Its baseline sits at y 38, its origin at x 24.",
+  "tags": [
+   "window"
+  ]
+ },
+ {
+  "collection": "ui-assets",
+  "file": "ui/assets/credit.svg",
+  "slug": "credit",
+  "name": "Aria Ashrafi credit for the window",
+  "description": "Graphite deep. Drawn 54 × 15 at x 24, y 566.",
+  "tags": [
+   "window"
+  ]
+ }
+]

@@ -1,0 +1,1048 @@
+{
+ "name": "De-Saturator",
+ "version": "1.0.0",
+ "direction": "Hairline",
+ "idea": "Thinner, drawn literally. What stays is heavy, what's removed is a hairline: in the analyser, in the Amount ring, in the name.",
+ "units": "Window pixels at 100%. Every number scales with the window; the 1 px hairlines never go under one physical pixel.",
+ "window": {
+  "width": 960,
+  "height": 600,
+  "aspect": 1.6,
+  "scale": {
+   "min": 0.75,
+   "max": 2,
+   "default": 1
+  },
+  "background": "ground",
+  "corners": 0
+ },
+ "colors": {
+  "paper": "#ECEBE6",
+  "paperRaised": "#E2E0D8",
+  "paperLine": "#D6D4CB",
+  "ink": "#0C0C0B",
+  "graphiteDeep": "#5F5E59",
+  "klein": "#2E40FF"
+ },
+ "roles": {
+  "ground": {
+   "color": "paper",
+   "hex": "#ECEBE6",
+   "use": "The window."
+  },
+  "text": {
+   "color": "ink",
+   "hex": "#0C0C0B",
+   "use": "Labels, the name, button outlines, the analyser's frame."
+  },
+  "textMuted": {
+   "color": "graphiteDeep",
+   "hex": "#5F5E59",
+   "use": "Values, the latency, frequency labels, the credit."
+  },
+  "grid": {
+   "color": "paperLine",
+   "hex": "#D6D4CB",
+   "use": "The analyser's grid, knob tracks, the Shape track."
+  },
+  "body": {
+   "color": "ink",
+   "hex": "#0C0C0B",
+   "alpha": 0.16,
+   "use": "Analyser: the comb under the result line, at 16% opacity. What stays, kept quiet."
+  },
+  "result": {
+   "color": "ink",
+   "hex": "#0C0C0B",
+   "use": "Analyser: the result line, heavy. What you hear."
+  },
+  "original": {
+   "color": "ink",
+   "hex": "#0C0C0B",
+   "use": "Analyser: the original's line, a hairline."
+  },
+  "removed": {
+   "color": "ink",
+   "hex": "#0C0C0B",
+   "use": "Analyser: hairlines between the two lines. What's removed."
+  },
+  "hand": {
+   "color": "klein",
+   "hex": "#2E40FF",
+   "use": "What you set: the thinning curve, its points, value arcs, Delta when on."
+  },
+  "selected": {
+   "color": "ink",
+   "hex": "#0C0C0B",
+   "use": "The chosen segment of a switch; Auto gain and Bypass when on."
+  },
+  "onSelected": {
+   "color": "paper",
+   "hex": "#ECEBE6",
+   "use": "Text and icons on ink."
+  },
+  "onHand": {
+   "color": "paper",
+   "hex": "#ECEBE6",
+   "use": "Text on klein."
+  },
+  "readout": {
+   "color": "ink",
+   "hex": "#0C0C0B",
+   "use": "Readout chips and tooltips."
+  },
+  "onReadout": {
+   "color": "paper",
+   "hex": "#ECEBE6",
+   "use": "Text in readout chips and tooltips."
+  }
+ },
+ "strokes": {
+  "frame": {
+   "px": 1.5,
+   "use": "The analyser's frame."
+  },
+  "grid": {
+   "px": 1,
+   "use": "Grid lines."
+  },
+  "body": {
+   "px": 2.6,
+   "use": "Analyser comb, the part under the result line."
+  },
+  "result": {
+   "px": 2,
+   "use": "The result line."
+  },
+  "original": {
+   "px": 1,
+   "use": "The original's line. Never under 1 physical pixel."
+  },
+  "hair": {
+   "px": 1,
+   "use": "Analyser comb, the part between the two lines (what's removed). Never under 1 physical pixel."
+  },
+  "removedDelta": {
+   "px": 2.6,
+   "use": "Delta: the removed part of the comb, heavy."
+  },
+  "outline": {
+   "px": 1.5,
+   "use": "Switches, pills, Bypass, small knob bodies."
+  },
+  "outlineHover": {
+   "px": 2.5,
+   "use": "The same outline under the pointer."
+  },
+  "curve": {
+   "px": 2,
+   "use": "The thinning curve."
+  },
+  "curveApplied": {
+   "px": 2.25,
+   "use": "Live: the applied (smoothed) curve."
+  },
+  "curveDrawn": {
+   "px": 1.25,
+   "use": "Live: the curve you drew, dashed 4 on, 4 off."
+  },
+  "curveUnder": {
+   "px": 5,
+   "use": "A paper line under the curve so it reads over the analyser."
+  },
+  "knobTrack": {
+   "px": 3.5,
+   "use": "Small knob track and value arc."
+  },
+  "amountArc": {
+   "px": 2,
+   "use": "Amount track and value arc."
+  },
+  "tick": {
+   "px": 1.25,
+   "use": "Amount scale ticks."
+  },
+  "pointRing": {
+   "px": 2,
+   "use": "Curve point ring."
+  },
+  "bracket": {
+   "px": 1.25,
+   "use": "A point's width bracket."
+  },
+  "ringMax": {
+   "px": 44,
+   "use": "Amount ring at 0%: nearly a solid disc."
+  },
+  "ringMin": {
+   "px": 1.5,
+   "use": "Amount ring at 100%: a hairline."
+  }
+ },
+ "type": {
+  "title": {
+   "family": "Anybody",
+   "weight": 700,
+   "width": 100,
+   "size": 15,
+   "file": "Anybody-Bold-700.ttf",
+   "use": "The Amount title."
+  },
+  "button": {
+   "family": "Anybody",
+   "weight": 600,
+   "width": 100,
+   "size": 13,
+   "file": "Anybody-SemiBold-600.ttf",
+   "use": "Switches and the Delta pill."
+  },
+  "label": {
+   "family": "Anybody",
+   "weight": 600,
+   "width": 100,
+   "size": 12,
+   "file": "Anybody-SemiBold-600.ttf",
+   "use": "Control labels, Auto gain."
+  },
+  "tooltip": {
+   "family": "Anybody",
+   "weight": 500,
+   "width": 100,
+   "size": 12,
+   "lineHeight": 16,
+   "file": "Anybody-Medium-500.ttf",
+   "use": "Tooltips."
+  },
+  "value": {
+   "family": "Departure Mono",
+   "weight": 400,
+   "size": 11,
+   "file": "DepartureMono-Regular.otf",
+   "use": "Values, frequency and scale labels, chips, latency, version."
+  },
+  "valueLarge": {
+   "family": "Departure Mono",
+   "weight": 400,
+   "size": 22,
+   "file": "DepartureMono-Regular.otf",
+   "use": "The Amount value."
+  }
+ },
+ "fonts": [
+  {
+   "file": "fonts/Anybody-Medium-500.ttf",
+   "family": "Anybody",
+   "weight": 500,
+   "licence": "OFL-1.1"
+  },
+  {
+   "file": "fonts/Anybody-SemiBold-600.ttf",
+   "family": "Anybody",
+   "weight": 600,
+   "licence": "OFL-1.1"
+  },
+  {
+   "file": "fonts/Anybody-Bold-700.ttf",
+   "family": "Anybody",
+   "weight": 700,
+   "licence": "OFL-1.1"
+  },
+  {
+   "file": "fonts/DepartureMono-Regular.otf",
+   "family": "Departure Mono",
+   "weight": 400,
+   "licence": "OFL-1.1"
+  }
+ ],
+ "drawOrder": [
+  "ground",
+  "analyser frame and grid",
+  "frequency labels",
+  "comb body, removed, original line, result line (clipped to the plot)",
+  "curve (underlay, then line)",
+  "scale labels",
+  "state line",
+  "points, brackets, readout",
+  "header, legend, Amount, knobs, Auto gain, Shape, credit",
+  "tooltip"
+ ],
+ "components": {
+  "wordmark": {
+   "file": "ui/assets/wordmark-header.svg",
+   "x": 24,
+   "baseline": 38,
+   "size": 27,
+   "note": "An outlined drawing, not text: the weight changes letter by letter. Draw the SVG with its origin at x 24 and its baseline (y 0 in the file) at y 38. It stays ink in every state."
+  },
+  "legend": {
+   "baseline": 64,
+   "items": [
+    {
+     "x": 24,
+     "swatch": "18 px line, ink 2",
+     "label": "Result"
+    },
+    {
+     "x": 100,
+     "swatch": "18 px line, ink 1",
+     "label": "Original"
+    },
+    {
+     "x": 190,
+     "swatch": "four 10 px verticals 5 px apart, ink 1 (Delta: klein 2)",
+     "label": "Removed"
+    }
+   ],
+   "labelDx": 24,
+   "type": "label",
+   "color": "textMuted",
+   "note": "Swatches follow the analyser's current style."
+  },
+  "switch": {
+   "ids": [
+    "character",
+    "quality"
+   ],
+   "character": {
+    "x": 472,
+    "y": 12,
+    "h": 32,
+    "segments": [
+     {
+      "value": "clean",
+      "label": "Clean",
+      "width": 64
+     },
+     {
+      "value": "character",
+      "label": "Character",
+      "width": 96
+     }
+    ]
+   },
+   "quality": {
+    "x": 648,
+    "y": 12,
+    "h": 32,
+    "segments": [
+     {
+      "value": "live",
+      "label": "Live",
+      "width": 52
+     },
+     {
+      "value": "hq",
+      "label": "HQ",
+      "width": 52
+     }
+    ]
+   },
+   "track": "Pill outline, ink 1.5, radius half the height.",
+   "selected": "An inner pill inset 3 px, ink, with paper text.",
+   "hover": "On an unselected segment: a 1 px ink inner outline inset 3.5 px.",
+   "text": "button type, centred, baseline y + 20.5."
+  },
+  "latency": {
+   "x": 760,
+   "baseline": 32,
+   "type": "value",
+   "color": "textMuted",
+   "text": "\"{ms} ms\" from the processor in HQ, \"0 ms\" in Live. Room for six characters (\"120 ms\")."
+  },
+  "delta": {
+   "x": 820,
+   "y": 12,
+   "w": 72,
+   "h": 32,
+   "off": "Ink outline 1.5 (2.5 under the pointer), ink text.",
+   "on": "Klein fill, paper text.",
+   "text": "button type, centred."
+  },
+  "bypass": {
+   "cx": 920,
+   "cy": 28,
+   "r": 16,
+   "icon": "Arc radius 7 around (920, 29) from 38° to 322° (0° up, clockwise) and a stem from y 19 to 27, both 2 px with butt caps.",
+   "off": "Ink outline 1.5 (2.5 under the pointer), ink icon.",
+   "on": "Ink fill, paper icon."
+  },
+  "analyser": {
+   "frame": {
+    "x": 24,
+    "y": 72,
+    "w": 632,
+    "h": 368,
+    "fill": "ground",
+    "stroke": "text",
+    "width": 1.5
+   },
+   "plot": {
+    "x": 24,
+    "y": 72,
+    "w": 632,
+    "h": 346
+   },
+   "strip": {
+    "y": 418,
+    "h": 22,
+    "labelBaseline": 433,
+    "labels": [
+     "50 Hz",
+     "100",
+     "200",
+     "500",
+     "1k",
+     "2k",
+     "5k",
+     "10k"
+    ],
+    "type": "value",
+    "color": "textMuted"
+   },
+   "frequency": {
+    "min": 20,
+    "max": 20000,
+    "scale": "log",
+    "x": "x = 24 + 632 * log2(f / 20) / log2(1000)"
+   },
+   "level": {
+    "min": -90,
+    "max": 6,
+    "tiltDbPerOctave": 4.5,
+    "tiltPivotHz": 1000,
+    "y": "y = 72 + 346 * (6 - dB) / 96"
+   },
+   "grid": {
+    "frequencies": [
+     50,
+     100,
+     200,
+     500,
+     1000,
+     2000,
+     5000,
+     10000
+    ],
+    "major": [
+     100,
+     1000,
+     10000
+    ],
+    "minorOpacity": 0.55,
+    "dbLines": [
+     -72,
+     -48,
+     -24,
+     0
+    ],
+    "dbDash": [
+     2,
+     4
+    ],
+    "color": "grid",
+    "width": 1
+   },
+   "comb": {
+    "lines": 120,
+    "x": "x(j) = 24 + (j + 0.5) * 632 / 120, j = 0..119",
+    "base": 420,
+    "layers": [
+     {
+      "name": "body",
+      "from": "plot bottom + 2",
+      "to": "result level",
+      "color": "ink",
+      "alpha": 0.16,
+      "width": 2.6
+     },
+     {
+      "name": "removed",
+      "from": "result level",
+      "to": "original level",
+      "color": "ink",
+      "width": 1,
+      "delta": {
+       "color": "hand",
+       "width": 2.6
+      },
+      "bypass": "hidden"
+     },
+     {
+      "name": "original line",
+      "path": "through every analyser bin",
+      "color": "ink",
+      "width": 1,
+      "bypass": "hidden (it equals the result)"
+     },
+     {
+      "name": "result line",
+      "path": "through every analyser bin",
+      "color": "ink",
+      "width": 2,
+      "delta": {
+       "color": "textMuted",
+       "width": 1
+      }
+     }
+    ],
+    "note": "Clip all four to the plot. Sample each comb line at its own frequency from the spectra."
+   },
+   "scaleLabels": [
+    {
+     "text": "200%",
+     "baseline": 88,
+     "right": 646,
+     "chip": "paper at 85%, 15 high, 4 px past the text each side"
+    },
+    {
+     "text": "100%",
+     "baseline": 238,
+     "right": 646,
+     "chip": "paper at 85%, 15 high, 4 px past the text each side"
+    },
+    {
+     "text": "0%",
+     "baseline": 413,
+     "right": 646,
+     "chip": "paper at 85%, 15 high, 4 px past the text each side"
+    }
+   ],
+   "stateLine": {
+    "x": 39,
+    "baseline": 93.5,
+    "chip": {
+     "x": 32,
+     "y": 80,
+     "h": 19,
+     "fill": "ground at 90%"
+    },
+    "type": "value",
+    "color": "text",
+    "priority": [
+     "Bypassed",
+     "Delta",
+     "a passing note",
+     "Live"
+    ],
+    "strings": {
+     "bypass": "Bypassed",
+     "delta": "Delta: you hear only what's removed",
+     "live": "Live: the applied curve is smoothed",
+     "full": "Six points is the most"
+    }
+   }
+  },
+  "curve": {
+   "model": "value(f) = clamp(1 + sum over points of (a - 1) * exp(-0.5 * (log2(f / f0) / (w / 2.3548))^2), 0, 2). w is the bell's width in octaves at half height.",
+   "y": "y = 72 + 346 * (1 - value / 2): 200% at the top, 100% (follows Amount) in the middle, 0% (untouched) at the bottom",
+   "hq": {
+    "under": {
+     "color": "ground",
+     "width": 5
+    },
+    "line": {
+     "color": "hand",
+     "width": 2
+    },
+    "of": "the drawn curve"
+   },
+   "live": {
+    "under": {
+     "color": "ground",
+     "width": 5,
+     "of": "the applied curve"
+    },
+    "drawn": {
+     "color": "hand",
+     "width": 1.25,
+     "dash": [
+      4,
+      4
+     ]
+    },
+    "applied": {
+     "color": "hand",
+     "width": 2.25
+    }
+   },
+   "bypass": "Curve and points at 45% opacity.",
+   "points": {
+    "r": 6.5,
+    "rHover": 8.5,
+    "rSelected": 7,
+    "halo": 12,
+    "hit": 13,
+    "ring": 2,
+    "normal": "Paper fill, klein ring 2, radius 6.5.",
+    "hover": "Radius 8.5, plus the width bracket and the readout.",
+    "selected": "Klein fill radius 7 with a 2 px paper ring, a klein halo ring radius 12 (1.25), the width bracket and the readout. Stays after release.",
+    "drag": "As selected, plus a dashed klein drop line (1 px, 2/3) from 12 px under the point to the plot bottom.",
+    "bracket": "At the point's height, from f * 2^(-w/2) to f * 2^(w/2), klein 1.25, with 10 px end ticks.",
+    "position": "A point sits at (its frequency, its amount), not on the summed curve."
+   },
+   "readout": {
+    "h": 19,
+    "padX": 7,
+    "baseline": 13.5,
+    "above": 39,
+    "belowWhenNearTop": 22,
+    "nearTop": 46,
+    "inset": 6,
+    "text": "\"{freq}  {amount}%  {width} oct\", two spaces apart. freq: \"140 Hz\", \"3.3 kHz\", \"12 kHz\". width to one decimal.",
+    "fill": "readout",
+    "textColor": "onReadout"
+   },
+   "limits": {
+    "maxPoints": 6,
+    "f": [
+     20,
+     20000
+    ],
+    "amount": [
+     0,
+     2
+    ],
+    "width": [
+     0.3,
+     4
+    ],
+    "widthDefault": 1,
+    "widthStep": 0.1,
+    "baseline": 1
+   }
+  },
+  "amount": {
+   "cx": 808,
+   "cy": 222,
+   "r": 84,
+   "track": "Arc radius 96, -135° to 135°, paper line 2.",
+   "tickIn": 104,
+   "tickOut": 109,
+   "tickMajor": 113,
+   "notch": 6,
+   "title": {
+    "text": "Amount",
+    "baseline": 100,
+    "type": "title"
+   },
+   "readout": 358,
+   "chip": {
+    "w": 80,
+    "h": 32,
+    "y": 334
+   },
+   "hit": 106,
+   "angle": "angle = -135° + 270° * amount / 100 (0° up, clockwise)",
+   "ticks": "11 ticks every 27° from radius 104 to 109; 113 at 0%, 50% and 100%. graphite deep 1.25; ink under the pointer.",
+   "valueArc": "Arc radius 96 from -135° to the angle, klein 2.",
+   "ring": {
+    "outer": 84,
+    "width": "w = 44 - 42.5 * amount / 100",
+    "centreRadius": "84 - w / 2",
+    "notch": "A 6 px gap (arc length at the centre radius) centred on the angle.",
+    "color": "text"
+   },
+   "pointer": "A klein dot radius 5.5 (7.5 while dragging) with a 2 px paper ring, on radius 96 at the angle.",
+   "value": {
+    "baseline": 358,
+    "type": "valueLarge",
+    "hoverChip": {
+     "w": 80,
+     "h": 32,
+     "y": 334
+    }
+   },
+   "bypass": "Ring, value arc and dot in graphite deep."
+  },
+  "knob": {
+   "ids": [
+    {
+     "id": "restore",
+     "label": "Restore",
+     "cx": 724
+    },
+    {
+     "id": "mix",
+     "label": "Mix",
+     "cx": 808
+    },
+    {
+     "id": "output",
+     "label": "Output",
+     "cx": 892
+    }
+   ],
+   "cy": 428,
+   "r": 22,
+   "body": "Paper fill, ink outline 1.5 (2.5 under the pointer or while dragging).",
+   "track": "Arc radius 29, -135° to 135°, paper line 3.5.",
+   "valueArc": "Klein 3.5 from -135° (Output: from 0 dB) to the angle. Graphite deep when bypassed.",
+   "pointer": "Ink 3, square caps, from radius 7 to 18 at the angle.",
+   "label": {
+    "baseline": 474,
+    "type": "label"
+   },
+   "value": {
+    "baseline": 493.5,
+    "type": "value",
+    "color": "textMuted",
+    "hover": "On an ink chip 17 high, paper text."
+   }
+  },
+  "autoGain": {
+   "x": 852,
+   "y": 504,
+   "w": 80,
+   "h": 24,
+   "on": "Ink fill, paper text.",
+   "off": "Ink outline 1.5 (2.5 under the pointer), ink text.",
+   "text": "label type, centred."
+  },
+  "shape": {
+   "x1": 120,
+   "x2": 560,
+   "y": 514,
+   "title": "\"Shape\" centred at x 340, baseline 492.",
+   "thumb": "Ink pill 16 × 30 centred on x = 120 + 440 * shape / 100, with a 14 px paper mark (2).",
+   "endGap": 14,
+   "track": "Paper line 3 from x 120 to 560, with a 12 px centre tick (1.5).",
+   "hover": "An ink outline 1.5 around the thumb, 4 px out.",
+   "ends": "\"Harmonics\" right-aligned at x 106, baseline 512, its share (100 - shape)% under it at 527; \"Body\" at x 574, its share shape% under it."
+  },
+  "credit": {
+   "x": 24,
+   "y": 566,
+   "w": 54,
+   "h": 15,
+   "version": {
+    "x": 86,
+    "baseline": 578,
+    "text": "1.0.0",
+    "type": "value",
+    "color": "textMuted"
+   },
+   "file": "ui/assets/credit.svg"
+  },
+  "tooltip": {
+   "maxWidth": 220,
+   "padX": 10,
+   "padY": 8,
+   "gap": 8,
+   "delayMs": 600,
+   "fill": "readout",
+   "text": "onReadout",
+   "type": "tooltip",
+   "placement": "8 px under the control (above when it would leave the window), centred, kept 8 px inside. On the analyser: 18 px under the pointer.",
+   "hides": "On press, on leaving the control, and while dragging."
+  }
+ },
+ "parameters": [
+  {
+   "id": "amount",
+   "name": "Amount",
+   "kind": "knob",
+   "min": 0,
+   "max": 100,
+   "def": 30,
+   "unit": "%",
+   "step": 1,
+   "format": "whole percent: \"30%\""
+  },
+  {
+   "id": "shape",
+   "name": "Shape",
+   "kind": "slider",
+   "min": 0,
+   "max": 100,
+   "def": 50,
+   "unit": "%",
+   "step": 1,
+   "ends": [
+    "Harmonics",
+    "Body"
+   ],
+   "format": "whole percent: \"30%\""
+  },
+  {
+   "id": "restore",
+   "name": "Restore",
+   "kind": "knob",
+   "min": 0,
+   "max": 100,
+   "def": 0,
+   "unit": "%",
+   "step": 1,
+   "format": "whole percent: \"30%\""
+  },
+  {
+   "id": "mix",
+   "name": "Mix",
+   "kind": "knob",
+   "min": 0,
+   "max": 100,
+   "def": 100,
+   "unit": "%",
+   "step": 1,
+   "format": "whole percent: \"30%\""
+  },
+  {
+   "id": "output",
+   "name": "Output",
+   "kind": "knob",
+   "min": -24,
+   "max": 12,
+   "def": 0,
+   "unit": "dB",
+   "step": 0.5,
+   "origin": 0,
+   "format": "one decimal, a sign, \"dB\": \"−1.5 dB\", \"0.0 dB\", \"+3.0 dB\""
+  },
+  {
+   "id": "autoGain",
+   "name": "Auto gain",
+   "kind": "toggle",
+   "def": true
+  },
+  {
+   "id": "delta",
+   "name": "Delta",
+   "kind": "toggle",
+   "def": false
+  },
+  {
+   "id": "character",
+   "name": "Character",
+   "kind": "choice",
+   "options": [
+    "clean",
+    "character"
+   ],
+   "labels": [
+    "Clean",
+    "Character"
+   ],
+   "def": "clean"
+  },
+  {
+   "id": "quality",
+   "name": "Quality",
+   "kind": "choice",
+   "options": [
+    "live",
+    "hq"
+   ],
+   "labels": [
+    "Live",
+    "HQ"
+   ],
+   "def": "hq"
+  },
+  {
+   "id": "bypass",
+   "name": "Bypass",
+   "kind": "toggle",
+   "def": false
+  }
+ ],
+ "curve": {
+  "maxPoints": 6,
+  "f": [
+   20,
+   20000
+  ],
+  "amount": [
+   0,
+   2
+  ],
+  "width": [
+   0.3,
+   4
+  ],
+  "widthDefault": 1,
+  "widthStep": 0.1,
+  "baseline": 1
+ },
+ "interaction": {
+  "drag": {
+   "vertical": true,
+   "fullRangeScreenPx": 240,
+   "fineRangeScreenPx": 1200,
+   "fineKey": "Shift",
+   "note": "Knobs: up raises. Shape: horizontal, the thumb follows the pointer."
+  },
+  "doubleClick": {
+   "knob": "reset to default",
+   "shape": "reset to default",
+   "emptyAnalyser": "add a point at the pointer (width 1 oct); with six already, show \"Six points is the most\" for 2 s",
+   "point": "remove it"
+  },
+  "wheel": {
+   "knob": "one step per notch (1%, Output 0.5 dB)",
+   "point": "width ±0.1 oct per notch, 0.3 to 4",
+   "note": "Only once the window has been clicked, so a host's scroll isn't stolen."
+  },
+  "pointer": {
+   "point": "Press selects and drags it: frequency follows x, amount follows y. Clicking empty analyser deselects.",
+   "hitRadius": 13,
+   "cursors": {
+    "knob": "up-down resize",
+    "shape": "left-right resize",
+    "point": "grab / grabbing",
+    "analyser": "crosshair (default when full)",
+    "buttons": "pointing hand"
+   }
+  },
+  "keys": {
+   "Up / Down": "selected point's amount ±5%, or Amount ±1 with no point selected",
+   "Left / Right": "selected point ±1 semitone",
+   "Delete / Backspace": "remove the selected point",
+   "Escape": "deselect",
+   "D": "Delta",
+   "B": "Bypass"
+  },
+  "tooltips": {
+   "delayMs": 600,
+   "strings": {
+    "amount": "How much thinner. The curve scales it at each frequency.",
+    "shape": "Harmonics takes out overtones. Body takes out weight.",
+    "restore": "Gives back the peaks that thinning flattens.",
+    "mix": "How much of the thinned sound you hear against the original.",
+    "output": "The level after everything else.",
+    "autoGain": "Keeps the level steady, so thinner doesn't just mean quieter.",
+    "delta": "Hear only what's being removed.",
+    "character:clean": "Clean: transparent, for fixing.",
+    "character:character": "Character: goes further, for effect.",
+    "quality:live": "Live: no latency. The curve is applied smoothed.",
+    "quality:hq": "HQ: full resolution. Adds latency.",
+    "bypass": "Hear the track untouched.",
+    "display": "Double-click to add a point, up to six.",
+    "point": "Drag to move. Scroll to change its width. Double-click to remove."
+   }
+  }
+ },
+ "processor": [
+  "The input spectrum, and the result spectrum after thinning and Mix but before Output and Auto gain, in dB on the same bins. The gap between them is all the analyser shows, so a level change never looks like thinning.",
+  "The effective thinning curve as values 0 to 2 on a log frequency axis, 20 Hz to 20 kHz, in both modes. In HQ it equals the drawn curve.",
+  "The latency in ms, for the label beside Live / HQ.",
+  "Display ballistics the stand-in uses: rise at once, fall 28 dB per second, a 1-2-1 smoothing across neighbouring bins, the 4.5 dB/oct tilt pivoting at 1 kHz, at 30 to 60 frames a second."
+ ],
+ "accessibility": [
+  {
+   "control": "Amount",
+   "role": "slider",
+   "value": "the readout text",
+   "help": "How much thinner. The curve scales it at each frequency."
+  },
+  {
+   "control": "Shape",
+   "role": "slider",
+   "value": "the readout text",
+   "help": "Harmonics takes out overtones. Body takes out weight."
+  },
+  {
+   "control": "Restore",
+   "role": "slider",
+   "value": "the readout text",
+   "help": "Gives back the peaks that thinning flattens."
+  },
+  {
+   "control": "Mix",
+   "role": "slider",
+   "value": "the readout text",
+   "help": "How much of the thinned sound you hear against the original."
+  },
+  {
+   "control": "Output",
+   "role": "slider",
+   "value": "the readout text",
+   "help": "The level after everything else."
+  },
+  {
+   "control": "Auto gain",
+   "role": "toggle button",
+   "value": "on / off",
+   "help": "Keeps the level steady, so thinner doesn't just mean quieter."
+  },
+  {
+   "control": "Delta",
+   "role": "toggle button",
+   "value": "on / off",
+   "help": "Hear only what's being removed."
+  },
+  {
+   "control": "Character",
+   "role": "radio group",
+   "value": "Clean or Character",
+   "help": "Clean: transparent, for fixing."
+  },
+  {
+   "control": "Quality",
+   "role": "radio group",
+   "value": "Live or HQ",
+   "help": "Live: no latency. The curve is applied smoothed."
+  },
+  {
+   "control": "Bypass",
+   "role": "toggle button",
+   "value": "on / off",
+   "help": "Hear the track untouched."
+  },
+  {
+   "control": "Thinning curve",
+   "role": "group",
+   "value": "\"{n} points\"",
+   "help": "Double-click to add a point, up to six."
+  },
+  {
+   "control": "Curve point",
+   "role": "slider (2D)",
+   "value": "the readout text",
+   "help": "Drag to move. Scroll to change its width. Double-click to remove."
+  }
+ ],
+ "contrast": [
+  {
+   "pair": "ink on paper",
+   "ratio": 16.39,
+   "needs": 4.5,
+   "pass": true,
+   "use": "labels, values, the result line"
+  },
+  {
+   "pair": "graphite deep on paper",
+   "ratio": 5.44,
+   "needs": 4.5,
+   "pass": true,
+   "use": "values, latency, frequency labels"
+  },
+  {
+   "pair": "klein on paper",
+   "ratio": 5.34,
+   "needs": 3,
+   "pass": true,
+   "use": "the curve, points, value arcs (graphics)"
+  },
+  {
+   "pair": "paper on klein",
+   "ratio": 5.34,
+   "needs": 4.5,
+   "pass": true,
+   "use": "Delta's label when on"
+  },
+  {
+   "pair": "paper on ink",
+   "ratio": 16.39,
+   "needs": 4.5,
+   "pass": true,
+   "use": "chips, tooltips, selected switches"
+  },
+  {
+   "pair": "paper line on paper",
+   "ratio": 1.24,
+   "needs": null,
+   "pass": null,
+   "use": "grid and tracks: decorative, never carries meaning alone"
+  }
+ ],
+ "motion": "Nothing eases. Values, hovers and switches change on the next frame; the analyser runs at 30 to 60 fps. The only timers are the tooltip delay (600 ms) and the six-points note (2 s)."
+}

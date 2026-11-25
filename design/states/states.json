@@ -1,0 +1,146 @@
+[
+ {
+  "file": "default.png",
+  "file2x": "default@2x.png",
+  "name": "Default",
+  "description": "As it opens: Amount 30%, no points, the curve flat at 100% (it follows Amount everywhere)."
+ },
+ {
+  "file": "in-use.png",
+  "file2x": "in-use@2x.png",
+  "name": "In use",
+  "description": "Amount 55%, three points: less in the lows, more around 3 kHz and 9.5 kHz."
+ },
+ {
+  "file": "amount-hover.png",
+  "file2x": "amount-hover@2x.png",
+  "name": "Amount, hover",
+  "description": "The ticks darken and the value turns into a chip."
+ },
+ {
+  "file": "amount-drag.png",
+  "file2x": "amount-drag@2x.png",
+  "name": "Amount, drag",
+  "description": "The pointer dot grows while you drag. The ring thins as the value rises."
+ },
+ {
+  "file": "knob-hover.png",
+  "file2x": "knob-hover@2x.png",
+  "name": "Small knob, hover",
+  "description": "The outline thickens and the value turns into a chip."
+ },
+ {
+  "file": "knob-drag.png",
+  "file2x": "knob-drag@2x.png",
+  "name": "Small knob, drag",
+  "description": "Restore being dragged."
+ },
+ {
+  "file": "shape-drag.png",
+  "file2x": "shape-drag@2x.png",
+  "name": "Shape, drag",
+  "description": "A ring around the thumb while it's held. Both ends show their share."
+ },
+ {
+  "file": "switch-hover.png",
+  "file2x": "switch-hover@2x.png",
+  "name": "Switch, hover",
+  "description": "The segment under the pointer gets a thin outline."
+ },
+ {
+  "file": "point-hover.png",
+  "file2x": "point-hover@2x.png",
+  "name": "Point, hover",
+  "description": "The point grows, shows its width bracket and a readout."
+ },
+ {
+  "file": "point-drag.png",
+  "file2x": "point-drag@2x.png",
+  "name": "Point, drag",
+  "description": "Filled, with a halo, a drop line to the frequency scale and the readout."
+ },
+ {
+  "file": "point-selected.png",
+  "file2x": "point-selected@2x.png",
+  "name": "Point, selected",
+  "description": "Stays filled with its bracket and readout after you let go. Scroll on it to change the width."
+ },
+ {
+  "file": "points-full.png",
+  "file2x": "points-full@2x.png",
+  "name": "Six points",
+  "description": "The most there can be. Double-clicking empty space says so."
+ },
+ {
+  "file": "delta-on.png",
+  "file2x": "delta-on@2x.png",
+  "name": "Delta on",
+  "description": "Only what's removed plays. The removed part turns heavy and klein; the result drops to a hairline."
+ },
+ {
+  "file": "clean.png",
+  "file2x": "clean@2x.png",
+  "name": "Clean",
+  "description": "Transparent: the gentler range."
+ },
+ {
+  "file": "character.png",
+  "file2x": "character@2x.png",
+  "name": "Character",
+  "description": "Goes further: the same settings take out more."
+ },
+ {
+  "file": "hq.png",
+  "file2x": "hq@2x.png",
+  "name": "HQ",
+  "description": "Full resolution, with latency. One curve."
+ },
+ {
+  "file": "live.png",
+  "file2x": "live@2x.png",
+  "name": "Live",
+  "description": "No latency. Your curve turns dashed; the smoothed curve that's applied is drawn solid."
+ },
+ {
+  "file": "bypassed.png",
+  "file2x": "bypassed@2x.png",
+  "name": "Bypassed",
+  "description": "Nothing thins: one heavy line, no hatching, the curve and the value arcs fade."
+ },
+ {
+  "file": "silent.png",
+  "file2x": "silent@2x.png",
+  "name": "No signal",
+  "description": "The analyser is empty; the curve stays."
+ },
+ {
+  "file": "tooltip.png",
+  "file2x": "tooltip@2x.png",
+  "name": "Tooltip",
+  "description": "After 600 ms over a control. Ink box, paper text."
+ },
+ {
+  "file": "tooltip-point.png",
+  "file2x": "tooltip-point@2x.png",
+  "name": "Tooltip on a point",
+  "description": "How to use a point, once."
+ },
+ {
+  "file": "scale-75.png",
+  "file2x": "scale-75@2x.png",
+  "name": "At 75%",
+  "description": "720 × 450, the smallest size."
+ },
+ {
+  "file": "scale-200.png",
+  "file2x": "scale-200@2x.png",
+  "name": "At 200%",
+  "description": "1920 × 1200, the largest size."
+ },
+ {
+  "file": "redlines.png",
+  "file2x": "redlines@2x.png",
+  "name": "Redlines",
+  "description": "Every element's position and size, in window pixels at 100%."
+ }
+]

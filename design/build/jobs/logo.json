@@ -1,0 +1,236 @@
+[
+{
+"svg": "logo/de-saturator-wordmark-ink.svg",
+"png": "logo/png/de-saturator-wordmark-ink.png",
+"width": 1600,
+"background": null
+},
+{
+"svg": "logo/de-saturator-wordmark-paper.svg",
+"png": "logo/png/de-saturator-wordmark-paper.png",
+"width": 1600,
+"background": null
+},
+{
+"svg": "logo/de-saturator-wordmark-small-ink.svg",
+"png": "logo/png/de-saturator-wordmark-small-ink.png",
+"width": 600,
+"background": null
+},
+{
+"svg": "logo/de-saturator-wordmark-small-paper.svg",
+"png": "logo/png/de-saturator-wordmark-small-paper.png",
+"width": 600,
+"background": null
+},
+{
+"svg": "logo/de-saturator-mark-ink.svg",
+"png": "logo/png/de-saturator-mark-ink.png",
+"width": 1024,
+"background": null
+},
+{
+"svg": "logo/de-saturator-mark-paper.svg",
+"png": "logo/png/de-saturator-mark-paper.png",
+"width": 1024,
+"background": null
+},
+{
+"svg": "logo/de-saturator-mark-klein.svg",
+"png": "logo/png/de-saturator-mark-klein.png",
+"width": 1024,
+"background": null
+},
+{
+"svg": "logo/de-saturator-mark-small-ink.svg",
+"png": "logo/png/de-saturator-mark-small-ink.png",
+"width": 256,
+"background": null
+},
+{
+"svg": "logo/de-saturator-mark-small-paper.svg",
+"png": "logo/png/de-saturator-mark-small-paper.png",
+"width": 256,
+"background": null
+},
+{
+"svg": "logo/de-saturator-mark-small-klein.svg",
+"png": "logo/png/de-saturator-mark-small-klein.png",
+"width": 256,
+"background": null
+},
+{
+"svg": "logo/de-saturator-tile-paper.svg",
+"png": "logo/png/de-saturator-tile-paper-48.png",
+"width": 48,
+"background": "#ECEBE6"
+},
+{
+"svg": "logo/de-saturator-tile-paper.svg",
+"png": "logo/png/de-saturator-tile-paper-64.png",
+"width": 64,
+"background": "#ECEBE6"
+},
+{
+"svg": "logo/de-saturator-tile-paper.svg",
+"png": "logo/png/de-saturator-tile-paper-128.png",
+"width": 128,
+"background": "#ECEBE6"
+},
+{
+"svg": "logo/de-saturator-tile-paper.svg",
+"png": "logo/png/de-saturator-tile-paper-256.png",
+"width": 256,
+"background": "#ECEBE6"
+},
+{
+"svg": "logo/de-saturator-tile-paper.svg",
+"png": "logo/png/de-saturator-tile-paper-512.png",
+"width": 512,
+"background": "#ECEBE6"
+},
+{
+"svg": "logo/de-saturator-tile-paper.svg",
+"png": "logo/png/de-saturator-tile-paper-1024.png",
+"width": 1024,
+"background": "#ECEBE6"
+},
+{
+"svg": "logo/de-saturator-tile-ink.svg",
+"png": "logo/png/de-saturator-tile-ink-48.png",
+"width": 48,
+"background": "#0C0C0B"
+},
+{
+"svg": "logo/de-saturator-tile-ink.svg",
+"png": "logo/png/de-saturator-tile-ink-64.png",
+"width": 64,
+"background": "#0C0C0B"
+},
+{
+"svg": "logo/de-saturator-tile-ink.svg",
+"png": "logo/png/de-saturator-tile-ink-128.png",
+"width": 128,
+"background": "#0C0C0B"
+},
+{
+"svg": "logo/de-saturator-tile-ink.svg",
+"png": "logo/png/de-saturator-tile-ink-256.png",
+"width": 256,
+"background": "#0C0C0B"
+},
+{
+"svg": "logo/de-saturator-tile-ink.svg",
+"png": "logo/png/de-saturator-tile-ink-512.png",
+"width": 512,
+"background": "#0C0C0B"
+},
+{
+"svg": "logo/de-saturator-tile-ink.svg",
+"png": "logo/png/de-saturator-tile-ink-1024.png",
+"width": 1024,
+"background": "#0C0C0B"
+},
+{
+"svg": "logo/de-saturator-tile-klein.svg",
+"png": "logo/png/de-saturator-tile-klein-48.png",
+"width": 48,
+"background": "#2E40FF"
+},
+{
+"svg": "logo/de-saturator-tile-klein.svg",
+"png": "logo/png/de-saturator-tile-klein-64.png",
+"width": 64,
+"background": "#2E40FF"
+},
+{
+"svg": "logo/de-saturator-tile-klein.svg",
+"png": "logo/png/de-saturator-tile-klein-128.png",
+"width": 128,
+"background": "#2E40FF"
+},
+{
+"svg": "logo/de-saturator-tile-klein.svg",
+"png": "logo/png/de-saturator-tile-klein-256.png",
+"width": 256,
+"background": "#2E40FF"
+},
+{
+"svg": "logo/de-saturator-tile-klein.svg",
+"png": "logo/png/de-saturator-tile-klein-512.png",
+"width": 512,
+"background": "#2E40FF"
+},
+{
+"svg": "logo/de-saturator-tile-klein.svg",
+"png": "logo/png/de-saturator-tile-klein-1024.png",
+"width": 1024,
+"background": "#2E40FF"
+},
+{
+"svg": "logo/de-saturator-tile-small-paper.svg",
+"png": "logo/png/de-saturator-tile-paper-16.png",
+"width": 16,
+"background": "#ECEBE6"
+},
+{
+"svg": "logo/de-saturator-tile-small-paper.svg",
+"png": "logo/png/de-saturator-tile-paper-32.png",
+"width": 32,
+"background": "#ECEBE6"
+},
+{
+"svg": "logo/de-saturator-tile-small-ink.svg",
+"png": "logo/png/de-saturator-tile-ink-16.png",
+"width": 16,
+"background": "#0C0C0B"
+},
+{
+"svg": "logo/de-saturator-tile-small-ink.svg",
+"png": "logo/png/de-saturator-tile-ink-32.png",
+"width": 32,
+"background": "#0C0C0B"
+},
+{
+"svg": "logo/de-saturator-tile-small-klein.svg",
+"png": "logo/png/de-saturator-tile-klein-16.png",
+"width": 16,
+"background": "#2E40FF"
+},
+{
+"svg": "logo/de-saturator-tile-small-klein.svg",
+"png": "logo/png/de-saturator-tile-klein-32.png",
+"width": 32,
+"background": "#2E40FF"
+},
+{
+"svg": "logo/de-saturator-lockup-ink.svg",
+"png": "logo/png/de-saturator-lockup-ink.png",
+"width": 2000,
+"background": null
+},
+{
+"svg": "logo/de-saturator-lockup-paper.svg",
+"png": "logo/png/de-saturator-lockup-paper.png",
+"width": 2000,
+"background": null
+},
+{
+"svg": "logo/de-saturator-endorsed-ink.svg",
+"png": "logo/png/de-saturator-endorsed-ink.png",
+"width": 1600,
+"background": null
+},
+{
+"svg": "logo/de-saturator-endorsed-paper.svg",
+"png": "logo/png/de-saturator-endorsed-paper.png",
+"width": 1600,
+"background": null
+},
+{
+"svg": "logo/de-saturator-clear-space.svg",
+"png": "logo/png/de-saturator-clear-space.png",
+"width": 1600,
+"background": null
+}
+]

@@ -1,0 +1,12 @@
+[
+ {
+  "collection": "ui-handoff",
+  "file": "prototype/prototype.html",
+  "slug": "prototype",
+  "name": "Prototype (HTML)",
+  "description": "The window wired to the spec: open it in a browser. The analyser runs on a stand-in signal.",
+  "tags": [
+   "prototype"
+  ]
+ }
+]

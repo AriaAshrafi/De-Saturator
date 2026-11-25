@@ -1,0 +1,42 @@
+[
+ {
+  "collection": "ui-handoff",
+  "file": "spec/spec.json",
+  "slug": "spec-json",
+  "name": "Window spec (JSON)",
+  "description": "Everything the window is made of, for code: layout, colours, strokes, type, parameters, states, strings.",
+  "tags": [
+   "spec"
+  ]
+ },
+ {
+  "collection": "ui-handoff",
+  "file": "spec/SPEC.md",
+  "slug": "spec-md",
+  "name": "Window spec",
+  "description": "The same spec, written out.",
+  "tags": [
+   "spec"
+  ]
+ },
+ {
+  "collection": "ui-handoff",
+  "file": "tokens/de-saturator.tokens.json",
+  "slug": "tokens",
+  "name": "Tokens (DTCG)",
+  "description": "Colours, strokes, sizes, type and timings.",
+  "tags": [
+   "tokens"
+  ]
+ },
+ {
+  "collection": "ui-handoff",
+  "file": "spec/contrast.txt",
+  "slug": "contrast",
+  "name": "Contrast check",
+  "description": "WCAG ratios for every pairing the window uses.",
+  "tags": [
+   "accessibility"
+  ]
+ }
+]

@@ -1,0 +1,534 @@
+{
+ "$description": "De-Saturator: what it adds to aria-ashrafi. Window px at 100%; the window scales 75% to 200% at a fixed ratio. Every colour is the parent's.",
+ "ds-color": {
+  "$type": "color",
+  "$description": "Prefixed ds- so nothing inherits the parent's group types.",
+  "ground": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.9255,
+     0.9216,
+     0.902
+    ],
+    "hex": "#ecebe6"
+   },
+   "$description": "The window."
+  },
+  "text": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.0471,
+     0.0471,
+     0.0431
+    ],
+    "hex": "#0c0c0b"
+   },
+   "$description": "Labels, the name, button outlines, the analyser's frame."
+  },
+  "text-muted": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.3725,
+     0.3686,
+     0.349
+    ],
+    "hex": "#5f5e59"
+   },
+   "$description": "Values, the latency, frequency labels, the credit."
+  },
+  "grid": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.8392,
+     0.8314,
+     0.7961
+    ],
+    "hex": "#d6d4cb"
+   },
+   "$description": "The analyser's grid, knob tracks, the Shape track."
+  },
+  "body": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.0471,
+     0.0471,
+     0.0431
+    ],
+    "hex": "#0c0c0b",
+    "alpha": 0.16
+   },
+   "$description": "Analyser: the comb under the result line, at 16% opacity. What stays, kept quiet."
+  },
+  "result": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.0471,
+     0.0471,
+     0.0431
+    ],
+    "hex": "#0c0c0b"
+   },
+   "$description": "Analyser: the result line, heavy. What you hear."
+  },
+  "original": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.0471,
+     0.0471,
+     0.0431
+    ],
+    "hex": "#0c0c0b"
+   },
+   "$description": "Analyser: the original's line, a hairline."
+  },
+  "removed": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.0471,
+     0.0471,
+     0.0431
+    ],
+    "hex": "#0c0c0b"
+   },
+   "$description": "Analyser: hairlines between the two lines. What's removed."
+  },
+  "hand": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.1804,
+     0.251,
+     1
+    ],
+    "hex": "#2e40ff"
+   },
+   "$description": "What you set: the thinning curve, its points, value arcs, Delta when on."
+  },
+  "selected": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.0471,
+     0.0471,
+     0.0431
+    ],
+    "hex": "#0c0c0b"
+   },
+   "$description": "The chosen segment of a switch; Auto gain and Bypass when on."
+  },
+  "on-selected": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.9255,
+     0.9216,
+     0.902
+    ],
+    "hex": "#ecebe6"
+   },
+   "$description": "Text and icons on ink."
+  },
+  "on-hand": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.9255,
+     0.9216,
+     0.902
+    ],
+    "hex": "#ecebe6"
+   },
+   "$description": "Text on klein."
+  },
+  "readout": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.0471,
+     0.0471,
+     0.0431
+    ],
+    "hex": "#0c0c0b"
+   },
+   "$description": "Readout chips and tooltips."
+  },
+  "on-readout": {
+   "$value": {
+    "colorSpace": "srgb",
+    "components": [
+     0.9255,
+     0.9216,
+     0.902
+    ],
+    "hex": "#ecebe6"
+   },
+   "$description": "Text in readout chips and tooltips."
+  }
+ },
+ "ds-stroke": {
+  "$type": "dimension",
+  "frame": {
+   "$value": {
+    "value": 1.5,
+    "unit": "px"
+   },
+   "$description": "The analyser's frame."
+  },
+  "grid": {
+   "$value": {
+    "value": 1,
+    "unit": "px"
+   },
+   "$description": "Grid lines."
+  },
+  "body": {
+   "$value": {
+    "value": 2.6,
+    "unit": "px"
+   },
+   "$description": "Analyser comb, the part under the result line."
+  },
+  "result": {
+   "$value": {
+    "value": 2,
+    "unit": "px"
+   },
+   "$description": "The result line."
+  },
+  "original": {
+   "$value": {
+    "value": 1,
+    "unit": "px"
+   },
+   "$description": "The original's line. Never under 1 physical pixel."
+  },
+  "hair": {
+   "$value": {
+    "value": 1,
+    "unit": "px"
+   },
+   "$description": "Analyser comb, the part between the two lines (what's removed). Never under 1 physical pixel."
+  },
+  "removed-delta": {
+   "$value": {
+    "value": 2.6,
+    "unit": "px"
+   },
+   "$description": "Delta: the removed part of the comb, heavy."
+  },
+  "outline": {
+   "$value": {
+    "value": 1.5,
+    "unit": "px"
+   },
+   "$description": "Switches, pills, Bypass, small knob bodies."
+  },
+  "outline-hover": {
+   "$value": {
+    "value": 2.5,
+    "unit": "px"
+   },
+   "$description": "The same outline under the pointer."
+  },
+  "curve": {
+   "$value": {
+    "value": 2,
+    "unit": "px"
+   },
+   "$description": "The thinning curve."
+  },
+  "curve-applied": {
+   "$value": {
+    "value": 2.25,
+    "unit": "px"
+   },
+   "$description": "Live: the applied (smoothed) curve."
+  },
+  "curve-drawn": {
+   "$value": {
+    "value": 1.25,
+    "unit": "px"
+   },
+   "$description": "Live: the curve you drew, dashed 4 on, 4 off."
+  },
+  "curve-under": {
+   "$value": {
+    "value": 5,
+    "unit": "px"
+   },
+   "$description": "A paper line under the curve so it reads over the analyser."
+  },
+  "knob-track": {
+   "$value": {
+    "value": 3.5,
+    "unit": "px"
+   },
+   "$description": "Small knob track and value arc."
+  },
+  "amount-arc": {
+   "$value": {
+    "value": 2,
+    "unit": "px"
+   },
+   "$description": "Amount track and value arc."
+  },
+  "tick": {
+   "$value": {
+    "value": 1.25,
+    "unit": "px"
+   },
+   "$description": "Amount scale ticks."
+  },
+  "point-ring": {
+   "$value": {
+    "value": 2,
+    "unit": "px"
+   },
+   "$description": "Curve point ring."
+  },
+  "bracket": {
+   "$value": {
+    "value": 1.25,
+    "unit": "px"
+   },
+   "$description": "A point's width bracket."
+  },
+  "ring-max": {
+   "$value": {
+    "value": 44,
+    "unit": "px"
+   },
+   "$description": "Amount ring at 0%: nearly a solid disc."
+  },
+  "ring-min": {
+   "$value": {
+    "value": 1.5,
+    "unit": "px"
+   },
+   "$description": "Amount ring at 100%: a hairline."
+  }
+ },
+ "ds-size": {
+  "$type": "dimension",
+  "window-width": {
+   "$value": {
+    "value": 960,
+    "unit": "px"
+   }
+  },
+  "window-height": {
+   "$value": {
+    "value": 600,
+    "unit": "px"
+   }
+  },
+  "radius-square": {
+   "$value": {
+    "value": 0,
+    "unit": "px"
+   },
+   "$description": "The window, the analyser, chips, tooltips."
+  },
+  "radius-pill": {
+   "$value": {
+    "value": 9999,
+    "unit": "px"
+   },
+   "$description": "Switches, pills, the Shape thumb: half their height. Nothing in between."
+  },
+  "amount-radius": {
+   "$value": {
+    "value": 84,
+    "unit": "px"
+   },
+   "$description": "The Amount ring's outer edge."
+  },
+  "amount-track": {
+   "$value": {
+    "value": 96,
+    "unit": "px"
+   },
+   "$description": "Radius of the Amount track and value arc."
+  },
+  "knob-radius": {
+   "$value": {
+    "value": 22,
+    "unit": "px"
+   }
+  },
+  "knob-track": {
+   "$value": {
+    "value": 29,
+    "unit": "px"
+   }
+  },
+  "point-radius": {
+   "$value": {
+    "value": 6.5,
+    "unit": "px"
+   }
+  },
+  "point-radius-hover": {
+   "$value": {
+    "value": 8.5,
+    "unit": "px"
+   }
+  },
+  "point-radius-selected": {
+   "$value": {
+    "value": 7,
+    "unit": "px"
+   }
+  },
+  "point-halo": {
+   "$value": {
+    "value": 12,
+    "unit": "px"
+   }
+  },
+  "control-height": {
+   "$value": {
+    "value": 32,
+    "unit": "px"
+   },
+   "$description": "Switches, Delta, Bypass."
+  },
+  "pill-small-height": {
+   "$value": {
+    "value": 24,
+    "unit": "px"
+   },
+   "$description": "Auto gain."
+  },
+  "chip-height": {
+   "$value": {
+    "value": 19,
+    "unit": "px"
+   }
+  },
+  "tooltip-max-width": {
+   "$value": {
+    "value": 220,
+    "unit": "px"
+   }
+  }
+ },
+ "ds-type": {
+  "family-voice": {
+   "$type": "fontFamily",
+   "$value": [
+    "Anybody",
+    "system-ui",
+    "sans-serif"
+   ],
+   "$description": "Labels, switches, tooltips. Static cuts at width 100."
+  },
+  "family-machine": {
+   "$type": "fontFamily",
+   "$value": [
+    "Departure Mono",
+    "ui-monospace",
+    "monospace"
+   ],
+   "$description": "Values. 11 or 22 px at 100%."
+  },
+  "title-size": {
+   "$type": "dimension",
+   "$value": {
+    "value": 15,
+    "unit": "px"
+   },
+   "$description": "The Amount title."
+  },
+  "title-weight": {
+   "$type": "fontWeight",
+   "$value": 700
+  },
+  "button-size": {
+   "$type": "dimension",
+   "$value": {
+    "value": 13,
+    "unit": "px"
+   },
+   "$description": "Switches and the Delta pill."
+  },
+  "button-weight": {
+   "$type": "fontWeight",
+   "$value": 600
+  },
+  "label-size": {
+   "$type": "dimension",
+   "$value": {
+    "value": 12,
+    "unit": "px"
+   },
+   "$description": "Control labels, Auto gain."
+  },
+  "label-weight": {
+   "$type": "fontWeight",
+   "$value": 600
+  },
+  "tooltip-size": {
+   "$type": "dimension",
+   "$value": {
+    "value": 12,
+    "unit": "px"
+   },
+   "$description": "Tooltips."
+  },
+  "tooltip-weight": {
+   "$type": "fontWeight",
+   "$value": 500
+  },
+  "value-size": {
+   "$type": "dimension",
+   "$value": {
+    "value": 11,
+    "unit": "px"
+   },
+   "$description": "Values, frequency and scale labels, chips, latency, version."
+  },
+  "value-weight": {
+   "$type": "fontWeight",
+   "$value": 400
+  },
+  "value-large-size": {
+   "$type": "dimension",
+   "$value": {
+    "value": 22,
+    "unit": "px"
+   },
+   "$description": "The Amount value."
+  },
+  "value-large-weight": {
+   "$type": "fontWeight",
+   "$value": 400
+  }
+ },
+ "ds-motion": {
+  "tooltip-delay": {
+   "$type": "duration",
+   "$value": {
+    "value": 600,
+    "unit": "ms"
+   },
+   "$description": "Rest the pointer this long for a tooltip."
+  },
+  "note-time": {
+   "$type": "duration",
+   "$value": {
+    "value": 2000,
+    "unit": "ms"
+   },
+   "$description": "How long a passing note (six points) stays."
+  }
+ }
+}
