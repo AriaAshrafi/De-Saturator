@@ -4,6 +4,7 @@
 //
 //   desat_snapshot [folder]      render every state (default folder: ./snapshots)
 //   desat_snapshot --check       run the interaction checks instead; exits 1 if any fails
+//   desat_snapshot --release [folder]   the same pictures with the plugin's own version, for a release page
 //
 // The analyser is fed the design's own stand-in signal and stand-in thinning (ported from
 // design/build/ui/core.js), so the pictures are comparable. Two things are set as in the design's
@@ -179,6 +180,9 @@ Bins reduce (const Settings& st, const Bins& applied, const Bins& original)
 }
 } // namespace standin
 
+// Set by --release: show the plugin's own version beside the credit, for pictures of a release.
+bool releasePictures = false;
+
 //==============================================================================
 struct Point
 {
@@ -346,7 +350,7 @@ void apply (DeSaturatorProcessor& processor, DeSaturatorView& view, const StateS
 
     auto pointer = s.pointer;
     pointer.dark = s.dark;
-    pointer.versionText = "1.0.0";
+    pointer.versionText = releasePictures ? juce::String() : juce::String ("1.0.0"); // empty: the plugin's own version
     view.setPreview (pointer);
 }
 
@@ -628,6 +632,12 @@ int main (int argc, char** argv)
 
     if (argc > 1 && juce::String (argv[1]) == "--check")
         return check();
+
+    if (argc > 1 && juce::String (argv[1]) == "--release")
+    {
+        releasePictures = true;
+        return render (juce::File::getCurrentWorkingDirectory().getChildFile (argc > 2 ? argv[2] : "snapshots-release"));
+    }
 
     return render (juce::File::getCurrentWorkingDirectory().getChildFile (argc > 1 ? argv[1] : "snapshots"));
 }

@@ -80,12 +80,10 @@ private:
     // Smoothed controls.
     double amount = 0.0, shape = 0.5, restoreAmount = 0.0, mix = 1.0, outputGain = 1.0;
     double bypassMix = 0.0, autoGainMix = 1.0, deltaMix = 0.0;
-    double smoothing = 1.0;
     bool primed = false;
 
     // Auto gain.
     double dryPower = 0.0, wetPower = 0.0, autoGainValue = 1.0;
-    double powerCoef = 0.0, autoGainCoef = 0.0;
 
     // Dry delay (HQ only).
     std::vector<std::vector<double>> delayLine;
