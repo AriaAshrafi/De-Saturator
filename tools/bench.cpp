@@ -7,6 +7,7 @@
 
 #include <chrono>
 #include <cstdio>
+#include <string>
 
 namespace
 {
@@ -24,8 +25,80 @@ void report (const char* name, double seconds, double audioSeconds)
 }
 } // namespace
 
-int main()
+/** How close y is to the reference, after the best single gain: signal-to-distortion ratio in dB. */
+double sdrDb (const wav::Audio& reference, const wav::Audio& y)
 {
+    double sy = 0.0, yy = 0.0;
+    const size_t from = (size_t) (0.5 * reference.sampleRate);
+    for (size_t c = 0; c < reference.channels.size(); ++c)
+        for (size_t i = from; i < reference.channels[c].size(); ++i)
+        {
+            sy += reference.channels[c][i] * y.channels[c][i];
+            yy += y.channels[c][i] * y.channels[c][i];
+        }
+    const double g = yy > 0.0 ? sy / yy : 1.0;
+    double ss = 0.0, ee = 0.0;
+    for (size_t c = 0; c < reference.channels.size(); ++c)
+        for (size_t i = from; i < reference.channels[c].size(); ++i)
+        {
+            const double e = reference.channels[c][i] - g * y.channels[c][i];
+            ss += reference.channels[c][i] * reference.channels[c][i];
+            ee += e * e;
+        }
+    return measure::db (ss) - measure::db (ee);
+}
+
+/** Soft-clips a clean sound at several drives, runs Restore over it, and reports how much nearer
+    to the clean original it comes (positive = restored). */
+int restoreReport()
+{
+    const double sr = 48000.0;
+    struct Source { const char* name; wav::Audio audio; };
+    Source sources[] = { { "chord", signals::cleanChord (sr, 4.0) }, { "drums+pad", signals::drumsAndPad (sr, 4.0) } };
+
+    std::printf ("Restore: change in signal-to-distortion ratio against the clean original, dB (positive = closer)\n");
+    std::printf ("%-10s %-6s %8s | %-28s | %-28s\n", "sound", "drive", "clipped", "Clean 25 / 50 / 75 / 100", "Character 25 / 50 / 75 / 100");
+
+    for (auto& src : sources)
+    {
+        auto clean = src.audio;
+        signals::normalise (clean, 1.0);
+
+        for (double drive : { 1.0, 1.5, 2.3 })
+        {
+            auto clipped = clean;
+            for (auto& c : clipped.channels)
+                for (double& v : c)
+                    v = std::tanh (drive * v) / std::tanh (drive);
+
+            const double before = sdrDb (clean, clipped);
+            std::printf ("%-10s %-6.1f %8.1f |", src.name, drive, before);
+
+            for (bool character : { false, true })
+            {
+                for (double amount : { 25.0, 50.0, 75.0, 100.0 })
+                {
+                    desat::EngineParams p;
+                    p.hq = false;
+                    p.amount = 0.0;
+                    p.restore = amount;
+                    p.character = character;
+                    p.autoGain = false;
+                    std::printf (" %+6.1f", sdrDb (clean, measure::process (clipped, p).out) - before);
+                }
+                std::printf (" |");
+            }
+            std::printf ("\n");
+        }
+    }
+    return 0;
+}
+
+int main (int argc, char** argv)
+{
+    if (argc > 1 && std::string (argv[1]) == "restore")
+        return restoreReport();
+
     const double sr = 48000.0, seconds = 10.0;
     const auto chord = signals::saturatedChord (sr, seconds);
     const int total = chord.numSamples();

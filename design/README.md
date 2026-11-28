@@ -1,4 +1,4 @@
-# De-Saturator: design 1.1.0
+# De-Saturator: design 1.2.0
 
 The design for De-Saturator, a free plugin that thins a sound, and its brand, a sub-brand of Aria Ashrafi. Direction **B, Hairline**: thinner, drawn literally. What stays is heavy and what's removed is a hairline, in the analyser, in the Amount ring and in the name.
 

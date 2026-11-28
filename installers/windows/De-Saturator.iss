@@ -1,10 +1,10 @@
 ; The Windows installer, built with Inno Setup 6 from the repository root:
-;   ISCC /DAppVersion=0.9.0 installers\windows\De-Saturator.iss
+;   ISCC /DAppVersion=0.9.1 installers\windows\De-Saturator.iss
 ; Art comes from design/installers/windows. The VST3 goes to the standard VST3 folder; the
 ; folder in Program Files only holds the uninstaller, the icon and the licences.
 
 #ifndef AppVersion
-  #define AppVersion "0.9.0"
+  #define AppVersion "0.9.1"
 #endif
 #define Root "..\.."
 #define Design Root + "\design"

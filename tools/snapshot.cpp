@@ -237,6 +237,7 @@ std::vector<StateSpec> allStates()
     add (work ("amount-drag"), [] (StateSpec& s) { s.amount = 78.0; s.pointer.hover = s.pointer.drag = { Control::amount, 0 }; });
     add (work ("knob-hover"), [] (StateSpec& s) { s.pointer.hover = { Control::mix, 0 }; });
     add (work ("knob-drag"), [] (StateSpec& s) { s.restore = 42.0; s.pointer.hover = s.pointer.drag = { Control::restore, 0 }; });
+    add (work ("output-max"), [] (StateSpec& s) { s.output = 36.0; s.pointer.hover = s.pointer.drag = { Control::output, 0 }; });
     add (work ("shape-drag"), [] (StateSpec& s) { s.shape = 72.0; s.pointer.hover = s.pointer.drag = { Control::shape, 0 }; });
     add (work ("switch-hover"), [] (StateSpec& s) { s.pointer.hover = { Control::character, 1 }; });
     add (work ("point-hover"), [] (StateSpec& s) { s.pointer.hover = { Control::point, 2 }; });
@@ -499,7 +500,7 @@ int check()
     c.press (ox, oy);
     c.drag (ox, oy - 60.0f);
     c.release (ox, oy - 60.0f);
-    c.expect (c.about (c.value (ParamIDs::output), 9.5), "Output drags over its 36 dB in 240 px");
+    c.expect (c.about (c.value (ParamIDs::output), 15.5), "Output drags over its 60 dB in 240 px");
     c.doubleClick (ox, oy);
     c.expect (c.about (c.value (ParamIDs::output), 0.0), "double-click resets Output to 0 dB");
 

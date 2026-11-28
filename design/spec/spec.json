@@ -1,6 +1,6 @@
 {
  "name": "De-Saturator",
- "version": "1.1.0",
+ "version": "1.2.0",
  "direction": "Hairline",
  "idea": "Thinner, drawn literally. What stays is heavy, what's removed is a hairline: in the analyser, in the Amount ring, in the name.",
  "units": "Window pixels at 100%. Every number scales with the window; the 1 px hairlines never go under one physical pixel.",
@@ -775,7 +775,8 @@
    "r": 22,
    "body": "Paper fill, ink outline 1.5 (2.5 under the pointer or while dragging).",
    "track": "Arc radius 29, -135° to 135°, paper line 3.5.",
-   "valueArc": "Klein 3.5 from -135° (Output: from 0 dB) to the angle. Graphite deep when bypassed.",
+   "valueArc": "Klein 3.5 from -135° (Output: from 0 dB, at -27°) to the angle. Graphite deep when bypassed.",
+   "originTick": "Output only: a tick at 0 dB (-27°) from radius 33 to 38, graphite deep 1.25, ink under the pointer or while dragging, so unity can be found on a 60 dB knob.",
    "pointer": "Ink 3, square caps, from radius 7 to 18 at the angle.",
    "label": {
     "baseline": 474,
@@ -890,12 +891,12 @@
    "name": "Output",
    "kind": "knob",
    "min": -24,
-   "max": 12,
+   "max": 36,
    "def": 0,
    "unit": "dB",
    "step": 0.5,
    "origin": 0,
-   "format": "one decimal, a sign, \"dB\": \"−1.5 dB\", \"0.0 dB\", \"+3.0 dB\""
+   "format": "one decimal, a sign, \"dB\": \"−1.5 dB\", \"0.0 dB\", \"+3.0 dB\"; the widest are \"−24.0 dB\" and \"+36.0 dB\", 8 characters"
   },
   {
    "id": "autoGain",

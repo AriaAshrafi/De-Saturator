@@ -36,6 +36,12 @@
   "description": "Restore being dragged."
  },
  {
+  "file": "output-max.png",
+  "file2x": "output-max@2x.png",
+  "name": "Output at +36 dB",
+  "description": "Output dragged to the top: the widest value, and the arc from the 0 dB tick."
+ },
+ {
   "file": "shape-drag.png",
   "file2x": "shape-drag@2x.png",
   "name": "Shape, drag",

@@ -21,12 +21,20 @@ struct ModeConstants
     double fillCap;           // most the fill term can remove
     double harmonicsDb;       // most an overtone is reduced
     double bodyDb;            // depth of the body bell
+    double contrastPerDb;     // dB removed per dB a third-octave band sits under its neighbours
+    double contrastCap;       // most the contrast term can remove
     double maxDb;             // ceiling for everything together
     double transientProtect;  // how much of the reduction an onset cancels
 };
 
-constexpr ModeConstants cleanMode     { 1.0, 15.0,  6.0,  5.0, 18.0, 0.85 };
-constexpr ModeConstants characterMode { 2.5, 36.0, 18.0, 12.0, 48.0, 0.60 };
+constexpr ModeConstants cleanMode     { 1.5, 24.0, 12.0, 12.0, 0.5, 12.0, 30.0, 0.85 };
+constexpr ModeConstants characterMode { 3.0, 48.0, 30.0, 24.0, 1.2, 30.0, 60.0, 0.60 };
+
+// The contrast term works on third-octave bands, 50 Hz upwards.
+constexpr double firstBandHz = 50.0;
+constexpr double contrastKnee = 3.0;   // dB under the neighbours before a band counts as a dip
+constexpr double contrastTilt = 3.0;   // dB/octave: an ordinary falling spectrum reads as level
+constexpr int contrastReach = 4;       // bands either side that a band is measured against
 
 // The long windows reach well up, because telling partials from the fill between them takes
 // frequency resolution. Above that the ear hears density, not single partials, and time matters more.
@@ -108,7 +116,7 @@ struct SpectralThinner::Resolution
 
     double aPower = 0, aAttack = 0, aRelease = 0, holdDecay = 0;
 
-    std::vector<double> W, curveVal, bodyBell;
+    std::vector<double> W, curveVal, bodyBell, bandPos; // bandPos: where each bin falls among the contrast bands
     std::vector<double> P, Ps, L, mx, U, trans, hold, harm, R, coef;
     std::vector<int> bwClean, bwCharacter, queue;
     std::vector<double> prefix;
@@ -153,7 +161,7 @@ void SpectralThinner::prepare (double sampleRate, int numChannels)
         r->aRelease = onePole (0.080, step);
         r->holdDecay = std::exp (-step / 0.040);
 
-        for (auto* v : { &r->W, &r->curveVal, &r->bodyBell, &r->P, &r->Ps, &r->L, &r->mx, &r->U,
+        for (auto* v : { &r->W, &r->curveVal, &r->bodyBell, &r->bandPos, &r->P, &r->Ps, &r->L, &r->mx, &r->U,
                          &r->trans, &r->hold, &r->harm, &r->R, &r->coef })
             v->assign ((size_t) K, 0.0);
 
@@ -182,6 +190,7 @@ void SpectralThinner::prepare (double sampleRate, int numChannels)
 
             const double x = f > 0.0 ? std::log2 (f / 260.0) / (2.4 / 2.3548) : -100.0;
             r->bodyBell[(size_t) k] = std::exp (-0.5 * x * x);
+            r->bandPos[(size_t) k] = f > 0.0 ? std::clamp (3.0 * std::log2 (f / firstBandHz), 0.0, (double) (numContrastBands - 1)) : 0.0;
         }
 
         r->kLo = std::max (r->kLo, 1); // never touch DC
@@ -191,7 +200,7 @@ void SpectralThinner::prepare (double sampleRate, int numChannels)
         if (i == 0)
         {
             r->aLo = 1;
-            r->aHi = std::min (K - 2, std::max (r->aHi, (int) (harmonicTop / r->binHz) + 4));
+            r->aHi = K - 2; // the whole spectrum: the contrast bands are measured here
         }
 
         r->ch.resize ((size_t) channels);
@@ -220,6 +229,21 @@ void SpectralThinner::prepare (double sampleRate, int numChannels)
     harmonics.clear();
     harmonics.reserve (maxSeries * 256);
 
+    // Third-octave band edges on the long resolution's bins.
+    for (int b = 0; b < numContrastBands; ++b)
+    {
+        const double fc = firstBandHz * std::pow (2.0, b / 3.0);
+        const double binHz = res[0]->binHz;
+        int lo = (int) std::ceil (fc * std::pow (2.0, -1.0 / 6.0) / binHz), hi = (int) std::floor (fc * std::pow (2.0, 1.0 / 6.0) / binHz);
+        lo = std::clamp (lo, 1, K0 - 2);
+        hi = std::clamp (hi, lo, K0 - 2);
+        bandLo[(size_t) b] = lo;
+        bandHi[(size_t) b] = hi;
+        bandTilt[(size_t) b] = contrastTilt * std::log2 (fc / 1000.0);
+        bandAbove[(size_t) b] = fc < 0.5 * sr;
+    }
+    contrast.fill (0.0);
+
     rebuildCurve();
     reset();
 }
@@ -246,6 +270,7 @@ void SpectralThinner::reset()
     harmonics.clear();
     harmonicConfidence = 0.0;
     bodyDynamics = 1.0;
+    contrast.fill (0.0);
 }
 
 void SpectralThinner::setCurve (const Curve& c)
@@ -383,7 +408,10 @@ void SpectralThinner::frame (int index, const ThinSettings& s)
     }
 
     if (index == 0)
+    {
         analyseHarmonics (r);
+        analyseContrast (r);
+    }
 
     // The upper envelope the valleys are measured against: a sliding maximum, then a mean.
     slidingMax (r.L.data(), bw.data(), r.aLo, r.aHi, r.mx.data(), r.queue.data());
@@ -423,7 +451,13 @@ void SpectralThinner::frame (int index, const ThinSettings& s)
         const double valley = std::max (0.0, r.U[(size_t) k] - r.L[(size_t) k] - peakKnee);
         const double fill = std::min (mode.fillPerDb * valley, mode.fillCap);
 
-        double target = depth * (fill
+        // The contrast term, read between the two bands this bin lies between.
+        const double bp = r.bandPos[(size_t) k];
+        const int b0 = std::min ((int) bp, numContrastBands - 2);
+        const double dip = contrast[(size_t) b0] + (bp - b0) * (contrast[(size_t) b0 + 1] - contrast[(size_t) b0]);
+        const double carve = std::min (mode.contrastPerDb * dip, mode.contrastCap);
+
+        double target = depth * (fill + carve
                                  + s.harmonics * mode.harmonicsDb * r.harm[(size_t) k]
                                  + s.body * mode.bodyDb * r.bodyBell[(size_t) k] * bodyDynamics);
         const double held = r.hold[(size_t) k];
@@ -490,6 +524,42 @@ void SpectralThinner::frame (int index, const ThinSettings& s)
 }
 
 //==============================================================================
+/** How far each third-octave band dips below its neighbours, in dB.
+
+    Thick sound is evenly filled in: every band is about as loud as the ones beside it. Pulling
+    down the bands that are already the lower ones leaves the sound standing on its strongest
+    regions, which is what "thin" sounds like. Measured on the long resolution and shared.
+*/
+void SpectralThinner::analyseContrast (Resolution& r)
+{
+    std::array<double, numContrastBands> level {};
+    double loudest = -400.0;
+
+    for (int b = 0; b < numContrastBands; ++b)
+    {
+        double sum = 0.0;
+        for (int k = bandLo[(size_t) b]; k <= bandHi[(size_t) b]; ++k)
+            sum += r.Ps[(size_t) k];
+        level[(size_t) b] = fastPowerToDb (sum + tiny) + bandTilt[(size_t) b];
+        if (bandAbove[(size_t) b])
+            loudest = std::max (loudest, level[(size_t) b]);
+    }
+
+    for (int b = 0; b < numContrastBands; ++b)
+    {
+        double upper = -400.0;
+        for (int j = std::max (0, b - contrastReach); j <= std::min (numContrastBands - 1, b + contrastReach); ++j)
+            if (j != b && bandAbove[(size_t) j])
+                upper = std::max (upper, level[(size_t) j] - 1.5 * (std::abs (j - b) - 1)); // nearer bands count for more
+
+        // A band far below everything (silence up there, or a filtered sound) is not a dip to deepen.
+        double dip = level[(size_t) b] > loudest - 60.0 ? std::max (0.0, upper - level[(size_t) b] - contrastKnee) : 0.0;
+        dip = std::min (dip, 24.0);
+        contrast[(size_t) b] += 0.35 * (dip - contrast[(size_t) b]);
+    }
+}
+
+//==============================================================================
 void SpectralThinner::analyseHarmonics (Resolution& r)
 {
     harmonics.clear();
@@ -513,7 +583,7 @@ void SpectralThinner::analyseHarmonics (Resolution& r)
 
     // The body bell digs deeper when the low mids dominate.
     const double share = bodyEnergy / (total + tiny);
-    bodyDynamics += 0.3 * (std::clamp (0.4 + 1.6 * share, 0.4, 1.3) - bodyDynamics);
+    bodyDynamics += 0.3 * (std::clamp (0.7 + 1.2 * share, 0.7, 1.3) - bodyDynamics);
 
     const double floorPower = (r.N * 1.0e-5) * (r.N * 1.0e-5);
     if (total < floorPower)

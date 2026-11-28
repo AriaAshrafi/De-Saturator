@@ -12,8 +12,11 @@ namespace desat
     Two parts, both driven by the same amount:
       - an upward expander on onsets (fast envelope against slow), which undoes squashing
         without adding harmonics;
-      - an inverse soft-clip curve (x + g x^3, relative to the running peak), which stretches
-        the top of the waveform back out. Its added part is anti-aliased (first-order ADAA).
+      - an inverse soft-clip curve, which stretches the top of the waveform back out. A soft clipper
+        is, near enough, y = tanh (x); its inverse is atanh. Relative to the running peak the curve
+        is atanh (k u) / k, where k says how hard the sound was driven (k = tanh of the drive), and
+        that is what the amount sets. When k matches, the clipper's harmonics cancel. Only the part
+        the curve adds is computed, and it is anti-aliased (first-order ADAA).
     At amount 0 the signal passes through exactly.
 */
 class Restore
@@ -59,7 +62,8 @@ public:
 
         const double exponent = amount * (character ? 0.8 : 0.5);
         const double maxGain = std::pow (10.0, amount * (character ? 10.0 : 6.0) / 20.0);
-        const double shape = amount * (character ? 1.0 : 0.3);
+        // How hard a drive to undo: up to tanh(1.47) in Clean, tanh(2.3) in Character.
+        const double k = amount * (character ? 0.98 : 0.90);
 
         for (int n = 0; n < numSamples; ++n)
         {
@@ -70,20 +74,40 @@ public:
                 target = std::min (maxGain, std::pow (fast / slow, exponent));
             gain += (target > gain ? gainAttack : gainRelease) * (target - gain);
 
-            const double scale = peak > 1.0e-6 ? shape / (peak * peak) : 0.0;
+            const bool shaping = k > 1.0e-3 && peak > 1.0e-6;
+            const double invPeak = shaping ? 1.0 / peak : 0.0;
 
             for (size_t c = 0; c < last.size(); ++c)
             {
                 const double x1 = x[c][n], x0 = last[c];
                 last[c] = x1;
-                // The mean of x^3 between the last sample and this one.
-                const double cubed = 0.25 * (x1 * x1 * x1 + x1 * x1 * x0 + x1 * x0 * x0 + x0 * x0 * x0);
-                x[c][n] = gain * (x1 + scale * cubed);
+
+                double added = 0.0;
+                if (shaping)
+                {
+                    // Both samples relative to the peak, kept inside the curve's range.
+                    const double u1 = std::clamp (x1 * invPeak, -1.0, 1.0), u0 = std::clamp (x0 * invPeak, -1.0, 1.0);
+                    const double du = u1 - u0;
+                    // The curve averaged between the last sample and this one, less the straight line
+                    // averaged the same way: what the curve adds, with the aliasing averaged out.
+                    const double mean = std::abs (du) > 1.0e-5 ? (antiderivative (u1, k) - antiderivative (u0, k)) / du
+                                                               : std::atanh (k * 0.5 * (u0 + u1)) / k;
+                    added = peak * (mean - 0.5 * (u0 + u1));
+                }
+
+                x[c][n] = gain * (x1 + added);
             }
         }
     }
 
 private:
+    /** The integral of atanh (k u) / k. */
+    static double antiderivative (double u, double k) noexcept
+    {
+        const double ku = k * u;
+        return (ku * std::atanh (ku) + 0.5 * std::log (1.0 - ku * ku)) / (k * k);
+    }
+
     double coef (double seconds) const noexcept { return 1.0 - std::exp (-1.0 / (seconds * sr)); }
 
     double linked (double* const* x, int n) const noexcept

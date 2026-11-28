@@ -1,5 +1,12 @@
 # Changes
 
+## 1.2.0
+
+- **Output goes up to +36 dB** (Aria, after testing 0.9.0): the range is now −24 to +36 dB. The default stays 0 dB, the wheel step 0.5 dB and the format "+36.0 dB". The widest values, "−24.0 dB" and "+36.0 dB", are both 8 characters, and the value label and its chip hold them. The value arc still starts at 0 dB, which is now at −27°, 40% of the way round.
+- **A 0 dB tick on Output**: a short mark outside the track at 0 dB, radius 33 to 38, graphite deep 1.25 (ink under the pointer), so unity is easy to find on a 60 dB knob. Restore and Mix have no origin, so they get no tick.
+- The drag doesn't change: 240 px for the whole range (now 0.25 dB a pixel, a 0.5 dB step every 2 px), 1200 px with Shift (0.05 dB a pixel). Double-click still resets to 0 dB.
+- A new state, `states/output-max.png`: Output dragged to +36 dB.
+
 ## 1.1.0
 
 - **No keyboard.** The keyboard shortcuts are gone from the spec and the prototype (Aria). The window takes no keys and never takes keyboard focus, so the host keeps its shortcuts. Mouse and wheel are unchanged; Shift still fines a drag.

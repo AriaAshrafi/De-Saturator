@@ -3,6 +3,7 @@
 #include "Curve.h"
 #include "Fft.h"
 
+#include <array>
 #include <memory>
 #include <vector>
 
@@ -18,6 +19,7 @@ namespace desat
 
     What gets removed, per bin:
       - fill:      whatever sits in the valleys between the spectral peaks (a spectral expander);
+      - contrast:  third-octave bands that already dip below their neighbours are pulled down further;
       - harmonics: the overtones (2nd and up) of the pitched sounds it can find;
       - body:      a dynamic bell in the low mids.
     Onsets are detected per band and let through.
@@ -45,6 +47,7 @@ private:
 
     void frame (int index, const ThinSettings& settings);
     void analyseHarmonics (Resolution& r);
+    void analyseContrast (Resolution& r);
     void rebuildCurve();
 
     double sr = 48000.0;
@@ -58,6 +61,12 @@ private:
     std::vector<HarmonicEntry> harmonics;
     double harmonicConfidence = 0.0;
     double bodyDynamics = 1.0;
+
+    // Third-octave bands from 50 Hz up, for the contrast term.
+    static constexpr int numContrastBands = 27;
+    std::array<int, numContrastBands> bandLo {}, bandHi {};
+    std::array<double, numContrastBands> bandTilt {}, contrast {};
+    std::array<bool, numContrastBands> bandAbove {};
 
     // Scratch for the harmonic analysis.
     std::vector<double> compressed, compressedWork;

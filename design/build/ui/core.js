@@ -12,7 +12,7 @@
 (function (root) {
 "use strict";
 
-const VERSION = "1.1.0";                    // the design's version; the window shows the plugin's own
+const VERSION = "1.2.0";                    // the design's version; the window shows the plugin's own
 const W = 960, H = 600;
 const FMIN = 20, FMAX = 20000, OCT = Math.log2(FMAX / FMIN);
 const DBMIN = -90, DBMAX = 6, TILT = 4.5;
@@ -113,7 +113,7 @@ const L = {
   plot: { x: 24, y: 72, w: 632, h: 346 },
   strip: { h: 22, baseline: 433 },
   amount: { cx: 808, cy: 222, r: 84, track: 96, tickIn: 104, tickOut: 109, tickMajor: 113, notch: 6, title: 100, readout: 358, chip: { w: 80, h: 32, y: 334 }, hit: 106 },
-  small: { cy: 428, r: 22, track: 29, pointerIn: 7, pointerOut: 18, label: 474, value: 493.5, hit: 32, knobs: [["restore", "Restore", 724], ["mix", "Mix", 808], ["output", "Output", 892]] },
+  small: { cy: 428, r: 22, track: 29, pointerIn: 7, pointerOut: 18, originIn: 33, originOut: 38, label: 474, value: 493.5, hit: 32, knobs: [["restore", "Restore", 724], ["mix", "Mix", 808], ["output", "Output", 892]] },
   autoGain: { x: 852, y: 504, w: 80, h: 24 },
   shape: { x1: 120, x2: 560, y: 514, title: 492, thumb: { w: 16, h: 30 }, endGap: 14 },
   credit: { x: 24, y: 566, w: 54, h: 15, version: { x: 86, baseline: 578 } },
@@ -136,7 +136,7 @@ const PARAMS = [
   { id: "shape", name: "Shape", kind: "slider", min: 0, max: 100, def: 50, unit: "%", step: 1, ends: ["Harmonics", "Body"] },
   { id: "restore", name: "Restore", kind: "knob", min: 0, max: 100, def: 0, unit: "%", step: 1 },
   { id: "mix", name: "Mix", kind: "knob", min: 0, max: 100, def: 100, unit: "%", step: 1 },
-  { id: "output", name: "Output", kind: "knob", min: -24, max: 12, def: 0, unit: "dB", step: 0.5, origin: 0 },
+  { id: "output", name: "Output", kind: "knob", min: -24, max: 36, def: 0, unit: "dB", step: 0.5, origin: 0 },
   { id: "autoGain", name: "Auto gain", kind: "toggle", def: true },
   { id: "delta", name: "Delta", kind: "toggle", def: false },
   { id: "character", name: "Character", kind: "choice", options: ["clean", "character"], labels: ["Clean", "Character"], def: "clean" },
@@ -393,6 +393,8 @@ function smallKnob(ctx, id, label, cx) {
   const [x0, y0] = polar(cx, cy, g.pointerIn, a), [x1, y1] = polar(cx, cy, g.pointerOut, a);
   let s = `<path d="${arc(cx, cy, g.track, -135, 135)}" fill="none" stroke="${T.grid}" stroke-width="${S.knobTrack}"/>`;
   s += `<path d="${arc(cx, cy, g.track, a0, a)}" fill="none" stroke="${st.bypass ? T.textMuted : T.hand}" stroke-width="${S.knobTrack}"/>`;
+  // a knob with an origin inside its range (Output, 0 dB) marks it outside the track, like the Amount ticks
+  if (PM[id].origin != null) { const [ox0, oy0] = polar(cx, cy, g.originIn, a0), [ox1, oy1] = polar(cx, cy, g.originOut, a0); s += `<path d="M${n2(ox0)} ${n2(oy0)}L${n2(ox1)} ${n2(oy1)}" stroke="${hv ? T.text : T.textMuted}" stroke-width="${S.tick}"/>`; }
   s += `<circle cx="${cx}" cy="${cy}" r="${g.r}" fill="${T.ground}" stroke="${T.text}" stroke-width="${hv ? S.outlineHover : S.outline}"/>`;
   s += `<path d="M${n2(x0)} ${n2(y0)}L${n2(x1)} ${n2(y1)}" stroke="${T.text}" stroke-width="3" stroke-linecap="square"/>`;
   s += text(cx, g.label, label, "label", T.text, "middle");

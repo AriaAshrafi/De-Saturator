@@ -14,6 +14,9 @@ const ROOT = join(HERE, "..");
 const DS = createRequire(import.meta.url)("./ui/core.js");
 const { L, S, T, COLOR, ROLE, STROKE, TYPE, PARAMS, CURVE, DRAG, TIPS, NOTES, ALPHA } = DS;
 const r2 = (v) => Math.round(v * 100) / 100;
+const OUTP = PARAMS.find((p) => p.id === "output");
+const OUTSPAN = OUTP.max - OUTP.min;
+const OUT0 = r2(-135 + 270 * (OUTP.origin - OUTP.min) / OUTSPAN);   // where 0 dB sits on the knob, 0° up, clockwise
 
 /* ---------- contrast ---------- */
 const lin = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
@@ -123,13 +126,13 @@ const components = {
     value: { baseline: L.amount.readout, type: "valueLarge", hoverChip: L.amount.chip },
     bypass: "Ring, value arc and dot in graphite deep.",
   },
-  knob: { ids: L.small.knobs.map(([id, label, cx]) => ({ id, label, cx })), cy: L.small.cy, r: L.small.r, body: "Paper fill, ink outline 1.5 (2.5 under the pointer or while dragging).", track: "Arc radius 29, -135° to 135°, paper line 3.5.", valueArc: "Klein 3.5 from -135° (Output: from 0 dB) to the angle. Graphite deep when bypassed.", pointer: "Ink 3, square caps, from radius 7 to 18 at the angle.", label: { baseline: L.small.label, type: "label" }, value: { baseline: L.small.value, type: "value", color: "textMuted", hover: "On an ink chip 17 high, paper text." } },
+  knob: { ids: L.small.knobs.map(([id, label, cx]) => ({ id, label, cx })), cy: L.small.cy, r: L.small.r, body: "Paper fill, ink outline 1.5 (2.5 under the pointer or while dragging).", track: "Arc radius 29, -135° to 135°, paper line 3.5.", valueArc: `Klein 3.5 from -135° (Output: from 0 dB, at ${OUT0}°) to the angle. Graphite deep when bypassed.`, originTick: `Output only: a tick at 0 dB (${OUT0}°) from radius ${L.small.originIn} to ${L.small.originOut}, graphite deep 1.25, ink under the pointer or while dragging, so unity can be found on a ${OUTSPAN} dB knob.`, pointer: "Ink 3, square caps, from radius 7 to 18 at the angle.", label: { baseline: L.small.label, type: "label" }, value: { baseline: L.small.value, type: "value", color: "textMuted", hover: "On an ink chip 17 high, paper text." } },
   autoGain: { ...L.autoGain, on: "Ink fill, paper text.", off: "Ink outline 1.5 (2.5 under the pointer), ink text.", text: "label type, centred." },
   shape: { ...L.shape, track: "Paper line 3 from x 120 to 560, with a 12 px centre tick (1.5).", thumb: "Ink pill 16 × 30 centred on x = 120 + 440 * shape / 100, with a 14 px paper mark (2).", hover: "An ink outline 1.5 around the thumb, 4 px out.", ends: "\"Harmonics\" right-aligned at x 106, baseline 512, its share (100 - shape)% under it at 527; \"Body\" at x 574, its share shape% under it.", title: "\"Shape\" centred at x 340, baseline 492." },
   credit: { ...L.credit, file: "ui/assets/credit.svg", fileDark: "ui/assets/credit-dark.svg", version: { ...L.credit.version, text: "the plugin's version string, e.g. \"1.0.0\"", type: "value", color: "textMuted" } },
   tooltip: { ...L.tooltip, fill: "readout", text: "onReadout", type: "tooltip", placement: "8 px under the control (above when it would leave the window), centred, kept 8 px inside. On the analyser: 18 px under the pointer.", hides: "On press, on leaving the control, and while dragging." },
 };
-const params = PARAMS.map((p) => ({ ...p, format: p.kind === "knob" || p.kind === "slider" ? (p.id === "output" ? "one decimal, a sign, \"dB\": \"−1.5 dB\", \"0.0 dB\", \"+3.0 dB\"" : "whole percent: \"30%\"") : undefined }));
+const params = PARAMS.map((p) => ({ ...p, format: p.kind === "knob" || p.kind === "slider" ? (p.id === "output" ? "one decimal, a sign, \"dB\": \"−1.5 dB\", \"0.0 dB\", \"+3.0 dB\"; the widest are \"−24.0 dB\" and \"+36.0 dB\", 8 characters" : "whole percent: \"30%\"") : undefined }));
 const interaction = {
   drag: { vertical: true, fullRangeScreenPx: DRAG.fullRangePx, fineRangeScreenPx: DRAG.fineRangePx, fineKey: "Shift", note: "Knobs: up raises. Shape: horizontal, the thumb follows the pointer." },
   doubleClick: { knob: "reset to default", shape: "reset to default", emptyAnalyser: "add a point at the pointer (width 1 oct); with six already, show \"Six points is the most\" for 2 s", point: "remove it" },
@@ -239,7 +242,7 @@ md.push(`- ${components.amount.ticks}`);
 md.push(`- \"Amount\" in the title type, centred, baseline ${L.amount.title}. The value (22 px mono) centred at baseline ${L.amount.readout}; under the pointer or while dragging it sits on an ink chip ${L.amount.chip.w} × ${L.amount.chip.h} at y ${L.amount.chip.y}, paper text.`);
 md.push(`- Bypassed: ${components.amount.bypass}`, "");
 md.push("## Restore, Mix, Output", "");
-md.push(`Centres at x ${L.small.knobs.map((k) => k[2]).join(", ")}, y ${L.small.cy}. ${components.knob.body} ${components.knob.track} ${components.knob.valueArc} ${components.knob.pointer} Label baseline ${L.small.label}; value baseline ${L.small.value}, graphite deep. ${components.knob.value.hover}`, "");
+md.push(`Centres at x ${L.small.knobs.map((k) => k[2]).join(", ")}, y ${L.small.cy}. ${components.knob.body} ${components.knob.track} ${components.knob.valueArc} ${components.knob.originTick} ${components.knob.pointer} Label baseline ${L.small.label}; value baseline ${L.small.value}, graphite deep. ${components.knob.value.hover}`, "");
 md.push(`**Auto gain** under Output: a pill at x ${L.autoGain.x}, y ${L.autoGain.y}, ${L.autoGain.w} × ${L.autoGain.h}. ${components.autoGain.on} ${components.autoGain.off}`, "");
 md.push("## Shape", "", `${components.shape.track} ${components.shape.thumb} ${components.shape.hover} ${components.shape.ends} ${components.shape.title}`, "");
 md.push("## Footer", "", `**Credit**: \`ui/assets/credit.svg\` (dark: \`credit-dark.svg\`) drawn ${L.credit.w} × ${L.credit.h} at (${L.credit.x}, ${L.credit.y}); the plugin's own version string (\"1.0.0\" in the pictures) in the value type, graphite deep, at x ${L.credit.version.x}, baseline ${L.credit.version.baseline}.`, "");

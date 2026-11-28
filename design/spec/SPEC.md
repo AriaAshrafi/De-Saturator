@@ -1,4 +1,4 @@
-# De-Saturator: window spec 1.1.0
+# De-Saturator: window spec 1.2.0
 
 Direction B, Hairline. Thinner, drawn literally. What stays is heavy, what's removed is a hairline: in the analyser, in the Amount ring, in the name.
 
@@ -147,7 +147,7 @@ Centre (808, 222). angle = -135° + 270° * amount / 100 (0° up, clockwise).
 
 ## Restore, Mix, Output
 
-Centres at x 724, 808, 892, y 428. Paper fill, ink outline 1.5 (2.5 under the pointer or while dragging). Arc radius 29, -135° to 135°, paper line 3.5. Klein 3.5 from -135° (Output: from 0 dB) to the angle. Graphite deep when bypassed. Ink 3, square caps, from radius 7 to 18 at the angle. Label baseline 474; value baseline 493.5, graphite deep. On an ink chip 17 high, paper text.
+Centres at x 724, 808, 892, y 428. Paper fill, ink outline 1.5 (2.5 under the pointer or while dragging). Arc radius 29, -135° to 135°, paper line 3.5. Klein 3.5 from -135° (Output: from 0 dB, at -27°) to the angle. Graphite deep when bypassed. Output only: a tick at 0 dB (-27°) from radius 33 to 38, graphite deep 1.25, ink under the pointer or while dragging, so unity can be found on a 60 dB knob. Ink 3, square caps, from radius 7 to 18 at the angle. Label baseline 474; value baseline 493.5, graphite deep. On an ink chip 17 high, paper text.
 
 **Auto gain** under Output: a pill at x 852, y 504, 80 × 24. Ink fill, paper text. Ink outline 1.5 (2.5 under the pointer), ink text.
 
@@ -202,7 +202,7 @@ Paper line 3 from x 120 to 560, with a 12 px centre tick (1.5). Ink pill 16 × 3
 | `shape` | Shape | 0 to 100 % | 50 | whole percent: "30%" |
 | `restore` | Restore | 0 to 100 % | 0 | whole percent: "30%" |
 | `mix` | Mix | 0 to 100 % | 100 | whole percent: "30%" |
-| `output` | Output | -24 to 12 dB | 0 | one decimal, a sign, "dB": "−1.5 dB", "0.0 dB", "+3.0 dB" |
+| `output` | Output | -24 to 36 dB | 0 | one decimal, a sign, "dB": "−1.5 dB", "0.0 dB", "+3.0 dB"; the widest are "−24.0 dB" and "+36.0 dB", 8 characters |
 | `autoGain` | Auto gain | on / off | true | pill or button state |
 | `delta` | Delta | on / off | false | pill or button state |
 | `character` | Character | clean / character | clean | Clean / Character |
@@ -246,6 +246,7 @@ Every state is in `states/` at 1x and 2x (`@2x`).
 | Amount, drag | The pointer dot grows while you drag. The ring thins as the value rises. | [1x](../states/amount-drag.png), [2x](../states/amount-drag@2x.png) |
 | Small knob, hover | The outline thickens and the value turns into a chip. | [1x](../states/knob-hover.png), [2x](../states/knob-hover@2x.png) |
 | Small knob, drag | Restore being dragged. | [1x](../states/knob-drag.png), [2x](../states/knob-drag@2x.png) |
+| Output at +36 dB | Output dragged to the top: the widest value, and the arc from the 0 dB tick. | [1x](../states/output-max.png), [2x](../states/output-max@2x.png) |
 | Shape, drag | A ring around the thumb while it's held. Both ends show their share. | [1x](../states/shape-drag.png), [2x](../states/shape-drag@2x.png) |
 | Switch, hover | The segment under the pointer gets a thin outline. | [1x](../states/switch-hover.png), [2x](../states/switch-hover@2x.png) |
 | Point, hover | The point grows, shows its width bracket and a readout. | [1x](../states/point-hover.png), [2x](../states/point-hover@2x.png) |

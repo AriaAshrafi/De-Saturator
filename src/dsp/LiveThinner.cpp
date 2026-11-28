@@ -16,8 +16,8 @@ struct LiveMode
     double fillPerDb, fillCap, sustainDb, harmonicsDb, bodyDb, maxDb, transientProtect;
 };
 
-constexpr LiveMode cleanMode     { 0.35,  6.0, 3.0,  8.0,  5.0, 12.0, 0.85 };
-constexpr LiveMode characterMode { 0.80, 16.0, 8.0, 18.0, 12.0, 30.0, 0.60 };
+constexpr LiveMode cleanMode     { 0.7, 14.0,  5.0, 12.0, 12.0, 30.0, 0.85 };
+constexpr LiveMode characterMode { 1.6, 32.0, 12.0, 30.0, 24.0, 60.0, 0.60 };
 
 constexpr double bandQ = 1.1;
 constexpr double bandOverlap = 0.75; // neighbouring bells add up; this brings a flat cut back to size
@@ -352,7 +352,7 @@ void LiveThinner::updateControl (const ThinSettings& s)
     // Body.
     {
         const double share = bodyEnergy / (total + 1.0e-20);
-        const double dynamics = std::clamp (0.4 + 1.6 * share, 0.4, 1.3);
+        const double dynamics = std::clamp (0.7 + 1.2 * share, 0.7, 1.3);
         const double depth = s.amount * effectiveAt (bodyFreq);
         const double target = total > 1.0e-9 ? std::min (depth * s.body * mode.bodyDb * dynamics, mode.maxDb * depth) : 0.0;
         bodyReduction += (target > bodyReduction ? attack : release) * (target - bodyReduction);

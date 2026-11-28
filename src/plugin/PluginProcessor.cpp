@@ -47,7 +47,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout DeSaturatorProcessor::create
     layout.add (percentParam (ParamIDs::restore, "Restore", 0.0f));
     layout.add (percentParam (ParamIDs::mix, "Mix", 100.0f));
 
-    layout.add (std::make_unique<AudioParameterFloat> (ParameterID { ParamIDs::output, 1 }, "Output", NormalisableRange<float> (-24.0f, 12.0f, 0.01f), 0.0f,
+    layout.add (std::make_unique<AudioParameterFloat> (ParameterID { ParamIDs::output, 1 }, "Output", NormalisableRange<float> (-24.0f, 36.0f, 0.01f), 0.0f,
                                                        AudioParameterFloatAttributes().withLabel ("dB").withStringFromValueFunction (decibels)));
 
     layout.add (std::make_unique<AudioParameterBool> (ParameterID { ParamIDs::autoGain, 1 }, "Auto gain", true));

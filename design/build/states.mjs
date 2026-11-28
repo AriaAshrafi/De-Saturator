@@ -30,6 +30,7 @@ export const STATES = [
   { slug: "amount-drag", name: "Amount, drag", desc: "The pointer dot grows while you drag. The ring thins as the value rises.", st: work({ amount: 78 }), ui: { hover: "amount", drag: { id: "amount" } } },
   { slug: "knob-hover", name: "Small knob, hover", desc: "The outline thickens and the value turns into a chip.", st: work(), ui: { hover: "mix" } },
   { slug: "knob-drag", name: "Small knob, drag", desc: "Restore being dragged.", st: work({ restore: 42 }), ui: { hover: "restore", drag: { id: "restore" } } },
+  { slug: "output-max", name: "Output at +36 dB", desc: "Output dragged to the top: the widest value, and the arc from the 0 dB tick.", st: work({ output: 36 }), ui: { hover: "output", drag: { id: "output" } } },
   { slug: "shape-drag", name: "Shape, drag", desc: "A ring around the thumb while it's held. Both ends show their share.", st: work({ shape: 72 }), ui: { hover: "shape", drag: { id: "shape" } } },
   { slug: "switch-hover", name: "Switch, hover", desc: "The segment under the pointer gets a thin outline.", st: work(), ui: { hover: "character:character" } },
   { slug: "point-hover", name: "Point, hover", desc: "The point grows, shows its width bracket and a readout.", st: work(), ui: { hover: "point:2" } },

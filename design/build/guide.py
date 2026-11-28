@@ -216,7 +216,7 @@ The hero. Its ring thins as you turn it up, from a near-solid disc at 0% to a ha
 
 ## Restore, Mix, Output
 
-Small knobs: a paper disc with an ink outline and pointer, a klein value arc (Output's starts at 0 dB). Under the pointer the outline thickens and the value turns into a chip.
+Small knobs: a paper disc with an ink outline and pointer, a klein value arc. Output runs from −24 to +36 dB; its arc starts at 0 dB, which a small tick outside the track marks, 40% of the way round. Under the pointer the outline thickens and the value turns into a chip.
 
 {A("ui-states", "knob-hover")}
 

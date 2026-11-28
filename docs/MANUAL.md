@@ -23,7 +23,7 @@ The result is measured before Output and Auto gain, so the gap only ever shows t
 
 ## Controls
 
-**Amount** (0 to 100%). How much thinner. Everything else shapes what Amount does.
+**Amount** (0 to 100%). How much thinner. Everything else shapes what Amount does. The first third of its travel already makes a clear difference; Clean can take up to 30 dB out of a part of the sound, Character up to 60 dB.
 
 **The thinning curve.** Drawn on the analyser, like an EQ, but its height sets *how much thinning* happens at each frequency, not volume.
 
@@ -36,15 +36,16 @@ The result is measured before Output and Auto gain, so the gap only ever shows t
 
 - Towards **Harmonics**: takes out overtones, the upper partials of pitched sounds. The sound gets purer and less rich.
 - Towards **Body**: takes out weight in the low mids. The sound gets lighter.
-- In the middle you get both in full. The fill between partials is thinned at every setting.
+- In the middle you get both in full.
+- At every setting it also clears the fill between partials, and pulls down the parts of the spectrum that already sit lower than their surroundings, so the sound is left standing on its strongest regions.
 
-**Restore** (0 to 100%). Gives flattened peaks back. It makes hits and attacks stand out from the sound around them again, and stretches the tops of the waveform back out, the reverse of soft clipping. At 0% it does nothing. On audio that was never squashed it adds a peaky edge, most of all in Character.
+**Restore** (0 to 100%). Gives flattened peaks back, in two ways. It makes hits and attacks stand out from the sound around them again. And it applies the exact reverse of a soft clipper's curve, stretching the tops of the waveform back out: the amount says how hard the sound was driven, so turn it up until the sound opens out and stop before it turns peaky. Set to match, it cancels much of the distortion the clipping added. At 0% it does nothing. On audio that was never squashed it adds a peaky edge, most of all in Character.
 
 **Mix** (0 to 100%). The thinned sound against the original.
 
-**Output** (-24 to +12 dB). The level after everything else.
+**Output** (-24 to +36 dB). The level after everything else. The top of its range is a lot of gain: turn it up with care.
 
-**Auto gain.** Keeps the level steady as you thin, by up to 18 dB, so thinner doesn't just mean quieter. It follows the sound over about a second, so it does not pump.
+**Auto gain.** Keeps the loudness steady as you thin, by up to 24 dB, so thinner doesn't just mean quieter. It measures loudness the way the ear weighs it (the K-weighting used for broadcast loudness), and follows the sound over about a second, so it does not pump.
 
 **Delta.** Plays only what is being removed. Use it to check that you are removing what you meant to.
 
@@ -69,7 +70,7 @@ Switching between Live and HQ changes the plugin's latency, and the audio restar
 | | Good for | Notes |
 |---|---|---|
 | HQ, Clean | Mixing: buses, dense synths, distorted guitars, over-saturated stems | The most exact |
-| HQ, Character | Sound design, breakdowns, making something skeletal | Can go as far as 48 dB down |
+| HQ, Character | Sound design, breakdowns, making something skeletal | Can go as far as 60 dB down |
 | Live, Clean | Tracking and playing through | Broader strokes, no delay |
 | Live, Character | Performance effects | |
 

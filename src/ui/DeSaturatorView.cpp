@@ -549,6 +549,13 @@ void DeSaturatorView::paintSmallKnob (juce::Graphics& g, Control control, const 
     strokeArc (g, cx, cy, track, -135.0f, 135.0f, c.grid, S::knobTrack);
     strokeArc (g, cx, cy, track, from, a, st.bypass ? c.textMuted : c.hand, S::knobTrack);
 
+    // A tick at 0 dB, outside the track: on a 60 dB knob unity can't be found by eye without it.
+    if (control == Control::output)
+    {
+        const auto t0 = polar (cx, cy, 33.0f, from), t1 = polar (cx, cy, 38.0f, from);
+        line (g, t0.x, t0.y, t1.x, t1.y, hover ? c.text : c.textMuted, S::tick);
+    }
+
     fillCircle (g, cx, cy, r, c.ground);
     strokeCircle (g, cx, cy, r, c.text, hover ? S::outlineHover : S::outline);
 

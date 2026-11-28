@@ -21,6 +21,8 @@ void Engine::prepare (double sampleRate, int numChannels, int maxBlockSize)
     spectral.prepare (sr, channels);
     live.prepare (sr, channels);
     restore.prepare (sr, channels);
+    dryWeighting.prepare (sr, channels);
+    wetWeighting.prepare (sr, channels);
     spectral.setCurve (curve);
     live.setCurve (curve);
 
@@ -61,6 +63,8 @@ void Engine::reset()
 
     dryPower = wetPower = 0.0;
     autoGainValue = 1.0;
+    dryWeighting.reset();
+    wetWeighting.reset();
     fadeRemaining = 0;
     primed = false;
 }
@@ -143,7 +147,8 @@ void Engine::processChunk (double* const* io, int offset, int n)
     }
 
     ThinSettings settings;
-    settings.amount = amount;
+    // The knob is eased at the bottom, so the first third of its travel already does something clear.
+    settings.amount = amount > 0.0 ? std::pow (amount, 0.7) : 0.0;
     settings.harmonics = std::min (1.0, 2.0 * (1.0 - shape));
     settings.body = std::min (1.0, 2.0 * shape);
     settings.character = target.character;
@@ -200,8 +205,10 @@ void Engine::processChunk (double* const* io, int offset, int n)
             const double d = dryBuf[(size_t) c][(size_t) i];
             const double w = wetBuf[(size_t) c][(size_t) i];
             const double r = mix >= 1.0 ? w : d + mix * (w - d);
-            drySum += d * d;
-            wetSum += r * r;
+            // Loudness, not raw energy: both go through the same K-weighting.
+            const double dk = dryWeighting.process (c, d), rk = wetWeighting.process (c, r);
+            drySum += dk * dk;
+            wetSum += rk * rk;
         }
     }
 
@@ -212,8 +219,8 @@ void Engine::processChunk (double* const* io, int offset, int n)
     if (dryPower > 1.0e-9)
     {
         constexpr double floor = 1.0e-12;
-        // Up to 18 dB of make-up: enough for Character at full, short of turning a near-silent result into a blast.
-        const double wanted = std::clamp (std::sqrt ((dryPower + floor) / (wetPower + floor)), 0.5, 8.0);
+        // Up to 24 dB of make-up: enough for Character at full, short of turning a near-silent result into a blast.
+        const double wanted = std::clamp (std::sqrt ((dryPower + floor) / (wetPower + floor)), 0.5, 16.0);
         autoGainValue += (1.0 - std::exp (-n / (0.15 * sr))) * (wanted - autoGainValue);
         if (std::abs (wanted - autoGainValue) < 1.0e-9)
             autoGainValue = wanted;
