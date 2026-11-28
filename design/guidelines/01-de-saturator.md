@@ -11,5 +11,5 @@ The brand is **Hairline**: thinner, drawn literally. What stays is heavy and wha
 De-Saturator is a sub-brand of Aria Ashrafi. It keeps the parent's colours, its flat fills, its corners (square or fully round, nothing between), its hard print offset and two of its three typefaces. Klein, one of the parent's track keys, is its one accent: the hand, meaning everything you set.
 
 - **Product:** a free plugin, VST3 on Windows and macOS, AU on macOS. Built with JUCE 8.
-- **Version:** 1.2.0. The plugin is built from the files on the Hand-off page.
+- **Version:** 1.2.1. The plugin is built from the files on the Hand-off page.
 - **The marks are reserved.** The name and the mark are Aria Ashrafi's; the fonts are open (SIL OFL).

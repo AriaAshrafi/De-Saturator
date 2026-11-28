@@ -1,5 +1,9 @@
 # Changes
 
+## 1.2.1
+
+- **Restore's tooltip** is now "Undoes soft clipping. Clean only undoes what it finds. Character goes further, lifting attacks." Restore now runs before thinning and undoes soft clipping in the incoming sound, so the old line ("Gives back the peaks that thinning flattens.") was no longer true. The same text is Restore's accessibility help. It wraps to three lines in the 220 px box, like the longest tips already did. The knob, its range and its position don't change.
+
 ## 1.2.0
 
 - **Output goes up to +36 dB** (Aria, after testing 0.9.0): the range is now −24 to +36 dB. The default stays 0 dB, the wheel step 0.5 dB and the format "+36.0 dB". The widest values, "−24.0 dB" and "+36.0 dB", are both 8 characters, and the value label and its chip hold them. The value arc still starts at 0 dB, which is now at −27°, 40% of the way round.

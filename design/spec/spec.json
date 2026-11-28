@@ -1,6 +1,6 @@
 {
  "name": "De-Saturator",
- "version": "1.2.0",
+ "version": "1.2.1",
  "direction": "Hairline",
  "idea": "Thinner, drawn literally. What stays is heavy, what's removed is a hairline: in the analyser, in the Amount ring, in the name.",
  "units": "Window pixels at 100%. Every number scales with the window; the 1 px hairlines never go under one physical pixel.",
@@ -999,7 +999,7 @@
    "strings": {
     "amount": "How much thinner. The curve scales it at each frequency.",
     "shape": "Harmonics takes out overtones. Body takes out weight.",
-    "restore": "Gives back the peaks that thinning flattens.",
+    "restore": "Undoes soft clipping. Clean only undoes what it finds. Character goes further, lifting attacks.",
     "mix": "How much of the thinned sound you hear against the original.",
     "output": "The level after everything else.",
     "autoGain": "Keeps the level steady, so thinner doesn't just mean quieter.",
@@ -1039,7 +1039,7 @@
    "control": "Restore",
    "role": "slider",
    "value": "the readout text",
-   "help": "Gives back the peaks that thinning flattens."
+   "help": "Undoes soft clipping. Clean only undoes what it finds. Character goes further, lifting attacks."
   },
   {
    "control": "Mix",

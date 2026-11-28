@@ -39,7 +39,12 @@ The result is measured before Output and Auto gain, so the gap only ever shows t
 - In the middle you get both in full.
 - At every setting it also clears the fill between partials, and pulls down the parts of the spectrum that already sit lower than their surroundings, so the sound is left standing on its strongest regions.
 
-**Restore** (0 to 100%). Gives flattened peaks back, in two ways. It makes hits and attacks stand out from the sound around them again. And it applies the exact reverse of a soft clipper's curve, stretching the tops of the waveform back out: the amount says how hard the sound was driven, so turn it up until the sound opens out and stop before it turns peaky. Set to match, it cancels much of the distortion the clipping added. At 0% it does nothing. On audio that was never squashed it adds a peaky edge, most of all in Character.
+**Restore** (0 to 100%). Undoes the squashing itself. A soft clipper bends the top of the waveform over; Restore applies the exact reverse of that curve, which cancels the harmonics and the grit the clipping added, and it lets hits and attacks stand out again.
+
+- In **Clean**, Restore *measures* how hard the sound was driven. It listens to the incoming audio all the time, tries a range of reverse curves and keeps the one that leaves the cleanest spectrum, settling within a couple of seconds. The knob is how much of that measured correction to apply: at 100% it undoes what it found. If the sound was never saturated, or it can't tell (on noise, or very light saturation), it does nothing, so it can't make clean audio worse.
+- In **Character**, Restore doesn't ask: it forces a strong reverse curve and lifts every attack, which opens a squashed sound right up and gives clean audio a peaky, exaggerated edge.
+
+Restore works on the sound before it is thinned.
 
 **Mix** (0 to 100%). The thinned sound against the original.
 

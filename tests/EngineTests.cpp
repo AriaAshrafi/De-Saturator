@@ -260,17 +260,85 @@ TEST_CASE ("Bypass gives the input back, in time")
     }
 }
 
-TEST_CASE ("Restore lifts peaks and does nothing at 0")
+TEST_CASE ("Restore in Character lifts peaks; in Clean it leaves unsaturated sound alone")
 {
     const auto in = signals::drumsAndPad (sr, 3.0);
 
     auto p = params (false, 0.0);
     p.autoGain = false;
     p.restore = 100.0;
-    const auto run = measure::process (in, p);
-    REQUIRE (allFinite (run.out));
-    REQUIRE (measure::crestDb (run.out) > measure::crestDb (in) + 1.0);
-    REQUIRE (measure::peak (run.out) < 4.0 * measure::peak (in));
+
+    p.character = true;
+    const auto forced = measure::process (in, p);
+    REQUIRE (allFinite (forced.out));
+    REQUIRE (measure::crestDb (forced.out) > measure::crestDb (in) + 1.0);
+    REQUIRE (measure::peak (forced.out) < 5.0 * measure::peak (in)); // the curve and the expander together stay bounded
+
+    // Nothing here was saturated, so Clean measures no drive and changes nothing.
+    p.character = false;
+    const auto clean = measure::process (in, p);
+    REQUIRE (maxDifference (clean.out, in) < 1.0e-9);
+}
+
+TEST_CASE ("Restore measures how hard a sound was driven, and undoing it brings the clean sound back")
+{
+    auto clean = signals::cleanChord (sr, 8.0);
+    signals::normalise (clean, 1.0);
+
+    auto sdr = [&] (const wav::Audio& y)
+    {
+        // Against the clean original, after the best single gain, from 4 s in (the measurement has settled).
+        const size_t from = (size_t) (4.0 * sr);
+        double sy = 0.0, yy = 0.0, ss = 0.0, ee = 0.0;
+        for (size_t c = 0; c < 2; ++c)
+            for (size_t i = from; i < clean.channels[c].size(); ++i)
+            {
+                sy += clean.channels[c][i] * y.channels[c][i];
+                yy += y.channels[c][i] * y.channels[c][i];
+            }
+        const double g = sy / yy;
+        for (size_t c = 0; c < 2; ++c)
+            for (size_t i = from; i < clean.channels[c].size(); ++i)
+            {
+                const double e = clean.channels[c][i] - g * y.channels[c][i];
+                ss += clean.channels[c][i] * clean.channels[c][i];
+                ee += e * e;
+            }
+        return measure::db (ss) - measure::db (ee);
+    };
+
+    // Unsaturated: it reads no drive.
+    {
+        desat::Restore restore;
+        restore.prepare (sr, 2);
+        auto copy = clean;
+        double* io[2] = { copy.channels[0].data(), copy.channels[1].data() };
+        restore.process (io, copy.numSamples(), 1.0, false);
+        REQUIRE (restore.matchedDrive() < 0.05);
+    }
+
+    // Driven hard: it reads close to the true drive (k = tanh of the drive), and Clean at 100% undoes most of it.
+    const double drive = 2.3;
+    auto saturated = clean;
+    for (auto& c : saturated.channels)
+        for (double& v : c)
+            v = std::tanh (drive * v) / std::tanh (drive);
+
+    {
+        desat::Restore restore;
+        restore.prepare (sr, 2);
+        auto copy = saturated;
+        double* io[2] = { copy.channels[0].data(), copy.channels[1].data() };
+        restore.process (io, copy.numSamples(), 1.0, false);
+        REQUIRE (restore.matchedDrive() > 0.85);
+        REQUIRE (restore.matchedDrive() < 0.995);
+    }
+
+    auto p = params (false, 0.0);
+    p.autoGain = false;
+    p.restore = 100.0;
+    const auto restored = measure::process (saturated, p);
+    REQUIRE (sdr (restored.out) > sdr (saturated) + 6.0);
 }
 
 TEST_CASE ("Auto gain brings the level back")

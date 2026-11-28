@@ -27,6 +27,7 @@ void Engine::prepare (double sampleRate, int numChannels, int maxBlockSize)
     live.setCurve (curve);
 
     delayLine.assign ((size_t) channels, std::vector<double> ((size_t) spectral.latency(), 0.0));
+    restoredDelayLine = delayLine;
 
     for (auto* b : { &inBuf, &removedBuf, &dryBuf, &wetBuf })
         b->assign ((size_t) channels, std::vector<double> ((size_t) chunkSize, 0.0));
@@ -35,12 +36,14 @@ void Engine::prepare (double sampleRate, int numChannels, int maxBlockSize)
     removedPtr.resize ((size_t) channels);
     wetPtr.resize ((size_t) channels);
     inConstPtr.resize ((size_t) channels);
+    wetConstPtr.resize ((size_t) channels);
     for (int c = 0; c < channels; ++c)
     {
         inPtr[(size_t) c] = inBuf[(size_t) c].data();
         inConstPtr[(size_t) c] = inBuf[(size_t) c].data();
         removedPtr[(size_t) c] = removedBuf[(size_t) c].data();
         wetPtr[(size_t) c] = wetBuf[(size_t) c].data();
+        wetConstPtr[(size_t) c] = wetBuf[(size_t) c].data();
     }
 
     tapIn.assign ((size_t) std::max (1, maxBlockSize), 0.0);
@@ -57,8 +60,9 @@ void Engine::reset()
     live.reset();
     restore.reset();
 
-    for (auto& d : delayLine)
-        std::fill (d.begin(), d.end(), 0.0);
+    for (auto* lines : { &delayLine, &restoredDelayLine })
+        for (auto& d : *lines)
+            std::fill (d.begin(), d.end(), 0.0);
     delayPos = 0;
 
     dryPower = wetPower = 0.0;
@@ -106,8 +110,9 @@ void Engine::processChunk (double* const* io, int offset, int n)
         spectral.reset();
         live.reset();
         restore.reset();
-        for (auto& d : delayLine)
-            std::fill (d.begin(), d.end(), 0.0);
+        for (auto* lines : { &delayLine, &restoredDelayLine })
+            for (auto& d : *lines)
+                std::fill (d.begin(), d.end(), 0.0);
         delayPos = 0;
         fadeRemaining = fadeLength;
     }
@@ -154,28 +159,37 @@ void Engine::processChunk (double* const* io, int offset, int n)
     settings.character = target.character;
 
     for (int c = 0; c < channels; ++c)
+    {
         std::copy (io[c] + offset, io[c] + offset + n, inBuf[(size_t) c].begin());
+        std::copy (io[c] + offset, io[c] + offset + n, wetBuf[(size_t) c].begin());
+    }
+
+    // Restore goes first: undoing a clipper's curve only works on the waveform as the clipper left it.
+    restore.process (wetPtr.data(), n, restoreAmount, target.character);
 
     if (hqActive)
-        spectral.process (inConstPtr.data(), removedPtr.data(), n, settings);
+        spectral.process (wetConstPtr.data(), removedPtr.data(), n, settings);
     else
-        live.process (inConstPtr.data(), removedPtr.data(), n, settings);
+        live.process (wetConstPtr.data(), removedPtr.data(), n, settings);
 
-    // The dry signal, lined up with what the engine removed.
+    // The dry signal and the restored one, both lined up with what the engine removed.
     const int delay = latency();
     for (int c = 0; c < channels; ++c)
     {
         auto& dry = dryBuf[(size_t) c];
+        auto& wet = wetBuf[(size_t) c];
         const auto& in = inBuf[(size_t) c];
 
         if (delay > 0)
         {
             auto& line = delayLine[(size_t) c];
+            auto& restoredLine = restoredDelayLine[(size_t) c];
             int p = delayPos;
             for (int i = 0; i < n; ++i)
             {
                 dry[(size_t) i] = line[(size_t) p];
                 line[(size_t) p] = in[(size_t) i];
+                std::swap (wet[(size_t) i], restoredLine[(size_t) p]);
                 if (++p == delay)
                     p = 0;
             }
@@ -185,16 +199,13 @@ void Engine::processChunk (double* const* io, int offset, int n)
             std::copy (in.begin(), in.begin() + n, dry.begin());
         }
 
-        auto& wet = wetBuf[(size_t) c];
         const auto& removed = removedBuf[(size_t) c];
         for (int i = 0; i < n; ++i)
-            wet[(size_t) i] = dry[(size_t) i] - removed[(size_t) i];
+            wet[(size_t) i] -= removed[(size_t) i];
     }
 
     if (delay > 0)
         delayPos = (delayPos + n) % delay;
-
-    restore.process (wetPtr.data(), n, restoreAmount, target.character);
 
     // Loudness of the dry signal against the mixed result, for Auto gain.
     double drySum = 0.0, wetSum = 0.0;

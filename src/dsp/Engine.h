@@ -78,7 +78,7 @@ private:
 
 /** Everything between the plugin's input and output.
 
-    input -> thinning (HQ or Live) -> Restore -> Mix -> [analyser tap] -> Delta / Auto gain -> Output
+    input -> Restore -> thinning (HQ or Live) -> Mix -> [analyser tap] -> Delta / Auto gain -> Output
 
     The thinning engines report what they remove and it is subtracted from the (delayed) input,
     so nothing-to-remove means bit-identical audio, and Delta is exactly that removed signal.
@@ -106,6 +106,9 @@ public:
     /** Mono taps of the last process() call: the delayed input, and the result after Mix. */
     const double* inputTap() const noexcept { return tapIn.data(); }
     const double* resultTap() const noexcept { return tapOut.data(); }
+
+    /** The drive Restore has measured in the incoming audio: 0 = not saturated, towards 1 = driven hard. */
+    double matchedDrive() const noexcept { return restore.matchedDrive(); }
 
     /** The auto-gain correction being applied right now, as a linear factor. */
     double autoGainNow() const noexcept { return autoGainValue; }
@@ -138,12 +141,12 @@ private:
     KWeighting dryWeighting, wetWeighting;
 
     // Dry delay (HQ only).
-    std::vector<std::vector<double>> delayLine;
+    std::vector<std::vector<double>> delayLine, restoredDelayLine;
     int delayPos = 0;
 
     std::vector<std::vector<double>> inBuf, removedBuf, dryBuf, wetBuf;
     std::vector<double*> inPtr, removedPtr, wetPtr;
-    std::vector<const double*> inConstPtr;
+    std::vector<const double*> inConstPtr, wetConstPtr;
     std::vector<double> tapIn, tapOut;
 };
 

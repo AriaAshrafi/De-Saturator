@@ -12,7 +12,7 @@
 (function (root) {
 "use strict";
 
-const VERSION = "1.2.0";                    // the design's version; the window shows the plugin's own
+const VERSION = "1.2.1";                    // the design's version; the window shows the plugin's own
 const W = 960, H = 600;
 const FMIN = 20, FMAX = 20000, OCT = Math.log2(FMAX / FMIN);
 const DBMIN = -90, DBMAX = 6, TILT = 4.5;
@@ -162,7 +162,7 @@ const fmtF = f => f < 1000 ? Math.round(f) + " Hz" : (f < 9950 ? (f / 1000).toFi
 const TIPS = {
   amount: "How much thinner. The curve scales it at each frequency.",
   shape: "Harmonics takes out overtones. Body takes out weight.",
-  restore: "Gives back the peaks that thinning flattens.",
+  restore: "Undoes soft clipping. Clean only undoes what it finds. Character goes further, lifting attacks.",
   mix: "How much of the thinned sound you hear against the original.",
   output: "The level after everything else.",
   autoGain: "Keeps the level steady, so thinner doesn't just mean quieter.",

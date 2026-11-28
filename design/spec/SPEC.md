@@ -1,4 +1,4 @@
-# De-Saturator: window spec 1.2.0
+# De-Saturator: window spec 1.2.1
 
 Direction B, Hairline. Thinner, drawn literally. What stays is heavy, what's removed is a hairline: in the analyser, in the Amount ring, in the name.
 
@@ -177,7 +177,7 @@ Paper line 3 from x 120 to 560, with a 12 px centre tick (1.5). Ink pill 16 × 3
 | --- | --- |
 | amount | How much thinner. The curve scales it at each frequency. |
 | shape | Harmonics takes out overtones. Body takes out weight. |
-| restore | Gives back the peaks that thinning flattens. |
+| restore | Undoes soft clipping. Clean only undoes what it finds. Character goes further, lifting attacks. |
 | mix | How much of the thinned sound you hear against the original. |
 | output | The level after everything else. |
 | autoGain | Keeps the level steady, so thinner doesn't just mean quieter. |
@@ -222,7 +222,7 @@ Paper line 3 from x 120 to 560, with a 12 px centre tick (1.5). Ink pill 16 × 3
 | --- | --- | --- | --- |
 | Amount | slider | the readout text | How much thinner. The curve scales it at each frequency. |
 | Shape | slider | the readout text | Harmonics takes out overtones. Body takes out weight. |
-| Restore | slider | the readout text | Gives back the peaks that thinning flattens. |
+| Restore | slider | the readout text | Undoes soft clipping. Clean only undoes what it finds. Character goes further, lifting attacks. |
 | Mix | slider | the readout text | How much of the thinned sound you hear against the original. |
 | Output | slider | the readout text | The level after everything else. |
 | Auto gain | toggle button | on / off | Keeps the level steady, so thinner doesn't just mean quieter. |

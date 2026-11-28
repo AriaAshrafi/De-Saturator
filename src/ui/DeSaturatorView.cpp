@@ -871,7 +871,7 @@ juce::String DeSaturatorView::tipText (Target t)
     {
         case Control::amount:    return "How much thinner. The curve scales it at each frequency.";
         case Control::shape:     return "Harmonics takes out overtones. Body takes out weight.";
-        case Control::restore:   return "Gives back the peaks that thinning flattens.";
+        case Control::restore:   return "Undoes soft clipping. Clean only undoes what it finds. Character goes further, lifting attacks.";
         case Control::mix:       return "How much of the thinned sound you hear against the original.";
         case Control::output:    return "The level after everything else.";
         case Control::autoGain:  return "Keeps the level steady, so thinner doesn't just mean quieter.";
